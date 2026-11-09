@@ -167,15 +167,9 @@ export default function Hero() {
           );
         })}
 
-        {/* Cinematic dark vignette overlays for crystal clear 4.5:1 text legibility across all video frames */}
-        <div className="absolute inset-0 z-20 bg-gradient-to-r from-black/90 via-black/60 to-black/30" />
-        <div className="absolute inset-0 z-20 bg-gradient-to-t from-[#0B0B0C]/95 via-transparent to-black/35" />
-
-        {/* Subtle stone chromatic tint tied to selected stone accent */}
-        <div
-          className="absolute inset-0 z-20 opacity-20 mix-blend-color transition-colors duration-1000"
-          style={{ backgroundColor: activeStone.accent }}
-        />
+        {/* Balanced contrast overlays: keeps text ultra-readable while letting the natural stone lighting shine */}
+        <div className="absolute inset-0 z-20 bg-gradient-to-r from-black/75 via-black/40 to-transparent" />
+        <div className="absolute inset-0 z-20 bg-gradient-to-t from-[#0E0E10] via-transparent to-black/25" />
       </div>
 
       {/* LAYER 2: Mid-Layer Floating Mineral Dust & Light Particles */}
@@ -183,9 +177,9 @@ export default function Hero() {
         ref={particlesRef}
         className="absolute inset-0 z-[1] pointer-events-none will-change-transform"
       >
-        <div className="absolute top-1/4 left-1/3 w-1.5 h-1.5 rounded-full bg-[#B8A07A] opacity-60 blur-[0.5px] animate-pulse" />
+        <div className="absolute top-1/4 left-1/3 w-1.5 h-1.5 rounded-full bg-[#E5C578] opacity-60 blur-[0.5px] animate-pulse" />
         <div className="absolute top-1/2 left-2/3 w-2 h-2 rounded-full bg-white opacity-40 blur-[1px] animate-pulse delay-700" />
-        <div className="absolute bottom-1/3 left-1/2 w-1.5 h-1.5 rounded-full bg-[#B8A07A] opacity-50 blur-[0.5px] animate-pulse delay-1000" />
+        <div className="absolute bottom-1/3 left-1/2 w-1.5 h-1.5 rounded-full bg-[#E5C578] opacity-50 blur-[0.5px] animate-pulse delay-1000" />
         <div className="absolute top-1/3 right-1/4 w-2.5 h-2.5 rounded-full bg-white/60 blur-[1.5px] animate-pulse delay-500" />
         <div className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full bg-white/[0.04] blur-[120px]" />
       </div>

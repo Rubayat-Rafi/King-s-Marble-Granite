@@ -58,7 +58,7 @@ export default function Layout() {
       <LogoPreloader />
 
       <ScrollToTop />
-      <div className="min-h-screen bg-[#080809] text-[var(--text)] relative flex flex-col justify-between">
+      <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] relative flex flex-col justify-between">
         {/* Subtle Organic Film Grain Layer */}
         <div className="pointer-events-none fixed inset-0 z-40 opacity-[0.025] mix-blend-overlay bg-repeat bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
 
@@ -66,7 +66,7 @@ export default function Layout() {
         <Header />
 
         {/* Routed Page Content - Instant, Zero White Flash */}
-        <div className="flex-grow bg-[#080809]">
+        <div className="flex-grow bg-[var(--bg)]">
           <Outlet />
         </div>
 

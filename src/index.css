@@ -3,19 +3,19 @@
 @tailwind utilities;
 
 :root {
-  /* Default Theme: Neutral Bone White / Calacatta baseline */
-  --bg: #F4F2EE;
-  --bg-dark: #0F0F10;
-  --text: #1A1A1A;
-  --text-muted: #6B6862;
-  --text-light: #F4F2EE;
-  --line: #DDD8CF;
-  --line-dark: #2A2A2B;
-  --accent: #B8A07A;
-  --glow: rgba(184, 160, 122, 0.18);
-  --header-bg: rgba(244, 242, 238, 0.88);
-  --header-text: #1A1A1A;
-  --header-line: rgba(221, 216, 207, 0.8);
+  /* Refined Luxury Dark Palette - Soft On The Eyes */
+  --bg: #0E0E10;
+  --bg-dark: #09090A;
+  --text: #F4F2EE;
+  --text-muted: #A3A09A;
+  --text-light: #FFFFFF;
+  --line: #242427;
+  --line-dark: #1A1A1D;
+  --accent: #E5C578;
+  --glow: rgba(229, 197, 120, 0.12);
+  --header-bg: rgba(14, 14, 16, 0.92);
+  --header-text: #F4F2EE;
+  --header-line: rgba(36, 36, 39, 0.7);
 }
 
 /* Cross-browser scrollbar hiding utility */
@@ -61,7 +61,7 @@ body {
   font-weight: 500;
 }
 
-/* Button tokens: dynamic accent background matching selected stone */
+/* Button tokens: refined light champagne gold styling */
 .btn-primary-luxury {
   display: inline-flex;
   align-items: center;
@@ -69,23 +69,23 @@ body {
   gap: 0.75rem;
   padding: 0.95rem 1.85rem;
   border-radius: 2px;
-  background-color: var(--accent);
-  color: #0F0F10;
-  border: 1px solid var(--accent);
+  background: linear-gradient(135deg, #EDD495 0%, #D8B768 100%);
+  color: #121214;
+  border: 1px solid #E5C578;
   font-size: 13px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   font-weight: 600;
-  transition: all 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
   cursor: pointer;
   min-height: 48px;
-  box-shadow: 0 4px 20px var(--glow);
+  box-shadow: 0 4px 18px rgba(229, 197, 120, 0.18);
 }
 
 .btn-primary-luxury:hover {
-  filter: brightness(1.12);
-  box-shadow: 0 8px 30px var(--glow);
+  filter: brightness(1.06);
+  box-shadow: 0 8px 26px rgba(229, 197, 120, 0.28);
   transform: translateY(-1px);
 }
 
