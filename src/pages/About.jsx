@@ -160,7 +160,7 @@ export default function About() {
             Walk our Harvey indoor reserve and inspect full-size Calacatta, Taj Mahal, and Titanium Granite slabs under calibrated gallery illumination.
           </p>
           <div className="pt-4 flex flex-wrap justify-center gap-4">
-            <Link to="/#contact" className="btn-primary-luxury">
+            <Link to="/contact" className="btn-primary-luxury">
               Book Studio Consultation
             </Link>
             <a href="tel:+15047237898" className="btn-outline-luxury !text-white !border-white/30">

@@ -137,27 +137,44 @@ export default function Header() {
             })}
           </nav>
 
-          {/* Action Button & Mobile Menu Trigger */}
+          {/* Action Button (Desktop Only) & Mobile Hamburger Trigger */}
           <div className="flex items-center gap-4 sm:gap-6">
-            <Link
-              to="/contact"
-              className="btn-primary-luxury text-xs !py-2.5 !px-5 hidden sm:inline-flex"
-            >
-              Request estimate
-            </Link>
+            <div className="hidden md:block">
+              <Link
+                to="/contact"
+                className="btn-primary-luxury text-xs !py-2.5 !px-5"
+              >
+                Request estimate
+              </Link>
+            </div>
 
-            {/* Mobile menu trigger */}
+            {/* Luxury Animated Hamburger Menu Trigger */}
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`md:hidden p-2 focus:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center ${
-                scrolled ? 'text-[var(--text)]' : 'text-white'
+              className={`md:hidden p-2 rounded-sm focus:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center transition-colors ${
+                scrolled ? 'text-[var(--text)] hover:text-[var(--accent)]' : 'text-white hover:text-[var(--accent)]'
               }`}
-              aria-label="Toggle navigation menu"
+              aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={mobileMenuOpen}
             >
-              <span className="text-xs uppercase tracking-widest font-medium">
-                {mobileMenuOpen ? 'Close' : 'Menu'}
-              </span>
+              <div className="w-6 h-4 flex flex-col justify-between items-end relative">
+                <span
+                  className={`h-[1.5px] bg-current transition-all duration-300 ease-out origin-center ${
+                    mobileMenuOpen ? 'w-6 rotate-45 translate-y-[7.5px]' : 'w-6'
+                  }`}
+                />
+                <span
+                  className={`h-[1.5px] bg-current transition-all duration-200 ease-out ${
+                    mobileMenuOpen ? 'w-0 opacity-0' : 'w-4'
+                  }`}
+                />
+                <span
+                  className={`h-[1.5px] bg-current transition-all duration-300 ease-out origin-center ${
+                    mobileMenuOpen ? 'w-6 -rotate-45 -translate-y-[7.5px]' : 'w-5'
+                  }`}
+                />
+              </div>
             </button>
           </div>
         </div>
@@ -171,7 +188,7 @@ export default function Header() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden bg-[var(--bg)] border-b border-[var(--line)] px-6 py-8 transition-colors duration-700 shadow-xl overflow-hidden"
+            className="md:hidden bg-[var(--bg)] border-b border-[var(--line)] px-6 py-8 transition-colors duration-700 shadow-2xl overflow-hidden"
           >
             <nav className="flex flex-col gap-5 text-left">
               {navLinks.map((link) => {
@@ -181,7 +198,7 @@ export default function Header() {
                       key={link.label}
                       to={link.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="font-display text-2xl text-[var(--text)] font-light"
+                      className="font-display text-2xl text-[var(--text)] font-light hover:text-[var(--accent)] transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -193,30 +210,33 @@ export default function Header() {
                     key={link.label}
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="font-display text-2xl text-[var(--text)] font-light"
+                    className="font-display text-2xl text-[var(--text)] font-light hover:text-[var(--accent)] transition-colors"
                   >
                     {link.label}
                   </a>
                 );
               })}
-              <div className="pt-6 border-t border-[var(--line)] flex flex-col gap-3">
-                <div className="space-y-1 text-xs text-[var(--text-muted)]">
+
+              <div className="pt-6 border-t border-[var(--line)] flex flex-col gap-4">
+                {/* Primary CTA Button Inside Mobile Drawer */}
+                <Link
+                  to="/contact"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="btn-primary-luxury w-full text-center text-xs !py-3 tracking-[0.18em]"
+                >
+                  Request estimate
+                </Link>
+
+                <div className="space-y-1 text-xs text-[var(--text-muted)] pt-1">
                   <p className="font-medium text-[var(--text)]">1848 Industrial Blvd, Harvey, LA 70058</p>
                   <p>Mon – Sat: 8:00 AM – 5:00 PM</p>
                 </div>
                 <a
                   href="tel:+15047237898"
-                  className="text-xs uppercase tracking-wider text-[var(--accent)] font-semibold"
+                  className="text-xs uppercase tracking-wider text-[var(--accent)] font-semibold inline-flex items-center gap-1.5"
                 >
                   Direct: (504) 723-7898
                 </a>
-                <Link
-                  to="/contact"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="btn-primary-luxury w-full text-center text-xs mt-1"
-                >
-                  Request estimate
-                </Link>
               </div>
             </nav>
           </motion.div>

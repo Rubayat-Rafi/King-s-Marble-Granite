@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useStoneTheme } from '../context/StoneThemeContext';
 
 const SHOWCASE_IMAGES = [
@@ -15,6 +15,7 @@ const SHOWCASE_IMAGES = [
 export default function InteractiveCraftDeck() {
   const { activeStone } = useStoneTheme();
   const [activeIndex, setActiveIndex] = useState(0);
+  const [selectedImage, setSelectedImage] = useState(null);
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== 'undefined' ? window.innerWidth : 1200
   );
@@ -130,7 +131,13 @@ export default function InteractiveCraftDeck() {
             return (
               <motion.div
                 key={item.id}
-                onClick={() => setActiveIndex(idx)}
+                onClick={() => {
+                  if (isCenter) {
+                    setSelectedImage(item);
+                  } else {
+                    setActiveIndex(idx);
+                  }
+                }}
                 initial={false}
                 animate={{
                   x: xOffset,
@@ -145,7 +152,7 @@ export default function InteractiveCraftDeck() {
                   damping: 28,
                   mass: 0.9,
                 }}
-                className={`absolute w-[230px] sm:w-[270px] md:w-[310px] h-[340px] sm:h-[410px] md:h-[470px] rounded-2xl sm:rounded-3xl will-change-transform overflow-hidden shadow-2xl transition-all duration-500 group outline-none focus:outline-none focus:ring-0 select-none border ${
+                className={`absolute w-[230px] sm:w-[270px] md:w-[310px] h-[340px] sm:h-[410px] md:h-[470px] rounded-2xl sm:rounded-3xl will-change-transform overflow-hidden shadow-2xl transition-all duration-500 group outline-none focus:outline-none focus:ring-0 select-none border cursor-pointer ${
                   isCenter
                     ? 'border-2 border-white/45 shadow-[0_25px_60px_rgba(0,0,0,0.95)]'
                     : 'border border-white/15 hover:border-white/35'
@@ -165,6 +172,15 @@ export default function InteractiveCraftDeck() {
 
                 {/* Subtle vignette layer for depth */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
+
+                {/* Center Card Click-to-View Badge */}
+                {isCenter && (
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-[11px] uppercase tracking-wider bg-black/80 backdrop-blur-md px-3 py-1.5 text-white/90 border border-white/20 font-medium whitespace-nowrap shadow-lg">
+                      Click to inspect ↗
+                    </span>
+                  </div>
+                )}
               </motion.div>
             );
           })}
@@ -212,6 +228,87 @@ export default function InteractiveCraftDeck() {
           </button>
         </div>
       </div>
+
+      {/* Full-Screen High-Resolution Lightbox Modal */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            key="deck-modal"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-50 backdrop-blur-2xl flex flex-col justify-between p-4 sm:p-8 text-[#EDEDED]"
+            style={{ backgroundColor: 'rgba(11, 11, 12, 0.98)' }}
+            onClick={() => setSelectedImage(null)}
+          >
+            {/* Header */}
+            <motion.div
+              initial={{ opacity: 0, y: -15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.35, delay: 0.08 }}
+              className="flex items-center justify-between text-white z-20 max-w-7xl mx-auto w-full text-left"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="space-y-1">
+                <span className="text-xs uppercase tracking-[0.24em] text-[var(--accent)] block font-medium">
+                  Atelier Portfolio Highlight
+                </span>
+                <h3 className="font-display text-2xl sm:text-3xl text-white font-light">
+                  {selectedImage.alt}
+                </h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSelectedImage(null)}
+                className="w-11 h-11 border border-white/20 text-white flex items-center justify-center hover:border-white transition-colors"
+                aria-label="Close high-resolution modal"
+              >
+                ✕
+              </button>
+            </motion.div>
+
+            {/* Large Image Preview with distinct key so it never shows stale image */}
+            <div
+              className="flex-1 overflow-auto flex items-center justify-center my-4 max-w-7xl mx-auto w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <motion.img
+                key={selectedImage.src}
+                initial={{ opacity: 0, scale: 0.94 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.94 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                src={selectedImage.src}
+                alt={selectedImage.alt}
+                className="max-h-[76vh] max-w-[92vw] object-contain shadow-2xl border border-white/10"
+              />
+            </div>
+
+            {/* Footer Bar */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.35, delay: 0.08 }}
+              className="border-t border-white/10 pt-4 max-w-7xl mx-auto w-full flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs text-white/70 z-20"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <p className="font-light">
+                Crafted at Kings Marble &amp; Granite · 1848 Industrial Blvd, Harvey LA
+              </p>
+              <button
+                type="button"
+                onClick={() => setSelectedImage(null)}
+                className="btn-primary-luxury !py-2 !px-5 text-xs"
+              >
+                Close View ✕
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

@@ -103,7 +103,7 @@ export default function Services() {
 
                   <div className="pt-4 flex items-center gap-5">
                     <Link
-                      to="/#contact"
+                      to="/contact"
                       className="btn-primary-luxury text-xs !py-3 !px-6"
                     >
                       Inquire About This Service
@@ -211,7 +211,7 @@ export default function Services() {
 
               <div className="pt-4 border-t border-white/10">
                 <Link
-                  to="/#contact"
+                  to="/contact"
                   className="text-label text-xs text-[var(--accent)] hover:text-white transition-colors uppercase tracking-widest inline-flex items-center gap-2"
                 >
                   Consult on custom apron miters →
@@ -235,7 +235,7 @@ export default function Services() {
             Bring your blueprints, cabinet layouts, or architectural drawings to our Harvey slab yard for a complimentary vein continuation review and formal estimate.
           </p>
           <div className="pt-4 flex flex-wrap justify-center gap-4">
-            <Link to="/#contact" className="btn-primary-luxury">
+            <Link to="/contact" className="btn-primary-luxury">
               Schedule Studio Consultation
             </Link>
             <a href="tel:+15047237898" className="btn-outline-luxury">

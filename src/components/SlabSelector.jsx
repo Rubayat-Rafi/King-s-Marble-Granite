@@ -10,7 +10,6 @@ export default function SlabSelector() {
   const { activeStone, setStoneById, isTransitioning } = useStoneTheme();
   const [photoType, setPhotoType] = useState('slab'); // 'slab' | 'room'
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxPhotoType, setLightboxPhotoType] = useState('slab'); // 'slab' | 'room'
   const [zoomLevel, setZoomLevel] = useState(1);
   const [tilt, setTilt] = useState({ rx: 0, ry: 0 });
   const imageContainerRef = useRef(null);
@@ -50,13 +49,11 @@ export default function SlabSelector() {
 
   const handleOpenLightbox = () => {
     setZoomLevel(1);
-    setLightboxPhotoType(photoType);
     setLightboxOpen(true);
   };
 
   const isBacklitOnyx = activeStone.id === 'backlit-onyx';
   const displayedPhoto = photoType === 'slab' ? (activeStone.detailImage || activeStone.image) : activeStone.image;
-  const currentLightboxPhoto = lightboxPhotoType === 'slab' ? (activeStone.detailImage || activeStone.image) : activeStone.image;
 
   return (
     <section
@@ -295,7 +292,7 @@ export default function SlabSelector() {
                     <motion.a
                       whileHover={{ scale: 1.015 }}
                       whileTap={{ scale: 0.985 }}
-                      href="#contact"
+                      href="contact"
                       className="btn-primary-luxury text-xs w-full text-center"
                     >
                       Reserve this lot for digital templating →
@@ -334,7 +331,7 @@ export default function SlabSelector() {
                   Vein Inspection Mode
                 </span>
                 <h3 className="font-display text-2xl sm:text-3xl text-white font-light">
-                  {activeStone.name} — {lightboxPhotoType === 'slab' ? 'Raw Slab Specimen' : 'Finished Installation'}
+                  {activeStone.name} — {photoType === 'slab' ? 'Raw Slab Specimen' : 'Finished Installation'}
                 </h3>
               </div>
 
@@ -343,9 +340,9 @@ export default function SlabSelector() {
                 <div className="inline-flex bg-white/10 p-1 border border-white/15">
                   <button
                     type="button"
-                    onClick={() => setLightboxPhotoType('slab')}
+                    onClick={() => setPhotoType('slab')}
                     className={`text-xs uppercase tracking-wider px-3 py-1.5 transition-all ${
-                      lightboxPhotoType === 'slab'
+                      photoType === 'slab'
                         ? 'bg-white text-black font-semibold'
                         : 'text-white/70 hover:text-white'
                     }`}
@@ -354,9 +351,9 @@ export default function SlabSelector() {
                   </button>
                   <button
                     type="button"
-                    onClick={() => setLightboxPhotoType('room')}
+                    onClick={() => setPhotoType('room')}
                     className={`text-xs uppercase tracking-wider px-3 py-1.5 transition-all ${
-                      lightboxPhotoType === 'room'
+                      photoType === 'room'
                         ? 'bg-white text-black font-semibold'
                         : 'text-white/70 hover:text-white'
                     }`}
@@ -395,7 +392,8 @@ export default function SlabSelector() {
                 transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               >
                 <img
-                  src={currentLightboxPhoto}
+                  key={`${activeStone.id}-${photoType}`}
+                  src={displayedPhoto}
                   alt={`Ultra high-resolution veining pattern of ${activeStone.name}`}
                   className="max-h-[76vh] max-w-[90vw] object-contain shadow-2xl border border-white/10"
                 />

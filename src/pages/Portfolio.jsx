@@ -231,6 +231,7 @@ export default function Portfolio() {
               onClick={(e) => e.stopPropagation()}
             >
               <motion.img
+                key={selectedImage.src}
                 initial={{ opacity: 0, scale: 0.94 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.94 }}
@@ -261,7 +262,7 @@ export default function Portfolio() {
                   Direct: (504) 723-7898
                 </a>
                 <Link
-                  to="/#contact"
+                  to="/contact"
                   onClick={() => setSelectedImage(null)}
                   className="btn-primary-luxury !py-2 !px-4 text-xs"
                 >
@@ -286,7 +287,7 @@ export default function Portfolio() {
             From seamless waterfall kitchen islands to 18-foot floor-to-ceiling fireplaces, our master stone fabricators bring generational precision to your residential or commercial project.
           </p>
           <div className="pt-4 flex flex-wrap justify-center gap-4">
-            <Link to="/#contact" className="btn-primary-luxury">
+            <Link to="/contact" className="btn-primary-luxury">
               Request Project Estimate
             </Link>
             <a href="tel:+15047237898" className="btn-outline-luxury">

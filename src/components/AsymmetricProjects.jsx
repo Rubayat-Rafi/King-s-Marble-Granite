@@ -331,6 +331,7 @@ export default function AsymmetricProjects() {
 
             <div className="flex-1 overflow-auto flex items-center justify-center my-4 max-w-7xl mx-auto w-full" onClick={(e) => e.stopPropagation()}>
               <motion.img
+                key={selectedProject.image}
                 initial={{ opacity: 0, scale: 0.94 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.94 }}

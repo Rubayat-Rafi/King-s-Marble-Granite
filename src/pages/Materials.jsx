@@ -115,7 +115,7 @@ export default function Materials() {
                   <div className="pt-4 border-t border-[var(--line)] flex justify-between items-center text-xs">
                     <span className="text-[var(--text-muted)]">Grade: <strong className="text-[var(--text)] font-medium">{stone.priceLevel}</strong></span>
                     <Link
-                      to="/#contact"
+                      to="/contact"
                       className="btn-primary-luxury text-xs !py-2 !px-4"
                     >
                       Reserve Slab
