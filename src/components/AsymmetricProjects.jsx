@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import BeforeAfterSlider from './BeforeAfterSlider';
+import ImageWithSkeleton from './ImageWithSkeleton';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -330,16 +331,22 @@ export default function AsymmetricProjects() {
             </motion.div>
 
             <div className="flex-1 overflow-auto flex items-center justify-center my-4 max-w-7xl mx-auto w-full" onClick={(e) => e.stopPropagation()}>
-              <motion.img
+              <motion.div
                 key={selectedProject.image}
-                initial={{ opacity: 0, scale: 0.94 }}
+                initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.94 }}
-                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                src={selectedProject.image}
-                alt={selectedProject.title}
-                className="max-h-[75vh] max-w-[90vw] object-contain shadow-2xl border border-white/10"
-              />
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="max-h-[75vh] max-w-[90vw] flex items-center justify-center"
+              >
+                <ImageWithSkeleton
+                  src={selectedProject.image}
+                  alt={selectedProject.title}
+                  className="max-h-[75vh] max-w-[90vw] shadow-2xl border border-white/10 rounded-sm"
+                  imgClassName="max-h-[75vh] max-w-[90vw] object-contain"
+                  loadingText="Loading Architectural Specimen..."
+                />
+              </motion.div>
             </div>
 
             <motion.div

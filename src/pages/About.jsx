@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { MEDIA_ASSETS, GALLERY_IMAGES } from '../data/content';
 import { useStoneTheme } from '../context/StoneThemeContext';
+import ImageWithSkeleton from '../components/ImageWithSkeleton';
 
 export default function About() {
   const { activeStone } = useStoneTheme();
@@ -70,13 +71,15 @@ export default function About() {
 
             <div className="col-span-12 lg:col-span-6">
               <div className="relative border border-[var(--line)] overflow-hidden shadow-2xl bg-[#0B0B0C] h-[440px] sm:h-[540px]">
-                <img
+                <ImageWithSkeleton
                   src={MEDIA_ASSETS.workshop}
                   alt="Kings Marble and Granite Workshop"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full"
+                  imgClassName="w-full h-full object-cover"
+                  loadingText="Loading Harvey Workshop..."
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute bottom-6 left-6 right-6 text-white z-10">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none z-10" />
+                <div className="absolute bottom-6 left-6 right-6 text-white z-20">
                   <span className="text-label text-xs text-[var(--accent)] block tracking-widest mb-1">
                     Harvey Facility
                   </span>
@@ -105,10 +108,12 @@ export default function About() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {workshopGallery.map((img, idx) => (
               <div key={idx} className="h-44 sm:h-52 overflow-hidden border border-[var(--line)] bg-[#0B0B0C] group">
-                <img
+                <ImageWithSkeleton
                   src={img.src}
                   alt={`Workshop ${idx + 1}`}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
+                  className="w-full h-full"
+                  imgClassName="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
+                  loadingText=""
                 />
               </div>
             ))}

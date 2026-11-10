@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { SERVICES, EDGE_PROFILES } from '../data/content';
 import { useStoneTheme } from '../context/StoneThemeContext';
+import ImageWithSkeleton from '../components/ImageWithSkeleton';
 
 export default function Services() {
   const { activeStone } = useStoneTheme();
@@ -124,14 +125,15 @@ export default function Services() {
                   }`}
                 >
                   <div className="relative h-[380px] sm:h-[500px] overflow-hidden border border-[var(--line)] shadow-xl group bg-[#0B0B0C]">
-                    <img
+                    <ImageWithSkeleton
                       src={service.image}
                       alt={service.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-1000 ease-luxury group-hover:scale-105"
+                      className="w-full h-full"
+                      imgClassName="w-full h-full object-cover transition-transform duration-1000 ease-luxury group-hover:scale-105"
+                      loadingText=""
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-                    <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center text-xs text-white/80 z-10 pointer-events-none">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none z-10" />
+                    <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center text-xs text-white/80 z-20 pointer-events-none">
                       <span className="text-label tracking-widest text-xs bg-black/60 px-2.5 py-1 border border-white/10">
                         Harvey Jobsite Capture
                       </span>

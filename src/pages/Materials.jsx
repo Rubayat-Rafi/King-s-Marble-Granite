@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { STONES } from '../data/content';
 import { Link } from 'react-router';
 import { useStoneTheme } from '../context/StoneThemeContext';
+import ImageWithSkeleton from '../components/ImageWithSkeleton';
 
 export default function Materials() {
   const { activeStone } = useStoneTheme();
@@ -86,15 +87,17 @@ export default function Materials() {
                 className="border border-[var(--line)] overflow-hidden group hover:border-[var(--text)] transition-all duration-300 flex flex-col bg-[var(--bg)]"
               >
                 <div className="h-80 overflow-hidden relative bg-[#0B0B0C]">
-                  <img
+                  <ImageWithSkeleton
                     src={stone.image}
                     alt={stone.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full"
+                    imgClassName="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loadingText=""
                   />
-                  <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-md text-white text-xs uppercase tracking-widest px-2.5 py-1 border border-white/10">
+                  <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-md text-white text-xs uppercase tracking-widest px-2.5 py-1 border border-white/10 z-20">
                     {stone.category}
                   </div>
-                  <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-md text-[var(--accent)] text-xs uppercase tracking-widest px-2.5 py-1 border border-white/10">
+                  <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-md text-[var(--accent)] text-xs uppercase tracking-widest px-2.5 py-1 border border-white/10 z-20">
                     {stone.origin}
                   </div>
                 </div>

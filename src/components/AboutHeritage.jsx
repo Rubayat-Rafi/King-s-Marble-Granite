@@ -129,7 +129,7 @@ export default function AboutHeritage() {
             </p>
 
             {/* Real Metrics with Animated Count-Up */}
-            <div className="pt-8 border-t border-[var(--line)] grid grid-cols-3 gap-6">
+            <div className="pt-8 border-t border-[var(--line)] grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6">
               <div>
                 <strong className="block font-display text-3xl sm:text-4xl text-[var(--text)] font-light">
                   {counts.surfaces > 0 ? `${counts.surfaces.toLocaleString()}+` : '2,800+'}

@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GALLERY_IMAGES } from '../data/content';
 import { useStoneTheme } from '../context/StoneThemeContext';
+import ImageWithSkeleton from '../components/ImageWithSkeleton';
 
 export default function Portfolio() {
   const { activeStone } = useStoneTheme();
@@ -134,11 +135,12 @@ export default function Portfolio() {
                   idx
                 )}`}
               >
-                <img
+                <ImageWithSkeleton
                   src={item.src}
                   alt={item.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-1000 ease-luxury group-hover:scale-105 opacity-90 group-hover:opacity-100"
+                  className="w-full h-full"
+                  imgClassName="w-full h-full object-cover transition-transform duration-1000 ease-luxury group-hover:scale-105 opacity-90 group-hover:opacity-100"
+                  loadingText=""
                 />
 
                 {/* Subtle dark gradient overlay */}
@@ -225,21 +227,27 @@ export default function Portfolio() {
               </button>
             </motion.div>
 
-            {/* Large Image Preview */}
+            {/* Large Image Preview with Luxury Skeleton Loader */}
             <div
               className="flex-1 overflow-auto flex items-center justify-center my-4 max-w-7xl mx-auto w-full"
               onClick={(e) => e.stopPropagation()}
             >
-              <motion.img
+              <motion.div
                 key={selectedImage.src}
-                initial={{ opacity: 0, scale: 0.94 }}
+                initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.94 }}
-                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                src={selectedImage.src}
-                alt={selectedImage.title}
-                className="max-h-[76vh] max-w-[92vw] object-contain shadow-2xl border border-white/10"
-              />
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="max-h-[76vh] max-w-[92vw] w-full flex items-center justify-center"
+              >
+                <ImageWithSkeleton
+                  src={selectedImage.src}
+                  alt={selectedImage.title}
+                  className="max-h-[76vh] max-w-[92vw] shadow-2xl border border-white/10 rounded-sm"
+                  imgClassName="max-h-[76vh] max-w-[92vw] object-contain"
+                  loadingText="Loading High-Res Specimen · 0.4mm Detail"
+                />
+              </motion.div>
             </div>
 
             {/* Footer Bar with Direct Action */}

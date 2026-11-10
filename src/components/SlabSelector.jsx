@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useStoneTheme, STONE_THEMES } from '../context/StoneThemeContext';
+import ImageWithSkeleton from './ImageWithSkeleton';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -108,18 +109,13 @@ export default function SlabSelector() {
                 onClick={handleOpenLightbox}
                 className="has-cursor-light group w-full h-full relative cursor-zoom-in overflow-hidden"
               >
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={`${activeStone.id}-${photoType}`}
-                    src={displayedPhoto}
-                    alt={`${activeStone.name} raw slab veining`}
-                    initial={{ opacity: 0.4, scale: 0.985 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0.4, scale: 1.015 }}
-                    transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-                    className="w-full h-full object-cover group-hover:scale-105"
-                  />
-                </AnimatePresence>
+                <ImageWithSkeleton
+                  src={displayedPhoto}
+                  alt={`${activeStone.name} raw slab veining`}
+                  className="w-full h-full"
+                  imgClassName="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  loadingText={`Inspecting ${activeStone.name}...`}
+                />
 
                 {/* Polished stone cursor light highlight */}
                 <div className="cursor-light-layer" />
@@ -292,7 +288,7 @@ export default function SlabSelector() {
                     <motion.a
                       whileHover={{ scale: 1.015 }}
                       whileTap={{ scale: 0.985 }}
-                      href="contact"
+                      href="/contact"
                       className="btn-primary-luxury text-xs w-full text-center"
                     >
                       Reserve this lot for digital templating →
@@ -380,7 +376,7 @@ export default function SlabSelector() {
               </div>
             </motion.div>
 
-            {/* Zoomable Image Viewport */}
+            {/* Zoomable Image Viewport with Luxury Skeleton */}
             <div
               className="flex-1 overflow-auto flex items-center justify-center my-4 cursor-grab max-w-7xl mx-auto w-full"
               onClick={(e) => e.stopPropagation()}
@@ -390,12 +386,14 @@ export default function SlabSelector() {
                 animate={{ opacity: 1, scale: zoomLevel }}
                 exit={{ opacity: 0, scale: 0.94 }}
                 transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                className="max-h-[76vh] max-w-[90vw] flex items-center justify-center"
               >
-                <img
-                  key={`${activeStone.id}-${photoType}`}
+                <ImageWithSkeleton
                   src={displayedPhoto}
                   alt={`Ultra high-resolution veining pattern of ${activeStone.name}`}
-                  className="max-h-[76vh] max-w-[90vw] object-contain shadow-2xl border border-white/10"
+                  className="max-h-[76vh] max-w-[90vw] shadow-2xl border border-white/10 rounded-sm"
+                  imgClassName="max-h-[76vh] max-w-[90vw] object-contain"
+                  loadingText={`Loading High-Res ${activeStone.name} · 0.4mm Detail`}
                 />
               </motion.div>
             </div>

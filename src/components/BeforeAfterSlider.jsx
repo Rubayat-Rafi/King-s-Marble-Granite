@@ -62,16 +62,15 @@ export default function BeforeAfterSlider() {
           Finished 6cm Waterfall Apron
         </div>
 
-        {/* BEFORE IMAGE: Raw Quarry Monolith (Clipped to Slider Position) */}
+        {/* BEFORE IMAGE: Raw Quarry Monolith (Clipped via Modern CSS clip-path - 100% fluid & responsive) */}
         <div
-          className="absolute inset-0 overflow-hidden pointer-events-none"
-          style={{ width: `${sliderPos}%` }}
+          className="absolute inset-0 pointer-events-none overflow-hidden"
+          style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
         >
           <img
             src="/King’s Social Media/IMG_7694.webp"
             alt="Raw Quarry Slab Specimen"
-            className="absolute inset-0 w-full h-full object-cover max-w-none"
-            style={{ width: containerRef.current ? `${containerRef.current.clientWidth}px` : '100%' }}
+            className="w-full h-full object-cover"
           />
           <div className="absolute top-5 left-5 z-10 bg-black/70 backdrop-blur-md px-3 py-1.5 text-xs text-[var(--accent)] uppercase tracking-widest border border-white/10">
             Raw Carrara Slab Lot
@@ -94,11 +93,11 @@ export default function BeforeAfterSlider() {
         </div>
 
         {/* Bottom Helper Bar */}
-        <div className="absolute bottom-4 inset-x-4 flex justify-between items-center text-xs text-white/80 pointer-events-none z-10">
-          <span className="bg-black/60 px-2.5 py-1 backdrop-blur-md border border-white/10">
+        <div className="absolute bottom-4 inset-x-3 sm:inset-x-4 flex justify-between items-center text-[10px] sm:text-xs text-white/80 pointer-events-none z-10">
+          <span className="bg-black/70 px-2 py-0.5 sm:px-2.5 sm:py-1 backdrop-blur-md border border-white/10">
             01 / First-Quality Block
           </span>
-          <span className="bg-black/60 px-2.5 py-1 backdrop-blur-md border border-white/10">
+          <span className="bg-black/70 px-2 py-0.5 sm:px-2.5 sm:py-1 backdrop-blur-md border border-white/10">
             02 / 5-Axis Waterjet Miters
           </span>
         </div>

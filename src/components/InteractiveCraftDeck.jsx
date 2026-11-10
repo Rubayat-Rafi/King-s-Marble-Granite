@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStoneTheme } from '../context/StoneThemeContext';
+import ImageWithSkeleton from './ImageWithSkeleton';
 
 const SHOWCASE_IMAGES = [
   { id: 1, src: "/King’s Social Media/IMG_7694.webp", alt: "Mitered Waterfall Island Installation" },
@@ -90,18 +91,18 @@ export default function InteractiveCraftDeck() {
     pointerStartX.current = null;
   };
 
-  // Responsive spread spacing
-  const cardSpacing = windowWidth >= 1024 ? 260 : windowWidth >= 768 ? 210 : 160;
+  // Responsive spread spacing: fine-tuned for small mobile phones to prevent horizontal overflow
+  const cardSpacing = windowWidth >= 1024 ? 260 : windowWidth >= 768 ? 200 : windowWidth >= 480 ? 140 : 105;
 
   return (
-    <section className="relative py-16 sm:py-24 bg-[#080809] overflow-hidden select-none border-b border-white/5">
+    <section className="relative py-16 sm:py-24 bg-[#080809] overflow-hidden select-none border-b border-white/5 w-full max-w-full">
       {/* Subtle ambient lighting responding to the active stone */}
       <div
         className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] rounded-full blur-[140px] opacity-15 transition-all duration-1000"
         style={{ backgroundColor: activeStone.accent }}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full overflow-hidden">
         {/* ── GRABBABLE 3D IMAGE DECK (Pure visual, zero text) ── */}
         <div
           ref={containerRef}
@@ -110,7 +111,7 @@ export default function InteractiveCraftDeck() {
           onPointerCancel={handlePointerCancel}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
-          className={`relative h-[420px] sm:h-[490px] md:h-[550px] flex items-center justify-center touch-pan-y ${
+          className={`relative h-[420px] sm:h-[490px] md:h-[550px] flex items-center justify-center touch-pan-y w-full max-w-full overflow-hidden ${
             isGrabbing ? 'cursor-grabbing' : 'cursor-grab'
           }`}
           style={{ perspective: '1200px' }}
@@ -152,7 +153,7 @@ export default function InteractiveCraftDeck() {
                   damping: 28,
                   mass: 0.9,
                 }}
-                className={`absolute w-[230px] sm:w-[270px] md:w-[310px] h-[340px] sm:h-[410px] md:h-[470px] rounded-2xl sm:rounded-3xl will-change-transform overflow-hidden shadow-2xl transition-all duration-500 group outline-none focus:outline-none focus:ring-0 select-none border cursor-pointer ${
+                className={`absolute w-[210px] sm:w-[260px] md:w-[310px] h-[320px] sm:h-[390px] md:h-[470px] rounded-2xl sm:rounded-3xl will-change-transform overflow-hidden shadow-2xl transition-all duration-500 group outline-none focus:outline-none focus:ring-0 select-none border cursor-pointer ${
                   isCenter
                     ? 'border-2 border-white/45 shadow-[0_25px_60px_rgba(0,0,0,0.95)]'
                     : 'border border-white/15 hover:border-white/35'
@@ -161,13 +162,14 @@ export default function InteractiveCraftDeck() {
                   backgroundColor: '#0F0F12',
                 }}
               >
-                {/* Pure Installation Photograph */}
-                <img
+                {/* Pure Installation Photograph with Skeleton */}
+                <ImageWithSkeleton
                   src={item.src}
                   alt={item.alt}
                   draggable={false}
-                  loading="lazy"
-                  className="w-full h-full object-cover object-center pointer-events-none transition-transform duration-700 ease-out group-hover:scale-105"
+                  className="w-full h-full"
+                  imgClassName="w-full h-full object-cover object-center pointer-events-none transition-transform duration-700 ease-out group-hover:scale-105"
+                  loadingText=""
                 />
 
                 {/* Subtle vignette layer for depth */}
@@ -269,21 +271,27 @@ export default function InteractiveCraftDeck() {
               </button>
             </motion.div>
 
-            {/* Large Image Preview with distinct key so it never shows stale image */}
+            {/* Large Image Preview with Luxury Skeleton */}
             <div
               className="flex-1 overflow-auto flex items-center justify-center my-4 max-w-7xl mx-auto w-full"
               onClick={(e) => e.stopPropagation()}
             >
-              <motion.img
+              <motion.div
                 key={selectedImage.src}
-                initial={{ opacity: 0, scale: 0.94 }}
+                initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.94 }}
-                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                src={selectedImage.src}
-                alt={selectedImage.alt}
-                className="max-h-[76vh] max-w-[92vw] object-contain shadow-2xl border border-white/10"
-              />
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="max-h-[76vh] max-w-[92vw] w-full flex items-center justify-center"
+              >
+                <ImageWithSkeleton
+                  src={selectedImage.src}
+                  alt={selectedImage.alt}
+                  className="max-h-[76vh] max-w-[92vw] shadow-2xl border border-white/10 rounded-sm"
+                  imgClassName="max-h-[76vh] max-w-[92vw] object-contain"
+                  loadingText="Loading High-Res Specimen · 0.4mm Detail"
+                />
+              </motion.div>
             </div>
 
             {/* Footer Bar */}
