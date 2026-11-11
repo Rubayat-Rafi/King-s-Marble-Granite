@@ -18,6 +18,7 @@ const PROCESS_STEPS = [
     accent: '#FAB502',
     image: "/King’s Social Media/15d5ac9c-3e7e-4067-ac7d-9f5379ac1173.webp",
   },
+  
   {
     num: '02',
     step: 'Phase Two',
