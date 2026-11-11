@@ -140,7 +140,7 @@ export default function Hero() {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-[100svh] w-full flex items-center justify-start overflow-hidden bg-[#0B0B0C] text-[#F4F2EE]"
+      className="relative min-h-[100svh] w-full flex items-center justify-center overflow-hidden bg-[#0B0B0C] text-[#F4F2EE]"
     >
       {/* LAYER 1: Background Sequential Videos with Crossfade & Zero Sound */}
       <div
@@ -167,9 +167,9 @@ export default function Hero() {
           );
         })}
 
-        {/* Balanced contrast overlays: keeps text ultra-readable while letting the natural stone lighting shine */}
-        <div className="absolute inset-0 z-20 bg-gradient-to-r from-black/75 via-black/40 to-transparent" />
-        <div className="absolute inset-0 z-20 bg-gradient-to-t from-[#0E0E10] via-transparent to-black/25" />
+        {/* Balanced contrast overlays: keeps centered text ultra-readable while letting the natural stone lighting shine */}
+        <div className="absolute inset-0 z-20 bg-black/45" />
+        <div className="absolute inset-0 z-20 bg-gradient-to-t from-[#0E0E10] via-transparent to-black/35" />
       </div>
 
       {/* LAYER 2: Mid-Layer Floating Mineral Dust & Light Particles */}
@@ -177,39 +177,39 @@ export default function Hero() {
         ref={particlesRef}
         className="absolute inset-0 z-[1] pointer-events-none will-change-transform"
       >
-        <div className="absolute top-1/4 left-1/3 w-1.5 h-1.5 rounded-full bg-[#E5C578] opacity-60 blur-[0.5px] animate-pulse" />
+        <div className="absolute top-1/4 left-1/3 w-1.5 h-1.5 rounded-full bg-[#FAB502] opacity-60 blur-[0.5px] animate-pulse" />
         <div className="absolute top-1/2 left-2/3 w-2 h-2 rounded-full bg-white opacity-40 blur-[1px] animate-pulse delay-700" />
-        <div className="absolute bottom-1/3 left-1/2 w-1.5 h-1.5 rounded-full bg-[#E5C578] opacity-50 blur-[0.5px] animate-pulse delay-1000" />
+        <div className="absolute bottom-1/3 left-1/2 w-1.5 h-1.5 rounded-full bg-[#FAB502] opacity-50 blur-[0.5px] animate-pulse delay-1000" />
         <div className="absolute top-1/3 right-1/4 w-2.5 h-2.5 rounded-full bg-white/60 blur-[1.5px] animate-pulse delay-500" />
         <div className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full bg-white/[0.04] blur-[120px]" />
       </div>
 
-      {/* LAYER 3: Foreground Content with Mask Reveal & Fully Responsive Fluid Typography */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-10 lg:px-12 py-16 sm:py-20 flex items-center">
-        <div className="max-w-xl lg:max-w-2xl text-left space-y-4 sm:space-y-5">
+      {/* LAYER 3: Foreground Content with Mask Reveal & Fully Responsive Centered Typography */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-10 lg:px-12 py-16 sm:py-24 flex items-center justify-center">
+        <div className="max-w-4xl lg:max-w-5xl text-center mx-auto space-y-5 sm:space-y-7 flex flex-col items-center">
           {/* Tagline Badge */}
-          <div className="overflow-hidden">
+          <div className="overflow-hidden flex justify-center w-full">
             <div
               ref={badgeRef}
-              className="inline-flex items-center gap-2 bg-black/60 px-3 sm:px-3.5 py-1 sm:py-1.5 backdrop-blur-md border border-white/10"
+              className="inline-flex items-center gap-2 bg-black/60 px-3.5 sm:px-4 py-1.5 sm:py-2 backdrop-blur-md border border-white/10"
             >
               <span
                 className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-colors duration-700"
                 style={{ backgroundColor: activeStone.accent }}
               />
-              <span className="text-[11px] sm:text-xs uppercase tracking-[0.18em] sm:tracking-[0.24em] text-white/90 font-medium">
+              <span className="text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white/90 font-medium">
                 Fabrication Atelier · Harvey, Louisiana
               </span>
             </div>
           </div>
 
-          {/* Fluid Responsive Headline: Scales seamlessly from mobile (1.85rem) to desktop (3.25rem) */}
-          <div className="overflow-hidden py-1">
+          {/* Fluid Responsive Headline: Grand Architectural Atelier Scale */}
+          <div className="overflow-hidden py-1 w-full flex justify-center">
             <h1
               ref={headlineRef}
-              className="font-display text-[clamp(1.85rem,5.2vw,3.25rem)] text-white tracking-[-0.015em] leading-[1.08] sm:leading-[1.12] drop-shadow-md"
+              className="font-display text-[clamp(2.75rem,7.5vw,5.75rem)] text-white tracking-[-0.02em] leading-[1.04] sm:leading-[0.98] drop-shadow-lg text-center"
             >
-              The surface <br />
+              The surface <br className="hidden sm:inline" />
               <span
                 className="italic font-normal transition-colors duration-700"
                 style={{ color: activeStone.accent }}
@@ -221,38 +221,35 @@ export default function Hero() {
           </div>
 
           {/* Responsive Paragraph Copy */}
-          <div className="overflow-hidden">
+          <div className="overflow-hidden w-full flex justify-center">
             <p
               ref={paragraphRef}
-              className="text-xs sm:text-sm md:text-base text-[#DDD8CF]/90 max-w-sm sm:max-w-md font-light leading-relaxed drop-shadow-sm"
+              className="text-sm sm:text-base md:text-lg text-[#DDD8CF]/90 max-w-lg sm:max-w-2xl mx-auto font-light leading-relaxed drop-shadow-sm text-center"
             >
               We import rare natural monoliths directly from historic quarries in Carrara and Brazil,
               digitize them with 0.4mm 3D lasers, and finish them with continuous vein continuation.
             </p>
           </div>
 
-          {/* Responsive Action Buttons & Stone Indicator */}
-          <div className="overflow-hidden pt-2">
+          {/* Responsive Action Buttons */}
+          <div className="overflow-hidden pt-3 w-full flex justify-center">
             <div
               ref={ctaRef}
-              className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5"
+              className="flex flex-col sm:flex-row sm:items-center justify-center gap-4 sm:gap-6"
             >
               <Link
                 to="/materials"
-                className="btn-primary-luxury text-xs !py-3 !px-6 text-center"
+                className="btn-primary-luxury text-xs sm:text-sm !py-3.5 !px-8 text-center"
               >
                 Inspect current reserve
               </Link>
-              <span className="text-xs uppercase tracking-[0.16em] sm:tracking-[0.18em] text-white/80">
-                Currently tuned to <strong className="text-white">{activeStone.name}</strong>
-              </span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Subtle Video Sequence Indicator */}
-      <div className="absolute bottom-6 sm:bottom-8 right-6 sm:right-10 z-20 hidden sm:flex items-center gap-2 bg-black/50 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15">
+      <div className="absolute bottom-6 sm:bottom-8 right-20 sm:right-24 z-20 hidden sm:flex items-center gap-2 bg-black/50 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15">
         <span className="text-[10px] uppercase tracking-[0.2em] text-white/60 mr-1 font-mono">
           Scene {currentVideoIndex + 1}/{HERO_VIDEOS.length}
         </span>

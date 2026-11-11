@@ -73,7 +73,7 @@ export default function LogoPreloader() {
         <div className="flex flex-col items-center max-w-sm text-center space-y-6">
           {/* Logo with Soft Glow */}
           <div className="relative">
-            <div className="absolute inset-0 bg-[#E5C578]/20 blur-3xl rounded-full scale-150 pointer-events-none" />
+            <div className="absolute inset-0 bg-[#FAB502]/20 blur-3xl rounded-full scale-150 pointer-events-none" />
             <img
               src="/logo.webp"
               alt="Kings Marble & Granite"
@@ -85,7 +85,7 @@ export default function LogoPreloader() {
           <div className="w-60 sm:w-72 space-y-2.5">
             <div className="w-full h-[2px] bg-white/10 rounded-full overflow-hidden relative">
               <div
-                className="h-full bg-gradient-to-r from-[#E5C578]/40 via-[#E5C578] to-[#E5C578] transition-all duration-75 ease-out"
+                className="h-full bg-gradient-to-r from-[#FAB502]/40 via-[#FAB502] to-[#FDCC2B] transition-all duration-75 ease-out"
                 style={{ width: `${progress}%` }}
               />
             </div>
@@ -93,7 +93,7 @@ export default function LogoPreloader() {
             {/* Dynamic Status & Percentage */}
             <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-mono tracking-[0.2em] text-white/80 uppercase">
               <span className="truncate max-w-[200px]">{getPhaseText(progress)}</span>
-              <span className="text-[#E5C578] font-bold shrink-0">{progress}%</span>
+              <span className="text-[#FAB502] font-bold shrink-0">{progress}%</span>
             </div>
           </div>
 

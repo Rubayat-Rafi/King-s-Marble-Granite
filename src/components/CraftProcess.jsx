@@ -10,7 +10,7 @@ const PROCESS_STEPS = [
     desc: 'You walk our Harvey indoor slab reserve or collaborate with our curators to tag exact whole blocks quarried in Carrara and Brazil. Every lot is cataloged by mineral composition, crystallization, and natural veining pattern.',
     spec: 'Direct Quarry Imports · No Distributor Markups',
     bg: '#0F0F10',
-    accent: '#E5C578',
+    accent: '#FAB502',
     image: "/King’s Social Media/15d5ac9c-3e7e-4067-ac7d-9f5379ac1173.webp",
   },
   {
@@ -21,7 +21,7 @@ const PROCESS_STEPS = [
     desc: 'Our engineers deploy optical 3D Prodim digital laser digitizers across your cabinetry and walls. We record electrical cutouts, uneven wall bowings, and radius corners with sub-millimeter precision before any stone is cut.',
     spec: '0.4 mm Accuracy · Eliminates Human Measuring Errors',
     bg: '#141211',
-    accent: '#E5C578',
+    accent: '#FAB502',
     image: "/King’s Social Media/18002a95-8d46-4866-bf82-42a028c2fc7a.webp",
   },
   {
@@ -32,7 +32,7 @@ const PROCESS_STEPS = [
     desc: 'Before cutting, clients review a digital vein-flow layout showing exactly where striations travel across islands, backsplashes, and mitered waterfall drops. Diamond waterjets mill 45° joints with hairline seams.',
     spec: '5-Axis Intermac CNC · 60,000 PSI Waterjet Precision',
     bg: '#0B0B0C',
-    accent: '#E5C578',
+    accent: '#FAB502',
     image: "/King’s Social Media/IMG_7693.webp",
   },
   {
@@ -43,7 +43,7 @@ const PROCESS_STEPS = [
     desc: 'Our certified master craftsmen anchor, level, and chemically fuse joints with UV-stable custom-pigmented epoxy. Every commission concludes with deep fluoropolymer penetrating sealer protection.',
     spec: '15-Year Craftsmanship & Stain Warranty',
     bg: '#171413',
-    accent: '#E5C578',
+    accent: '#FAB502',
     image: "/King’s Social Media/IMG_7690.webp",
   },
 ];
