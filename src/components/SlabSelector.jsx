@@ -1,14 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useStoneTheme, STONE_THEMES } from '../context/StoneThemeContext';
 import ImageWithSkeleton from './ImageWithSkeleton';
 
-gsap.registerPlugin(ScrollTrigger);
-
 export default function SlabSelector() {
-  const { activeStone, setStoneById, isTransitioning } = useStoneTheme();
+  const { activeStone, setStoneById } = useStoneTheme();
   const [photoType, setPhotoType] = useState('slab'); // 'slab' | 'room'
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1);
@@ -75,8 +71,14 @@ export default function SlabSelector() {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Lead */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
+        {/* Section Lead with Framer Motion Fade-Up */}
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6"
+        >
           <div className="space-y-3 text-left">
             <span className="text-xs uppercase tracking-[0.24em] text-[var(--accent)] font-medium block">
               01 / Signature Slab Selection
@@ -88,12 +90,18 @@ export default function SlabSelector() {
           <p className="text-xs sm:text-sm text-[var(--text-muted)] max-w-sm font-light leading-relaxed text-left md:text-right">
             Select a raw monolith lot below to re-tune the entire website atmosphere and lighting.
           </p>
-        </div>
+        </motion.div>
 
         {/* Split Screen Signature Interface */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
-          {/* Left Column: Fixed / Sticky Slab Monolith with 3D Tilt, Cursor Light & Wipe Transition */}
-          <div className="lg:col-span-7 lg:sticky lg:top-24">
+          {/* Left Column: Fixed / Sticky Slab Monolith with Framer Motion Fade-In */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.85, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-7 lg:sticky lg:top-24"
+          >
             <div
               ref={imageContainerRef}
               onMouseMove={handleMouseMove}
@@ -173,10 +181,16 @@ export default function SlabSelector() {
               <span>Provenance: <strong className="text-[var(--text)] font-medium">{activeStone.origin}</strong></span>
               <span className="italic">Prodim 3D Laser Digitized · 0.4mm Tolerance</span>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right Column: Slabs Selection at TOP, directly parallel to the Image */}
-          <div className="lg:col-span-5 space-y-6 text-left">
+          {/* Right Column: Slabs Selection at TOP with Framer Motion Fade-Up */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.85, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 space-y-6 text-left"
+          >
             {/* Slabs List (6 Specimens with Stone Swatches) - AT THE TOP FOR IMMEDIATE VISIBILITY */}
             <div className="p-5 sm:p-6 border border-[var(--line)] bg-[var(--bg)]/90 backdrop-blur-sm space-y-4 shadow-sm">
               <div className="flex items-center justify-between">
@@ -297,7 +311,7 @@ export default function SlabSelector() {
                 </motion.div>
               </AnimatePresence>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
 

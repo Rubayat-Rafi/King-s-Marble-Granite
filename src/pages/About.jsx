@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { motion } from 'framer-motion';
 import { MEDIA_ASSETS, GALLERY_IMAGES } from '../data/content';
 import { useStoneTheme } from '../context/StoneThemeContext';
 import ImageWithSkeleton from '../components/ImageWithSkeleton';
@@ -17,7 +18,12 @@ export default function About() {
           style={{ backgroundColor: activeStone.accent }}
         />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-left">
-          <div className="max-w-3xl space-y-5">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-3xl space-y-5"
+          >
             <div className="inline-flex items-center gap-2.5 bg-white/10 px-3 py-1.5 backdrop-blur-md border border-white/10">
               <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: activeStone.accent }} />
               <span className="text-xs uppercase tracking-[0.22em] text-white/80 font-medium">
@@ -35,7 +41,7 @@ export default function About() {
             <p className="text-sm sm:text-base text-[#DDD8CF] max-w-2xl font-light leading-relaxed">
               Founded in Harvey, Louisiana, King’s Marble &amp; Granite operates on direct quarry provenance, zero subcontracting, and sub-millimeter 3D digital fabrication.
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -43,7 +49,13 @@ export default function About() {
       <section className="py-24 sm:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-12 gap-12 lg:gap-16 items-center">
-            <div className="col-span-12 lg:col-span-6 space-y-6">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="col-span-12 lg:col-span-6 space-y-6 text-left"
+            >
               <span className="text-label text-xs text-[var(--accent)] tracking-[0.24em] font-medium block">
                 Direct Importers &amp; In-House Fabricators
               </span>
@@ -67,9 +79,15 @@ export default function About() {
                   <p className="text-xs text-[var(--text-muted)] mt-1 font-light">Fluoropolymer stain and structural craftsmanship guarantee.</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="col-span-12 lg:col-span-6">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="col-span-12 lg:col-span-6"
+            >
               <div className="relative border border-[var(--line)] overflow-hidden shadow-2xl bg-[#0B0B0C] h-[440px] sm:h-[540px]">
                 <ImageWithSkeleton
                   src={MEDIA_ASSETS.workshop}
@@ -79,7 +97,7 @@ export default function About() {
                   loadingText="Loading Harvey Workshop..."
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none z-10" />
-                <div className="absolute bottom-6 left-6 right-6 text-white z-20">
+                <div className="absolute bottom-6 left-6 right-6 text-white z-20 text-left">
                   <span className="text-label text-xs text-[var(--accent)] block tracking-widest mb-1">
                     Harvey Facility
                   </span>
@@ -88,7 +106,7 @@ export default function About() {
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -96,18 +114,35 @@ export default function About() {
       {/* Workshop Gallery Snapshot */}
       <section className="py-20 border-y border-[var(--line)] bg-[var(--bg)] transition-colors duration-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mb-12 space-y-2 text-left">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-2xl mb-12 space-y-2 text-left"
+          >
             <span className="text-label text-[var(--accent)] tracking-[0.22em] block">
               Behind the Diamond Blades
             </span>
             <h3 className="font-display text-2xl sm:text-4xl font-light text-[var(--text)]">
               Artisan Masonry in Action
             </h3>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {workshopGallery.map((img, idx) => (
-              <div key={idx} className="h-44 sm:h-52 overflow-hidden border border-[var(--line)] bg-[#0B0B0C] group">
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{
+                  duration: 0.5,
+                  delay: idx * 0.08,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="h-44 sm:h-52 overflow-hidden border border-[var(--line)] bg-[#0B0B0C] group"
+              >
                 <ImageWithSkeleton
                   src={img.src}
                   alt={`Workshop ${idx + 1}`}
@@ -115,7 +150,7 @@ export default function About() {
                   imgClassName="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                   loadingText=""
                 />
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -124,37 +159,61 @@ export default function About() {
       {/* Core Standards */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="border border-[var(--line)] p-8 space-y-4 bg-[var(--bg)]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="border border-[var(--line)] p-8 space-y-4 bg-[var(--bg)]"
+            >
               <span className="text-label text-xs text-[var(--accent)] block">01 / Provenance</span>
               <h3 className="font-display text-2xl text-[var(--text)]">Direct Block Quarrying</h3>
               <p className="text-xs text-[var(--text-muted)] font-light leading-relaxed">
                 We inspect every stone lot at the quarry source in Italy and Brazil to ensure zero resin fillers, hidden fracture faults, or counterfeit synthetic quartz blends.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="border border-[var(--line)] p-8 space-y-4 bg-[var(--bg)]">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="border border-[var(--line)] p-8 space-y-4 bg-[var(--bg)]"
+            >
               <span className="text-label text-xs text-[var(--accent)] block">02 / Orchestration</span>
               <h3 className="font-display text-2xl text-[var(--text)]">Vein-Flow Pre-Visualization</h3>
               <p className="text-xs text-[var(--text-muted)] font-light leading-relaxed">
                 Before a single diamond cut is made, clients inspect a high-resolution 3D digital model showing exactly how geological veins transition across waterfalls and walls.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="border border-[var(--line)] p-8 space-y-4 bg-[var(--bg)]">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="border border-[var(--line)] p-8 space-y-4 bg-[var(--bg)]"
+            >
               <span className="text-label text-xs text-[var(--accent)] block">03 / Accountability</span>
               <h3 className="font-display text-2xl text-[var(--text)]">In-House Master Crews</h3>
               <p className="text-xs text-[var(--text-muted)] font-light leading-relaxed">
                 Zero third-party subcontractors. The same certified craftsmen who laser-digitize your home and cut your stone oversee the white-glove delivery and installation.
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* CTA */}
       <section className="py-24 border-t border-[var(--line)] bg-[#0B0B0C] text-[#F4F2EE] text-center">
-        <div className="max-w-3xl mx-auto px-4 space-y-6">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-3xl mx-auto px-4 space-y-6"
+        >
           <span className="text-label text-[var(--accent)] tracking-[0.24em] block">
             Visit Our Private Slab Yard
           </span>
@@ -172,7 +231,7 @@ export default function About() {
               (504) 723-7898
             </a>
           </div>
-        </div>
+        </motion.div>
       </section>
     </div>
   );

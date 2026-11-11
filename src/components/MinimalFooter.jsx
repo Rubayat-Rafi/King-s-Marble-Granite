@@ -1,14 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { useStoneTheme } from '../context/StoneThemeContext';
+import { motion } from 'framer-motion';
+
+const CURRENT_YEAR = new Date().getFullYear();
 
 export default function MinimalFooter() {
-  const { activeStone } = useStoneTheme();
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer className="border-t border-[var(--line)] bg-[var(--bg)] pt-16 sm:pt-20 pb-12 text-[var(--text-muted)] transition-colors duration-1000 ease-luxury overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+      >
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-14 border-b border-[var(--line)] text-left">
           {/* Logo & Identity (Original logo on light background) */}
           <div className="md:col-span-4 space-y-4">
@@ -112,13 +117,13 @@ export default function MinimalFooter() {
         </div>
 
         <div className="pt-6 border-t border-[var(--line)] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs">
-          <p>© {currentYear} Kings Marble &amp; Granite. All rights reserved.</p>
+          <p>© {CURRENT_YEAR} Kings Marble &amp; Granite. All rights reserved.</p>
           <div className="flex gap-6 uppercase tracking-widest text-xs">
             <span>Sub-Millimeter 3D Laser Precision</span>
             <span>5-Axis CNC Waterjet</span>
           </div>
         </div>
-      </div>
+      </motion.div>
     </footer>
   );
 }

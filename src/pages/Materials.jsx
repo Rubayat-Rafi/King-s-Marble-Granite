@@ -25,7 +25,12 @@ export default function Materials() {
           style={{ backgroundColor: activeStone.accent }}
         />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-left">
-          <div className="max-w-3xl space-y-5">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-3xl space-y-5"
+          >
             <div className="inline-flex items-center gap-2.5 bg-white/10 px-3 py-1.5 backdrop-blur-md border border-white/10">
               <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: activeStone.accent }} />
               <span className="text-xs uppercase tracking-[0.22em] text-white/80 font-medium">
@@ -43,12 +48,17 @@ export default function Materials() {
             <p className="text-sm sm:text-base text-[#DDD8CF] max-w-2xl font-light leading-relaxed">
               Hand-selected blocks of Italian marble, indestructible Brazilian quartzite, and exotic granite in stock at our Harvey warehouse and available for reserve.
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Filter Tabs (Static in-flow, non-sticky) */}
-      <section className="py-5 sm:py-6 border-b border-[var(--line)] bg-[var(--bg)] transition-colors duration-700">
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        className="py-5 sm:py-6 border-b border-[var(--line)] bg-[var(--bg)] transition-colors duration-700"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center items-center gap-2 sm:gap-3 overflow-x-auto md:overflow-visible md:flex-wrap no-scrollbar py-1">
           {categories.map((cat) => {
             const isActive = selectedCategory === cat;
@@ -75,15 +85,23 @@ export default function Materials() {
             );
           })}
         </div>
-      </section>
+      </motion.section>
 
       {/* Stone Grid */}
       <section className="py-20 sm:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredStones.map((stone) => (
-              <div
+            {filteredStones.map((stone, idx) => (
+              <motion.div
                 key={stone.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{
+                  duration: 0.6,
+                  delay: (idx % 3) * 0.12,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
                 className="border border-[var(--line)] overflow-hidden group hover:border-[var(--text)] transition-all duration-300 flex flex-col bg-[var(--bg)]"
               >
                 <div className="h-80 overflow-hidden relative bg-[#0B0B0C]">
@@ -125,7 +143,7 @@ export default function Materials() {
                     </Link>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

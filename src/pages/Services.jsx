@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { motion } from 'framer-motion';
 import { SERVICES, EDGE_PROFILES } from '../data/content';
 import { useStoneTheme } from '../context/StoneThemeContext';
 import ImageWithSkeleton from '../components/ImageWithSkeleton';
@@ -16,7 +17,12 @@ export default function Services() {
           style={{ backgroundColor: activeStone.accent }}
         />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-left">
-          <div className="max-w-3xl space-y-5">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-3xl space-y-5"
+          >
             <div className="inline-flex items-center gap-2.5 bg-white/10 px-3 py-1.5 backdrop-blur-md border border-white/10">
               <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: activeStone.accent }} />
               <span className="text-xs uppercase tracking-[0.22em] text-white/80 font-medium">
@@ -49,7 +55,7 @@ export default function Services() {
                 <span>15-Year Fluoropolymer Warranty</span>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -59,8 +65,12 @@ export default function Services() {
           {SERVICES.map((service, idx) => {
             const isEven = idx % 2 === 1;
             return (
-              <div
+              <motion.div
                 key={service.id}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 className="grid grid-cols-12 gap-8 lg:gap-16 items-center"
               >
                 {/* Text Content */}
@@ -102,46 +112,49 @@ export default function Services() {
                     </ul>
                   </div>
 
-                  <div className="pt-4 flex items-center gap-5">
+                  <div className="pt-2">
                     <Link
                       to="/contact"
-                      className="btn-primary-luxury text-xs !py-3 !px-6"
+                      className="btn-primary-luxury inline-block"
                     >
-                      Inquire About This Service
+                      Commission {service.title}
                     </Link>
-                    <a
-                      href="tel:+15047237898"
-                      className="text-label text-xs text-[var(--text-muted)] hover:text-[var(--text)] transition-colors"
-                    >
-                      (504) 723-7898
-                    </a>
                   </div>
                 </div>
 
-                {/* Monolithic Image Showcase */}
+                {/* Monolith Imagery */}
                 <div
                   className={`col-span-12 lg:col-span-6 ${
                     isEven ? 'lg:order-1' : 'lg:order-2'
                   }`}
                 >
-                  <div className="relative h-[380px] sm:h-[500px] overflow-hidden border border-[var(--line)] shadow-xl group bg-[#0B0B0C]">
-                    <ImageWithSkeleton
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-full"
-                      imgClassName="w-full h-full object-cover transition-transform duration-1000 ease-luxury group-hover:scale-105"
-                      loadingText=""
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none z-10" />
-                    <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center text-xs text-white/80 z-20 pointer-events-none">
-                      <span className="text-label tracking-widest text-xs bg-black/60 px-2.5 py-1 border border-white/10">
-                        Harvey Jobsite Capture
+                  <div className="relative border border-[var(--line)] overflow-hidden shadow-2xl bg-[#0B0B0C] group">
+                    <div className="h-[360px] sm:h-[480px] overflow-hidden">
+                      <ImageWithSkeleton
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-full"
+                        imgClassName="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        loadingText={`Loading ${service.title}...`}
+                      />
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+                    <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end text-white pointer-events-none">
+                      <div>
+                        <span className="text-label text-xs text-[var(--accent)] block tracking-widest mb-1">
+                          In-House Fabrication
+                        </span>
+                        <p className="text-xs font-light text-[#DDD8CF]">
+                          {service.subtitle}
+                        </p>
+                      </div>
+                      <span className="text-label text-xs bg-black/60 backdrop-blur-md px-3 py-1 border border-white/10">
+                        Harvey, LA
                       </span>
-                      <span className="font-light italic text-xs">Kings Marble &amp; Granite</span>
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
@@ -150,7 +163,13 @@ export default function Services() {
       {/* Architectural Diamond CNC Edge Profiles Section */}
       <section className="py-24 border-t border-[var(--line)] bg-[var(--bg)] transition-colors duration-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mb-16 space-y-4 text-left">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-2xl mb-16 space-y-4 text-left"
+          >
             <span className="text-label text-[var(--accent)] tracking-[0.22em] block">
               Architectural Edge Library
             </span>
@@ -160,12 +179,20 @@ export default function Services() {
             <p className="text-sm text-[var(--text-muted)] font-light leading-relaxed">
               The edge treatment establishes the architectural silhouette of your stone. All edges are cut with 5-axis robotic diamond router bits and polished with multi-grit diamond pads to match the face sheen.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {EDGE_PROFILES.map((edge) => (
-              <div
+            {EDGE_PROFILES.map((edge, idx) => (
+              <motion.div
                 key={edge.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{
+                  duration: 0.6,
+                  delay: (idx % 3) * 0.1,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
                 className="border border-[var(--line)] p-8 bg-[var(--bg)] transition-all duration-300 hover:border-[var(--text)] space-y-4 flex flex-col justify-between"
               >
                 <div className="space-y-3">
@@ -189,11 +216,17 @@ export default function Services() {
                   <span>Diamond Polished</span>
                   <span>Hairline Tolerance</span>
                 </div>
-              </div>
+              </motion.div>
             ))}
 
             {/* Custom Monolithic Apron Card */}
-            <div className="border border-[var(--text)] p-8 bg-[#0B0B0C] text-[#F4F2EE] space-y-4 flex flex-col justify-between">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="border border-[var(--text)] p-8 bg-[#0B0B0C] text-[#F4F2EE] space-y-4 flex flex-col justify-between"
+            >
               <div className="space-y-3">
                 <div className="flex justify-between items-baseline border-b border-white/15 pb-3">
                   <h3 className="font-display text-2xl text-white">
@@ -219,14 +252,20 @@ export default function Services() {
                   Consult on custom apron miters →
                 </Link>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Editorial Bottom Consultation */}
       <section className="py-24 border-t border-[var(--line)] bg-[var(--bg)] transition-colors duration-700">
-        <div className="max-w-4xl mx-auto px-4 text-center space-y-6">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-4xl mx-auto px-4 text-center space-y-6"
+        >
           <span className="text-label text-[var(--accent)] tracking-[0.24em] block">
             Direct Shop Consultation
           </span>
@@ -244,7 +283,7 @@ export default function Services() {
               Direct Desk: (504) 723-7898
             </a>
           </div>
-        </div>
+        </motion.div>
       </section>
     </div>
   );

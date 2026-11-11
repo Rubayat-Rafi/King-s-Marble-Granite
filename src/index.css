@@ -34,7 +34,7 @@ html {
   background-color: #080809;
   color: var(--text);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  overflow-x: hidden !important;
+  overflow-x: clip;
   max-width: 100vw;
   width: 100%;
 }
@@ -44,7 +44,7 @@ body {
   color: var(--text);
   font-size: 17px;
   line-height: 1.6;
-  overflow-x: hidden !important;
+  overflow-x: clip;
   max-width: 100vw;
   width: 100%;
   -webkit-font-smoothing: antialiased;

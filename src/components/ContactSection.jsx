@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import gsap from 'gsap';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
 export default function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
@@ -8,36 +8,6 @@ export default function ContactSection() {
     phone: '',
     projectType: 'Mitered Waterfall Kitchen Island',
   });
-
-  const buttonRef = useRef(null);
-
-  // Magnetic Button Effect with GSAP elastic physics
-  const handleBtnMouseMove = (e) => {
-    if (!buttonRef.current) return;
-    const rect = buttonRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const deltaX = (e.clientX - centerX) * 0.26;
-    const deltaY = (e.clientY - centerY) * 0.26;
-    gsap.to(buttonRef.current, {
-      x: deltaX,
-      y: deltaY,
-      duration: 0.25,
-      ease: 'power2.out',
-      overwrite: 'auto',
-    });
-  };
-
-  const handleBtnMouseLeave = () => {
-    if (!buttonRef.current) return;
-    gsap.to(buttonRef.current, {
-      x: 0,
-      y: 0,
-      duration: 0.75,
-      ease: 'elastic.out(1, 0.35)',
-      overwrite: 'auto',
-    });
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,8 +18,14 @@ export default function ContactSection() {
     <section id="contact" className="py-24 sm:py-36 bg-[var(--bg)] border-t border-[var(--line)] text-left transition-colors duration-1000 ease-luxury">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Headline & Contact Info */}
-          <div className="lg:col-span-5 space-y-6">
+          {/* Headline & Contact Info with Framer Motion Fade-Up */}
+          <motion.div
+            initial={{ opacity: 0, y: 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 space-y-6"
+          >
             <span className="text-xs uppercase tracking-[0.24em] text-[var(--accent)] font-medium block">
               05 / Direct Consultation
             </span>
@@ -84,10 +60,16 @@ export default function ContactSection() {
                 <strong className="text-[var(--text)] font-medium">Hours:</strong> Monday – Saturday: 8:00 AM – 5:00 PM (Sunday Closed)
               </p>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Calm, High-End Short Form with Animated Field Underlines & Magnetic Button */}
-          <div className="lg:col-span-7 p-8 sm:p-12 border border-[var(--line)] bg-[var(--bg)] shadow-sm">
+          {/* Calm, High-End Short Form with Framer Motion Fade-Up */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.85, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-7 p-8 sm:p-12 border border-[var(--line)] bg-[var(--bg)] shadow-sm"
+          >
             {submitted ? (
               <div className="py-12 text-center space-y-4">
                 <span className="font-display text-4xl text-[var(--text)] block font-light">
@@ -170,27 +152,29 @@ export default function ContactSection() {
                   <div className="absolute bottom-0 left-0 w-full h-[1.5px] bg-[var(--accent)] scale-x-0 group-focus-within:scale-x-100 transition-transform duration-500 origin-left" />
                 </div>
 
-                {/* Magnetic Button with GSAP Elastic Physics */}
-                <div
-                  ref={buttonRef}
-                  onMouseMove={handleBtnMouseMove}
-                  onMouseLeave={handleBtnMouseLeave}
-                  className="will-change-transform"
+                {/* Luxury Interactive Button with Framer Motion spring physics */}
+                <motion.button
+                  type="submit"
+                  whileHover={{ scale: 1.015, y: -2 }}
+                  whileTap={{ scale: 0.985 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                  className="btn-primary-luxury w-full py-4 text-xs tracking-[0.2em] cursor-pointer"
                 >
-                  <button
-                    type="submit"
-                    className="btn-primary-luxury w-full py-4 text-xs tracking-[0.2em]"
-                  >
-                    Lock in Consultation &amp; Laser Measure →
-                  </button>
-                </div>
+                  Lock in Consultation &amp; Laser Measure →
+                </motion.button>
               </form>
             )}
-          </div>
+          </motion.div>
         </div>
 
-        {/* Embedded Interactive Google Map */}
-        <div className="mt-14 pt-12 border-t border-[var(--line)]">
+        {/* Embedded Interactive Google Map with Framer Motion Fade-Up */}
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-14 pt-12 border-t border-[var(--line)]"
+        >
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
             <div>
               <span className="text-xs uppercase tracking-[0.2em] text-[var(--accent)] font-medium block">
@@ -224,7 +208,7 @@ export default function ContactSection() {
               className="w-full h-full"
             />
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

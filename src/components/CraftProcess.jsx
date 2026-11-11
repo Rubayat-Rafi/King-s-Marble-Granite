@@ -1,10 +1,6 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ImageWithSkeleton from './ImageWithSkeleton';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const PROCESS_STEPS = [
   {
@@ -18,7 +14,6 @@ const PROCESS_STEPS = [
     accent: '#FAB502',
     image: "/King’s Social Media/15d5ac9c-3e7e-4067-ac7d-9f5379ac1173.webp",
   },
-  
   {
     num: '02',
     step: 'Phase Two',
@@ -55,60 +50,87 @@ const PROCESS_STEPS = [
 ];
 
 export default function CraftProcess() {
-  const containerRef = useRef(null);
-  const cardRefs = useRef([]);
+  const sectionRef = useRef(null);
+  const touchStartY = useRef(null);
+  const cooldownRef = useRef(false);
   const [activeStep, setActiveStep] = useState(0);
 
+  // Wheel listener:
+  // ONLY intercepts when the section is in the PROPER, FULL view (aligned near top navbar).
+  // If the user hasn't scrolled all the way to Section 02 yet, it allows natural page scroll.
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!containerRef.current) return;
+    const handleWheel = (e) => {
+      const section = sectionRef.current;
+      if (!section) return;
 
-    const ctx = gsap.context(() => {
-      PROCESS_STEPS.forEach((_, idx) => {
-        const card = cardRefs.current[idx];
-        if (!card) return;
+      const rect = section.getBoundingClientRect();
+      const navbarOffset = 75; // Top fixed header height
 
-        // 1. In-View Observer to track active tab header
-        ScrollTrigger.create({
-          trigger: card,
-          start: 'top 40%',
-          end: 'bottom 40%',
-          onEnter: () => setActiveStep(idx),
-          onEnterBack: () => setActiveStep(idx),
-        });
+      // If Section 02 is approaching from below (rect.top between 80px and 220px) and scrolling down:
+      // Smoothly snap section into full view so the whole card is visible
+      if (e.deltaY > 20 && rect.top > navbarOffset && rect.top < 240) {
+        if (window.lenis) {
+          window.lenis.scrollTo(section, { offset: -navbarOffset, duration: 0.5 });
+        } else {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        return;
+      }
 
-        // 2. Stacking Cards Parallax: As the next card slides ABOVE this card,
-        // subtly scale down this card and dim it to create tactile deck depth
-        if (!prefersReducedMotion && idx < PROCESS_STEPS.length - 1) {
-          const nextCard = cardRefs.current[idx + 1];
-          if (nextCard) {
-            gsap.to(card, {
-              scale: 0.94,
-              opacity: 0.5,
-              transformOrigin: 'top center',
-              ease: 'none',
-              scrollTrigger: {
-                trigger: nextCard,
-                start: 'top 90%',
-                end: 'top 20%',
-                scrub: true,
-              },
-            });
+      // Check if Section 02 is properly aligned on screen (within 25px of navbar)
+      const isProperlyInView = rect.top <= (navbarOffset + 20) && rect.top >= (navbarOffset - 60);
+
+      // If not properly aligned, do not hijack! Let the page scroll naturally
+      if (!isProperlyInView) return;
+
+      // Scrolling Down
+      if (e.deltaY > 15) {
+        if (activeStep < PROCESS_STEPS.length - 1) {
+          e.preventDefault();
+          if (!cooldownRef.current) {
+            cooldownRef.current = true;
+            setActiveStep((prev) => Math.min(prev + 1, PROCESS_STEPS.length - 1));
+            setTimeout(() => {
+              cooldownRef.current = false;
+            }, 460);
           }
         }
-      });
-    }, containerRef);
+        // When on the last card (Phase 4), do NOT prevent default -> page scrolls down to Section 03!
+      } else if (e.deltaY < -15) {
+        // Scrolling Up
+        if (activeStep > 0) {
+          e.preventDefault();
+          if (!cooldownRef.current) {
+            cooldownRef.current = true;
+            setActiveStep((prev) => Math.max(prev - 1, 0));
+            setTimeout(() => {
+              cooldownRef.current = false;
+            }, 460);
+          }
+        }
+        // When on the first card (Phase 1), do NOT prevent default -> page scrolls up to Section 01!
+      }
+    };
 
-    return () => ctx.revert();
-  }, []);
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    return () => window.removeEventListener('wheel', handleWheel);
+  }, [activeStep]);
 
-  const jumpToStep = (index) => {
-    setActiveStep(index);
-    const targetEl = cardRefs.current[index];
-    if (targetEl) {
-      const topOffset = targetEl.getBoundingClientRect().top + window.scrollY - 95;
-      window.scrollTo({ top: topOffset, behavior: 'smooth' });
+  // Touch swipe support for mobile/tablet
+  const handleTouchStart = (e) => {
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e) => {
+    if (touchStartY.current === null) return;
+    const deltaY = touchStartY.current - e.changedTouches[0].clientY;
+
+    if (deltaY > 35 && activeStep < PROCESS_STEPS.length - 1) {
+      setActiveStep((prev) => Math.min(prev + 1, PROCESS_STEPS.length - 1));
+    } else if (deltaY < -35 && activeStep > 0) {
+      setActiveStep((prev) => Math.max(prev - 1, 0));
     }
+    touchStartY.current = null;
   };
 
   const currentStep = PROCESS_STEPS[activeStep];
@@ -116,176 +138,200 @@ export default function CraftProcess() {
   return (
     <section
       id="process"
-      ref={containerRef}
-      className="relative bg-[#08080A] text-[#F4F2EE] transition-colors duration-1000 ease-luxury text-left"
+      ref={sectionRef}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      className="relative bg-[#08080A] text-[#F4F2EE] text-left pt-20 sm:pt-24 pb-14 sm:pb-18 min-h-[calc(100vh-4.5rem)] flex flex-col justify-between overflow-hidden border-0 rounded-none"
     >
       {/* Ambient Lighting Glow */}
       <div
-        className="absolute top-20 right-10 w-[600px] h-[600px] rounded-full blur-[160px] opacity-20 pointer-events-none transition-colors duration-1000"
+        className="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full blur-[160px] opacity-20 pointer-events-none transition-colors duration-700"
         style={{ backgroundColor: currentStep.accent }}
       />
 
-      {/* Section Header */}
-      <div className="relative border-b border-white/10 py-14 sm:py-20 bg-gradient-to-b from-black/80 to-transparent">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 text-left">
-            <div>
-              <span
-                className="text-xs uppercase tracking-[0.26em] block transition-colors duration-700 font-medium mb-2"
-                style={{ color: currentStep.accent }}
-              >
-                02 / Precision Execution
-              </span>
-              <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl text-white font-light">
-                The Monolith Journey
-              </h2>
+      {/* ── TOP SECTION HEADER (Zero Borders, Zero Rounded Corners) ── */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-20 mb-4 sm:mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-3 sm:pb-4 border-0">
+          <div>
+            <span
+              className="text-[11px] sm:text-xs uppercase tracking-[0.24em] block font-medium mb-1 transition-colors duration-500"
+              style={{ color: currentStep.accent }}
+            >
+              02 / Precision Execution
+            </span>
+            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl text-white font-light">
+              The Monolith Journey
+            </h2>
+          </div>
+
+          {/* Minimal Live Counter & Subtle Navigation */}
+          <div className="flex items-center gap-3">
+            {/* 4 Stage Dots */}
+            <div className="flex items-center gap-1.5">
+              {PROCESS_STEPS.map((_, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => setActiveStep(idx)}
+                  className={`h-1.5 rounded-none transition-all duration-300 cursor-pointer border-0 ${
+                    activeStep === idx
+                      ? 'w-6 bg-[var(--accent)]'
+                      : 'w-1.5 bg-white/20 hover:bg-white/40'
+                  }`}
+                  aria-label={`Jump to Phase 0${idx + 1}`}
+                />
+              ))}
             </div>
 
-            {/* Clickable Stage Selector Tabs */}
-            <div className="flex items-center gap-3 sm:gap-6 flex-wrap">
-              <div className="flex items-center gap-1.5 bg-black/60 p-1.5 border border-white/10 backdrop-blur-md">
-                {PROCESS_STEPS.map((step, idx) => (
-                  <button
-                    key={step.num}
-                    type="button"
-                    onClick={() => jumpToStep(idx)}
-                    className={`text-xs uppercase tracking-wider px-3.5 py-1.5 transition-all duration-300 font-medium cursor-pointer ${
-                      activeStep === idx
-                        ? 'bg-[var(--accent)] text-black font-semibold shadow-md'
-                        : 'text-white/60 hover:text-white hover:bg-white/10'
-                    }`}
-                  >
-                    Phase {step.num}
-                  </button>
-                ))}
-              </div>
-
-              <div className="hidden sm:flex items-center gap-2 text-xs text-white/70 font-mono">
-                <span>Phase</span>
-                <span className="font-bold text-white bg-white/10 px-2 py-0.5 border border-white/15">
-                  0{activeStep + 1} / 04
-                </span>
-              </div>
+            {/* Pill: Prev / Counter / Next (Zero border, zero rounded corner) */}
+            <div className="flex items-center gap-2 bg-black/60 px-3 py-1 rounded-none border-0 text-xs font-mono text-white/80">
+              <button
+                type="button"
+                onClick={() => setActiveStep((prev) => Math.max(prev - 1, 0))}
+                disabled={activeStep === 0}
+                className="hover:text-[var(--accent)] disabled:opacity-30 disabled:hover:text-white/80 cursor-pointer transition-colors"
+                aria-label="Previous Phase"
+              >
+                ←
+              </button>
+              <span className="px-1 text-white font-semibold">Phase 0{activeStep + 1} / 04</span>
+              <button
+                type="button"
+                onClick={() => setActiveStep((prev) => Math.min(prev + 1, PROCESS_STEPS.length - 1))}
+                disabled={activeStep === PROCESS_STEPS.length - 1}
+                className="hover:text-[var(--accent)] disabled:opacity-30 disabled:hover:text-white/80 cursor-pointer transition-colors"
+                aria-label="Next Phase"
+              >
+                →
+              </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Overlapping Stacking Cards (Section 2 slides ABOVE Section 1, 3 ABOVE 2, 4 ABOVE 3) */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        {PROCESS_STEPS.map((step, idx) => (
-          <div
-            key={step.num}
-            ref={(el) => (cardRefs.current[idx] = el)}
-            id={`process-phase-${idx + 1}`}
-            className="sticky top-[85px] sm:top-[95px] min-h-[76vh] sm:min-h-[80vh] rounded-t-2xl sm:rounded-t-3xl border-t border-white/20 shadow-[0_-25px_65px_rgba(0,0,0,0.95)] overflow-hidden transition-all duration-300 mb-12 sm:mb-16 last:mb-0"
-            style={{
-              zIndex: idx + 1,
-              backgroundColor: step.bg,
-            }}
-          >
-            <div className="relative w-full h-full p-6 sm:p-10 lg:p-14 flex flex-col justify-between">
-              {/* Giant Watermark Numeral */}
+      {/* ── CENTER STAGE: ZERO BORDER, ZERO CORNER RADIUS (Sharp Monolithic Stone Slab) ── */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 my-auto flex-1 flex items-center justify-center">
+        <div className="relative w-full max-w-6xl mx-auto min-h-[420px] sm:min-h-[440px] lg:h-[470px]">
+          {PROCESS_STEPS.map((step, idx) => {
+            const isActive = activeStep === idx;
+            const isPast = activeStep > idx;
+
+            return (
               <div
-                aria-hidden="true"
-                className="absolute right-6 sm:right-12 top-4 sm:top-6 pointer-events-none select-none font-display font-light text-[clamp(7rem,16vw,14rem)] text-white/5 leading-none z-0"
+                key={step.num}
+                className={`absolute inset-0 w-full h-full rounded-none border-0 transition-all duration-500 ease-out ${
+                  isActive
+                    ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto z-10 visible'
+                    : isPast
+                    ? 'opacity-0 -translate-y-8 scale-[0.98] pointer-events-none z-0 invisible'
+                    : 'opacity-0 translate-y-8 scale-[0.98] pointer-events-none z-0 invisible'
+                }`}
+                style={{ backgroundColor: step.bg }}
               >
-                {step.num}
-              </div>
-
-              <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
-                {/* Left Column: Narrative Content */}
-                <div className="lg:col-span-5 space-y-5 text-left">
-                  {/* Step Phase Badge */}
-                  <div className="inline-flex items-center gap-2.5 border border-white/15 px-3.5 py-1.5 text-xs uppercase tracking-widest text-white/90 bg-black/60 backdrop-blur-md">
-                    <span
-                      className="w-2 h-2 rounded-full transition-colors duration-500"
-                      style={{
-                        backgroundColor: step.accent,
-                        boxShadow: `0 0 10px ${step.accent}`,
-                      }}
-                    />
-                    <span className="font-mono text-white/70">{step.num}</span>
-                    <span className="text-white/30">/</span>
-                    <span>{step.step}</span>
-                    <span className="text-white/30 hidden sm:inline">·</span>
-                    <span className="text-white/70 hidden sm:inline">{step.subtitle}</span>
+                <div className="relative w-full h-full p-5 sm:p-7 lg:p-9 flex flex-col justify-between overflow-hidden rounded-none border-0">
+                  {/* Giant Watermark Numeral */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute right-6 sm:right-10 top-2 sm:top-4 pointer-events-none select-none font-display font-light text-[clamp(5rem,12vw,10rem)] text-white/[0.04] leading-none z-0"
+                  >
+                    {step.num}
                   </div>
 
-                  {/* Title */}
-                  <h3 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light leading-[1.08] text-white">
-                    {step.title}
-                  </h3>
+                  <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-center h-full my-auto">
+                    {/* Left Column: Narrative Content */}
+                    <div className="lg:col-span-5 space-y-3 sm:space-y-3.5 text-left">
+                      {/* Step Phase Badge (Sharp rectangular, zero rounded corner) */}
+                      <div className="inline-flex items-center gap-2 px-3 py-1 text-[11px] sm:text-xs uppercase tracking-widest text-white/90 bg-black/60 backdrop-blur-md rounded-none border-0">
+                        <span
+                          className="w-2 h-2 rounded-none transition-colors duration-500"
+                          style={{
+                            backgroundColor: step.accent,
+                            boxShadow: `0 0 10px ${step.accent}`,
+                          }}
+                        />
+                        <span className="font-mono text-white/70">{step.num}</span>
+                        <span className="text-white/30">/</span>
+                        <span>{step.step}</span>
+                        <span className="text-white/30 hidden sm:inline">·</span>
+                        <span className="text-white/70 hidden sm:inline">{step.subtitle}</span>
+                      </div>
 
-                  {/* Story Description */}
-                  <p className="text-sm sm:text-base md:text-lg text-[#DDD8CF]/90 font-light leading-relaxed">
-                    {step.desc}
-                  </p>
+                      {/* Title */}
+                      <h3 className="font-display text-xl sm:text-2xl lg:text-3xl font-light leading-[1.15] text-white">
+                        {step.title}
+                      </h3>
 
-                  {/* Technical Spec Pill */}
-                  <div className="pt-2 flex items-center gap-3">
-                    <div className="px-3.5 py-2 bg-white/[0.04] border border-white/10 rounded-sm">
-                      <span
-                        className="font-medium tracking-wider uppercase text-xs flex items-center gap-1.5"
-                        style={{ color: step.accent }}
-                      >
-                        ✦ {step.spec}
-                      </span>
+                      {/* Story Description */}
+                      <p className="text-xs sm:text-sm lg:text-[13.5px] text-[#DDD8CF]/90 font-light leading-relaxed line-clamp-3 sm:line-clamp-4">
+                        {step.desc}
+                      </p>
+
+                      {/* Technical Spec Pill (Sharp rectangular, zero rounded corner) */}
+                      <div className="pt-0.5 flex items-center gap-3">
+                        <div className="px-3 py-1.5 bg-white/[0.04] rounded-none border-0">
+                          <span
+                            className="font-medium tracking-wider uppercase text-[11px] sm:text-xs flex items-center gap-1.5"
+                            style={{ color: step.accent }}
+                          >
+                            ✦ {step.spec}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Step Mini Indicator */}
+                      <div className="pt-1 flex items-center gap-3 text-[11px] text-white/50 font-mono uppercase tracking-wider">
+                        <span>Phase {step.num} of 04</span>
+                        <span className="h-[1px] flex-1 bg-white/10" />
+                        <span className="text-white/80">Harvey, LA Atelier</span>
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Step Mini Indicator */}
-                  <div className="pt-4 flex items-center gap-4 text-xs text-white/50 font-mono uppercase tracking-wider">
-                    <span>Phase {step.num} of 04</span>
-                    <span className="h-[1px] flex-1 bg-white/10" />
-                    <span className="text-white/80">Harvey, LA Atelier</span>
+                    {/* Right Column: Monolith Image Frame (Sharp rectangular, zero border, zero radius) */}
+                    <div className="lg:col-span-7 h-full flex items-center">
+                      <div className="relative w-full h-[200px] sm:h-[260px] lg:h-[330px] overflow-hidden bg-black group rounded-none border-0">
+                        <ImageWithSkeleton
+                          src={step.image}
+                          alt={`${step.step} - ${step.title}`}
+                          className="w-full h-full rounded-none border-0"
+                          imgClassName="w-full h-full object-cover rounded-none border-0 transition-transform duration-700 group-hover:scale-105"
+                          loadingText={`${step.step} Monolith Visual · 0.4mm Laser`}
+                        />
+
+                        {/* Ambient Vignette Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none rounded-none border-0" />
+
+                        {/* Corner Badges (Sharp rectangular, zero radius) */}
+                        <div className="absolute top-3 left-3 z-10 pointer-events-none">
+                          <span className="text-[9px] sm:text-[10px] uppercase font-mono tracking-widest bg-black/75 backdrop-blur-md px-2.5 py-1 text-white/80 rounded-none border-0">
+                            {step.subtitle}
+                          </span>
+                        </div>
+
+                        <div className="absolute bottom-3 left-3 right-3 flex justify-between items-center text-[11px] sm:text-xs text-white/80 z-10 pointer-events-none">
+                          <span className="uppercase tracking-widest bg-black/75 backdrop-blur-md px-2.5 sm:px-3 py-1 rounded-none border-0">
+                            {step.step} Execution
+                          </span>
+                          <span className="italic font-light text-white/80 bg-black/60 px-2 py-0.5 backdrop-blur-sm rounded-none border-0">
+                            Continuous Vein Flow
+                          </span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-
-                {/* Right Column: Monolith Image Frame */}
-                <div className="lg:col-span-7">
-                  <div className="relative h-[290px] sm:h-[400px] lg:h-[460px] overflow-hidden border border-white/15 shadow-2xl bg-black group rounded-sm">
-                    <ImageWithSkeleton
-                      src={step.image}
-                      alt={`${step.step} - ${step.title}`}
-                      className="w-full h-full"
-                      imgClassName="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loadingText={`${step.step} Monolith Visual · 0.4mm Laser`}
-                    />
-
-                    {/* Ambient Vignette Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
-
-                    {/* Corner Badges */}
-                    <div className="absolute top-4 left-4 z-10 pointer-events-none">
-                      <span className="text-[10px] uppercase font-mono tracking-widest bg-black/75 backdrop-blur-md px-2.5 py-1 border border-white/10 text-white/80">
-                        {step.subtitle}
-                      </span>
-                    </div>
-
-                    <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center text-xs text-white/80 z-10 pointer-events-none">
-                      <span className="text-xs uppercase tracking-widest bg-black/75 backdrop-blur-md px-3 py-1 border border-white/10">
-                        {step.step} Execution
-                      </span>
-                      <span className="italic font-light text-xs text-white/80 bg-black/60 px-2 py-0.5 backdrop-blur-sm">
-                        Continuous Vein Flow
-                      </span>
-                    </div>
-                  </div>
-                </div>
               </div>
-            </div>
-          </div>
-        ))}
+            );
+          })}
+        </div>
       </div>
 
-      {/* Bottom Process Capabilities Link */}
-      <div className="border-t border-white/10 py-10 bg-black/40 text-left">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs text-white/60">
+      {/* ── BOTTOM STAGE BAR WITH LINK TO SERVICES (Zero Borders) ── */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-20 pt-4 sm:pt-6 border-0">
+        <div className="pt-3 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 text-[11px] sm:text-xs text-white/60 border-0">
           <span>Kings Marble &amp; Granite · 1848 Industrial Blvd, Harvey LA</span>
           <Link
             to="/services"
-            className="text-[var(--accent)] hover:text-white uppercase tracking-wider text-xs transition-colors flex items-center gap-1.5 font-medium"
+            className="text-[var(--accent)] hover:text-white uppercase tracking-wider transition-colors flex items-center gap-1.5 font-medium"
           >
             Explore all 6 fabrication capabilities &amp; CNC edge profiles →
           </Link>

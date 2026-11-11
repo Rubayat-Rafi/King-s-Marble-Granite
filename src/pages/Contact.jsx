@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { STONES } from '../data/content';
 import { useStoneTheme } from '../context/StoneThemeContext';
 
@@ -28,7 +29,12 @@ export default function Contact() {
           style={{ backgroundColor: activeStone.accent }}
         />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-left">
-          <div className="max-w-3xl space-y-5">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-3xl space-y-5"
+          >
             <div className="inline-flex items-center gap-2.5 bg-white/10 px-3 py-1.5 backdrop-blur-md border border-white/10">
               <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: activeStone.accent }} />
               <span className="text-xs uppercase tracking-[0.22em] text-white/80 font-medium">
@@ -46,7 +52,7 @@ export default function Contact() {
             <p className="text-sm sm:text-base text-[#DDD8CF] max-w-2xl font-light leading-relaxed">
               Schedule a private walkthrough of our Harvey slab reserve or request an in-home digital laser template consultation with our senior stone estimating team.
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -55,7 +61,13 @@ export default function Contact() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-12 gap-12 lg:gap-16">
             {/* Showroom & Logistics Information */}
-            <div className="col-span-12 lg:col-span-5 space-y-10 text-left">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="col-span-12 lg:col-span-5 space-y-10 text-left"
+            >
               <div className="space-y-3">
                 <span className="text-label text-xs text-[var(--accent)] tracking-[0.22em] block font-medium">
                   Studio &amp; Indoor Yard
@@ -134,10 +146,16 @@ export default function Contact() {
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Direct Form */}
-            <div className="col-span-12 lg:col-span-7 border border-[var(--line)] p-8 sm:p-12 bg-[var(--bg)] transition-colors duration-700">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="col-span-12 lg:col-span-7 border border-[var(--line)] p-8 sm:p-12 bg-[var(--bg)] transition-colors duration-700"
+            >
               {formSubmitted ? (
                 <div className="text-left py-12 space-y-4">
                   <span className="text-label text-xs text-[var(--accent)] tracking-widest block">
@@ -152,7 +170,7 @@ export default function Contact() {
                   <button
                     type="button"
                     onClick={() => setFormSubmitted(false)}
-                    className="btn-primary-luxury text-xs mt-6"
+                    className="btn-primary-luxury text-xs mt-6 cursor-pointer"
                   >
                     Submit Another Inquiry
                   </button>
@@ -263,13 +281,13 @@ export default function Contact() {
 
                   <button
                     type="submit"
-                    className="btn-primary-luxury w-full text-xs !py-4"
+                    className="btn-primary-luxury w-full text-xs !py-4 cursor-pointer"
                   >
                     Submit Consultation Request →
                   </button>
                 </form>
               )}
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -277,7 +295,13 @@ export default function Contact() {
       {/* Embedded Google Map Section */}
       <section className="pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="border border-[var(--line)] p-6 sm:p-10 bg-[var(--bg)] transition-colors duration-700 space-y-8 text-left">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="border border-[var(--line)] p-6 sm:p-10 bg-[var(--bg)] transition-colors duration-700 space-y-8 text-left"
+          >
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-5 pb-6 border-b border-[var(--line)]">
               <div className="space-y-2">
                 <span className="text-label text-xs text-[var(--accent)] tracking-widest block font-medium">
@@ -356,7 +380,7 @@ export default function Contact() {
                 <p className="text-[11px] text-[var(--text-muted)] font-light">Dedicated spaces outside showroom &amp; covered yard</p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

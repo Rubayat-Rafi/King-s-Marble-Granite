@@ -25,7 +25,13 @@ export default function BeforeAfterSlider() {
   };
 
   return (
-    <div className="mt-20 border border-[var(--line)] bg-[var(--bg)] p-6 sm:p-10 text-left">
+    <motion.div
+      initial={{ opacity: 0, y: 35 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+      className="mt-20 border border-[var(--line)] bg-[var(--bg)] p-6 sm:p-10 text-left"
+    >
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
         <div className="space-y-2">
           <span className="text-xs uppercase tracking-[0.24em] text-[var(--accent)] font-medium block">
@@ -102,7 +108,7 @@ export default function BeforeAfterSlider() {
           </span>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

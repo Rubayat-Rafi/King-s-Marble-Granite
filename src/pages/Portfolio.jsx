@@ -44,7 +44,12 @@ export default function Portfolio() {
       <section className="relative pt-32 sm:pt-40 pb-20 sm:pb-24 bg-[#0B0B0C] text-[#F4F2EE] border-b border-[var(--line-dark)] overflow-hidden">
         <div className="absolute inset-0 opacity-15 pointer-events-none mix-blend-color" style={{ backgroundColor: activeStone.accent }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-left">
-          <div className="max-w-3xl space-y-5">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-3xl space-y-5"
+          >
             <div className="inline-flex items-center gap-2.5 bg-white/10 px-3 py-1.5 backdrop-blur-md border border-white/10">
               <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: activeStone.accent }} />
               <span className="text-xs uppercase tracking-[0.22em] text-white/80 font-medium">
@@ -77,12 +82,17 @@ export default function Portfolio() {
                 <span>In-House Fabricators Only</span>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Quiet Architectural Filter Navigation (Static in-flow, non-sticky) */}
-      <section className="py-5 sm:py-6 border-b border-[var(--line)] bg-[var(--bg)] transition-colors duration-700">
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        className="py-5 sm:py-6 border-b border-[var(--line)] bg-[var(--bg)] transition-colors duration-700"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             {/* Horizontal scrollable pills with Framer Motion gliding pill (scrollbar completely hidden) */}
@@ -121,15 +131,23 @@ export default function Portfolio() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Asymmetric Luxury Portfolio Gallery */}
       <section className="py-16 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-12 gap-6 sm:gap-8">
             {displayedItems.map((item, idx) => (
-              <div
+              <motion.div
                 key={item.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{
+                  duration: 0.6,
+                  delay: (idx % 4) * 0.08,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
                 onClick={() => setSelectedImage(item)}
                 className={`group cursor-pointer overflow-hidden border border-[var(--line)] relative bg-[#0B0B0C] transition-all duration-500 hover:border-[var(--text)] shadow-sm ${getAsymmetricClass(
                   idx
@@ -166,24 +184,30 @@ export default function Portfolio() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
           {/* Load More Button */}
           {visibleCount < filteredItems.length && (
-            <div className="text-center mt-20 pt-10 border-t border-[var(--line)]">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mt-20 pt-10 border-t border-[var(--line)]"
+            >
               <button
                 type="button"
                 onClick={() => setVisibleCount((prev) => prev + 18)}
-                className="btn-primary-luxury"
+                className="btn-primary-luxury cursor-pointer"
               >
                 Load Next {Math.min(18, filteredItems.length - visibleCount)} Installations ↓
               </button>
               <p className="text-xs text-[var(--text-muted)] mt-3">
                 {filteredItems.length - visibleCount} additional verified photos in reserve
               </p>
-            </div>
+            </motion.div>
           )}
         </div>
       </section>
@@ -220,7 +244,7 @@ export default function Portfolio() {
               <button
                 type="button"
                 onClick={() => setSelectedImage(null)}
-                className="w-11 h-11 border border-white/20 text-white flex items-center justify-center hover:border-white transition-colors"
+                className="w-11 h-11 border border-white/20 text-white flex items-center justify-center hover:border-white transition-colors cursor-pointer"
                 aria-label="Close high-resolution modal"
               >
                 ✕
@@ -284,7 +308,13 @@ export default function Portfolio() {
 
       {/* Editorial Bottom CTA */}
       <section className="py-24 border-t border-[var(--line)] bg-[var(--bg)] transition-colors duration-700">
-        <div className="max-w-4xl mx-auto px-4 text-center space-y-6">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-4xl mx-auto px-4 text-center space-y-6"
+        >
           <span className="text-label text-[var(--accent)] tracking-[0.24em] block">
             Bespoke Architectural Surface Commissioning
           </span>
@@ -302,7 +332,7 @@ export default function Portfolio() {
               Call Direct: (504) 723-7898
             </a>
           </div>
-        </div>
+        </motion.div>
       </section>
     </div>
   );

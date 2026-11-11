@@ -1,12 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router';
-import { motion, AnimatePresence } from 'framer-motion';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import BeforeAfterSlider from './BeforeAfterSlider';
 import ImageWithSkeleton from './ImageWithSkeleton';
-
-gsap.registerPlugin(ScrollTrigger);
 
 // Curated 8 asymmetric case studies from authentic photography
 const ASYMMETRIC_CASES = [
@@ -100,70 +96,33 @@ const ASYMMETRIC_CASES = [
   },
 ];
 
-// Single Case Study Card with Silky GSAP ScrollTrigger Entrance & Scrub Parallax
+// Single Case Study Card with Silky Framer Motion Entrance & Scrub Parallax
 function CaseStudyCard({ project, onSelect, onHoverStart, onHoverEnd }) {
   const cardRef = useRef(null);
-  const imgRef = useRef(null);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    const ctx = gsap.context(() => {
-      // 1. Entrance reveal as card enters the viewport
-      gsap.fromTo(
-        cardRef.current,
-        { opacity: 0, y: 35 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.85,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: cardRef.current,
-            start: 'top 88%',
-            once: true,
-          },
-        }
-      );
-
-      // 2. Silky GSAP scrub parallax on the image (strictly bounded inside container)
-      if (!prefersReducedMotion && window.innerWidth >= 768 && imgRef.current) {
-        const factor = project.parallaxFactor || 16;
-        gsap.fromTo(
-          imgRef.current,
-          { yPercent: -factor * 0.35 },
-          {
-            yPercent: factor * 0.35,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: cardRef.current,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: 1.2,
-            },
-          }
-        );
-      }
-    }, cardRef);
-
-    return () => ctx.revert();
-  }, [project.parallaxFactor]);
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ['start end', 'end start'],
+  });
+  const imgY = useTransform(scrollYProgress, [0, 1], ['-6%', '6%']);
 
   return (
-    <div
+    <motion.div
       ref={cardRef}
+      initial={{ opacity: 0, y: 35 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       onClick={() => onSelect(project)}
       onMouseEnter={onHoverStart}
       onMouseLeave={onHoverEnd}
       className={`group cursor-pointer text-left ${project.layout}`}
     >
-      {/* Image Monolith with Controlled GSAP Parallax Depth */}
+      {/* Image Monolith with Controlled Parallax Depth */}
       <div
         className={`relative overflow-hidden border border-[var(--line)] bg-[#0B0B0C] ${project.height} shadow-lg`}
       >
-        <img
-          ref={imgRef}
+        <motion.img
+          style={{ y: imgY }}
           src={project.image}
           alt={project.title}
           loading="lazy"
@@ -200,7 +159,7 @@ function CaseStudyCard({ project, onSelect, onHoverStart, onHoverEnd }) {
           {project.desc}
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -222,7 +181,7 @@ export default function AsymmetricProjects() {
   }, []);
 
   return (
-    <section id="projects" className="py-24 sm:py-36 bg-[var(--bg)] transition-colors duration-1000 ease-luxury relative overflow-hidden">
+    <section id="projects" className="pt-16 sm:pt-24 pb-24 sm:pb-36 bg-[var(--bg)] transition-colors duration-1000 ease-luxury relative overflow-hidden">
       {/* Floating "View" Cursor Pill for Project Images */}
       {cursorHovering && (
         <div
@@ -238,8 +197,14 @@ export default function AsymmetricProjects() {
       )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Lead */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 sm:mb-24 gap-6 text-left">
+        {/* Section Lead with Framer Motion Fade-Up */}
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col md:flex-row md:items-end justify-between mb-16 sm:mb-24 gap-6 text-left"
+        >
           <div className="space-y-3">
             <span className="text-xs uppercase tracking-[0.24em] text-[var(--accent)] font-medium block">
               03 / Selected Case Studies
@@ -252,7 +217,7 @@ export default function AsymmetricProjects() {
             Eight commissions from private residences across Greater New Orleans. Asymmetric layouts,
             varying depths, and zero template repetition.
           </p>
-        </div>
+        </motion.div>
 
         {/* Asymmetric Case Studies Grid with Controlled Bounded Parallax per Image */}
         <div className="grid grid-cols-12 gap-y-16 sm:gap-y-24 gap-x-8 sm:gap-x-12 items-start">
@@ -270,8 +235,14 @@ export default function AsymmetricProjects() {
         {/* Interactive Metamorphosis Before/After Slider (Effect 11) */}
         <BeforeAfterSlider />
 
-        {/* Quiet Link to Full 125+ Image Archive */}
-        <div className="mt-20 p-8 sm:p-12 border border-[var(--line)] bg-[var(--bg)] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-8 text-left">
+        {/* Quiet Link to Full 125+ Image Archive with Framer Motion Fade-Up */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-20 p-8 sm:p-12 border border-[var(--line)] bg-[var(--bg)] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-8 text-left"
+        >
           <div className="space-y-2">
             <span className="text-xs uppercase tracking-[0.24em] text-[var(--accent)] font-medium block">
               Complete Visual Catalog
@@ -289,7 +260,7 @@ export default function AsymmetricProjects() {
           >
             Explore Full 125+ Archive →
           </Link>
-        </div>
+        </motion.div>
       </div>
 
       {/* Case Study Lightbox Inspection with Framer Motion AnimatePresence */}

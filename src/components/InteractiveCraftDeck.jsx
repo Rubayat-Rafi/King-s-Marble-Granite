@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStoneTheme } from '../context/StoneThemeContext';
 import ImageWithSkeleton from './ImageWithSkeleton';
@@ -21,26 +21,39 @@ export default function InteractiveCraftDeck() {
     typeof window !== 'undefined' ? window.innerWidth : 1200
   );
   const [isGrabbing, setIsGrabbing] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   const containerRef = useRef(null);
   const pointerStartX = useRef(null);
   const total = SHOWCASE_IMAGES.length;
 
-  const nextCard = () => {
+  const nextCard = useCallback(() => {
     setActiveIndex((prev) => (prev + 1) % total);
-  };
+  }, [total]);
 
-  const prevCard = () => {
+  const prevCard = useCallback(() => {
     setActiveIndex((prev) => (prev - 1 + total) % total);
-  };
+  }, [total]);
 
+  // Window resize listener for responsive card spacing
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Keyboard arrow keys
+  // Auto-scroll every 3 seconds (pauses on hover, drag, or modal open)
+  useEffect(() => {
+    if (isPaused || isGrabbing || selectedImage) return;
+
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % total);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [isPaused, isGrabbing, selectedImage, total]);
+
+  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'ArrowRight') nextCard();
@@ -48,62 +61,78 @@ export default function InteractiveCraftDeck() {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [nextCard, prevCard]);
 
   // Pointer drag / grab handlers (mouse & touch unified)
   const handlePointerDown = (e) => {
     pointerStartX.current = e.clientX;
     setIsGrabbing(true);
+    setIsPaused(true);
   };
 
   const handlePointerUp = (e) => {
     if (pointerStartX.current !== null) {
       const deltaX = e.clientX - pointerStartX.current;
-      if (deltaX > 35) {
+      if (deltaX > 25) {
         prevCard();
-      } else if (deltaX < -35) {
+      } else if (deltaX < -25) {
         nextCard();
       }
     }
     pointerStartX.current = null;
     setIsGrabbing(false);
+    setTimeout(() => setIsPaused(false), 2500);
   };
 
   const handlePointerCancel = () => {
     pointerStartX.current = null;
     setIsGrabbing(false);
+    setIsPaused(false);
   };
 
-  // Touch handlers for mobile
+  // Touch handlers for mobile devices
   const handleTouchStart = (e) => {
     pointerStartX.current = e.touches[0].clientX;
+    setIsPaused(true);
   };
 
   const handleTouchEnd = (e) => {
     if (pointerStartX.current !== null) {
       const deltaX = e.changedTouches[0].clientX - pointerStartX.current;
-      if (deltaX > 35) {
+      if (deltaX > 25) {
         prevCard();
-      } else if (deltaX < -35) {
+      } else if (deltaX < -25) {
         nextCard();
       }
     }
     pointerStartX.current = null;
+    setTimeout(() => setIsPaused(false), 2500);
   };
 
-  // Responsive spread spacing: fine-tuned for small mobile phones to prevent horizontal overflow
-  const cardSpacing = windowWidth >= 1024 ? 260 : windowWidth >= 768 ? 200 : windowWidth >= 480 ? 140 : 105;
+  // Responsive full-width card spacing across all viewports
+  const cardSpacing =
+    windowWidth >= 1440 ? 320 : windowWidth >= 1024 ? 270 : windowWidth >= 768 ? 210 : windowWidth >= 480 ? 150 : 110;
 
   return (
-    <section className="relative py-16 sm:py-24 bg-[#080809] overflow-hidden select-none border-b border-white/5 w-full max-w-full">
+    <section
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      className="relative py-6 sm:py-10 bg-[#080809] overflow-hidden select-none border-0 w-full"
+    >
       {/* Subtle ambient lighting responding to the active stone */}
       <div
-        className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] rounded-full blur-[140px] opacity-15 transition-all duration-1000"
+        className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] rounded-full blur-[140px] opacity-15 transition-all duration-1000"
         style={{ backgroundColor: activeStone.accent }}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full overflow-hidden">
-        {/* ── GRABBABLE 3D IMAGE DECK (Pure visual, zero text) ── */}
+      <motion.div
+        initial={{ opacity: 0, y: 35 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-40px' }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="w-full relative z-10 overflow-hidden px-2 sm:px-4"
+      >
+        {/* ── FULL WIDTH DRAGGABLE 3D IMAGE DECK ── */}
         <div
           ref={containerRef}
           onPointerDown={handlePointerDown}
@@ -111,7 +140,7 @@ export default function InteractiveCraftDeck() {
           onPointerCancel={handlePointerCancel}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
-          className={`relative h-[420px] sm:h-[490px] md:h-[550px] flex items-center justify-center touch-pan-y w-full max-w-full overflow-hidden ${
+          className={`relative h-[380px] sm:h-[450px] md:h-[500px] flex items-center justify-center touch-pan-y w-full overflow-hidden ${
             isGrabbing ? 'cursor-grabbing' : 'cursor-grab'
           }`}
           style={{ perspective: '1200px' }}
@@ -124,10 +153,10 @@ export default function InteractiveCraftDeck() {
             const isCenter = diff === 0;
 
             const xOffset = diff * cardSpacing;
-            const scale = Math.max(0.55, 1 - Math.abs(diff) * 0.14);
+            const scale = Math.max(0.55, 1 - Math.abs(diff) * 0.13);
             const zIndex = 30 - Math.abs(diff) * 6;
-            const opacity = Math.max(0.18, 1 - Math.abs(diff) * 0.28);
-            const rotateY = diff * -14;
+            const opacity = Math.max(0.18, 1 - Math.abs(diff) * 0.26);
+            const rotateY = diff * -12;
 
             return (
               <motion.div
@@ -153,32 +182,30 @@ export default function InteractiveCraftDeck() {
                   damping: 28,
                   mass: 0.9,
                 }}
-                className={`absolute w-[210px] sm:w-[260px] md:w-[310px] h-[320px] sm:h-[390px] md:h-[470px] rounded-2xl sm:rounded-3xl will-change-transform overflow-hidden shadow-2xl transition-all duration-500 group outline-none focus:outline-none focus:ring-0 select-none border cursor-pointer ${
-                  isCenter
-                    ? 'border-2 border-white/45 shadow-[0_25px_60px_rgba(0,0,0,0.95)]'
-                    : 'border border-white/15 hover:border-white/35'
+                className={`absolute w-[210px] sm:w-[260px] md:w-[310px] h-[310px] sm:h-[380px] md:h-[440px] rounded-none will-change-transform overflow-hidden shadow-2xl transition-all duration-500 group outline-none focus:outline-none focus:ring-0 select-none cursor-pointer border-0 ${
+                  isCenter ? 'shadow-[0_25px_60px_rgba(0,0,0,0.95)]' : 'shadow-xl'
                 }`}
                 style={{
                   backgroundColor: '#0F0F12',
                 }}
               >
-                {/* Pure Installation Photograph with Skeleton */}
+                {/* Pure Installation Photograph with Skeleton Loader (Zero Border, Sharp Rectangular Stone) */}
                 <ImageWithSkeleton
                   src={item.src}
                   alt={item.alt}
                   draggable={false}
-                  className="w-full h-full"
-                  imgClassName="w-full h-full object-cover object-center pointer-events-none transition-transform duration-700 ease-out group-hover:scale-105"
+                  className="w-full h-full rounded-none border-0"
+                  imgClassName="w-full h-full object-cover object-center pointer-events-none transition-transform duration-700 ease-out group-hover:scale-105 rounded-none border-0"
                   loadingText=""
                 />
 
                 {/* Subtle vignette layer for depth */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/20 pointer-events-none rounded-none" />
 
                 {/* Center Card Click-to-View Badge */}
                 {isCenter && (
                   <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="text-[11px] uppercase tracking-wider bg-black/80 backdrop-blur-md px-3 py-1.5 text-white/90 border border-white/20 font-medium whitespace-nowrap shadow-lg">
+                    <span className="text-[11px] uppercase tracking-wider bg-black/80 backdrop-blur-md px-3 py-1.5 text-white/90 font-medium whitespace-nowrap shadow-lg rounded-none border-0">
                       Click to inspect ↗
                     </span>
                   </div>
@@ -188,48 +215,52 @@ export default function InteractiveCraftDeck() {
           })}
         </div>
 
-        {/* ── MINIMAL NAVIGATION CONTROLS (Arrows & Dots Only) ── */}
-        <div className="mt-8 flex items-center justify-center gap-4">
-          <button
-            type="button"
-            onClick={prevCard}
-            aria-label="Previous image"
-            className="w-11 h-11 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/50 text-white flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer backdrop-blur-md"
-          >
-            <svg className="w-5 h-5 text-white" fill="none" stroke="white" viewBox="0 0 24 24" strokeWidth="2.4">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
+        {/* ── SLEEK UNIFIED CONTROLS (Zero Rounded Corners, Zero Border) ── */}
+        <div className="mt-4 sm:mt-5 flex items-center justify-center">
+          <div className="inline-flex items-center gap-3 px-3.5 py-1.5 rounded-none bg-black/60 backdrop-blur-md border-0 shadow-lg">
+            {/* Prev Arrow */}
+            <button
+              type="button"
+              onClick={prevCard}
+              aria-label="Previous slide"
+              className="text-white/60 hover:text-white transition-colors p-1 cursor-pointer flex items-center justify-center"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
 
-          {/* Dots Indicator */}
-          <div className="flex items-center gap-2 px-3 py-2 rounded-full bg-white/5 border border-white/10">
-            {SHOWCASE_IMAGES.map((item, idx) => (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => setActiveIndex(idx)}
-                aria-label={`Jump to slide ${idx + 1}`}
-                className="w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer"
-                style={{
-                  backgroundColor: idx === activeIndex ? 'var(--accent)' : 'rgba(255,255,255,0.25)',
-                  transform: idx === activeIndex ? 'scale(1.35)' : 'scale(1)',
-                }}
-              />
-            ))}
+            {/* Dots Indicator with active pill expansion (Sharp bars, rounded-none) */}
+            <div className="flex items-center gap-1.5 px-1">
+              {SHOWCASE_IMAGES.map((item, idx) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setActiveIndex(idx)}
+                  aria-label={`Jump to slide ${idx + 1}`}
+                  className="h-1.5 rounded-none transition-all duration-300 cursor-pointer border-0"
+                  style={{
+                    backgroundColor: idx === activeIndex ? 'var(--accent)' : 'rgba(255,255,255,0.25)',
+                    width: idx === activeIndex ? '16px' : '6px',
+                  }}
+                />
+              ))}
+            </div>
+
+            {/* Next Arrow */}
+            <button
+              type="button"
+              onClick={nextCard}
+              aria-label="Next slide"
+              className="text-white/60 hover:text-white transition-colors p-1 cursor-pointer flex items-center justify-center"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
           </div>
-
-          <button
-            type="button"
-            onClick={nextCard}
-            aria-label="Next image"
-            className="w-11 h-11 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/50 text-white flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer backdrop-blur-md"
-          >
-            <svg className="w-5 h-5 text-white" fill="none" stroke="white" viewBox="0 0 24 24" strokeWidth="2.4">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
         </div>
-      </div>
+      </motion.div>
 
       {/* Full-Screen High-Resolution Lightbox Modal */}
       <AnimatePresence>
@@ -264,14 +295,14 @@ export default function InteractiveCraftDeck() {
               <button
                 type="button"
                 onClick={() => setSelectedImage(null)}
-                className="w-11 h-11 border border-white/20 text-white flex items-center justify-center hover:border-white transition-colors"
-                aria-label="Close high-resolution modal"
+                className="w-11 h-11 border-0 bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer rounded-none"
+                aria-label="Close modal"
               >
                 ✕
               </button>
             </motion.div>
 
-            {/* Large Image Preview with Luxury Skeleton */}
+            {/* Modal Image */}
             <div
               className="flex-1 overflow-auto flex items-center justify-center my-4 max-w-7xl mx-auto w-full"
               onClick={(e) => e.stopPropagation()}
@@ -282,38 +313,26 @@ export default function InteractiveCraftDeck() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                className="max-h-[76vh] max-w-[92vw] w-full flex items-center justify-center"
+                className="max-h-[75vh] max-w-[90vw] flex items-center justify-center"
               >
-                <ImageWithSkeleton
+                <img
                   src={selectedImage.src}
                   alt={selectedImage.alt}
-                  className="max-h-[76vh] max-w-[92vw] shadow-2xl border border-white/10 rounded-sm"
-                  imgClassName="max-h-[76vh] max-w-[92vw] object-contain"
-                  loadingText="Loading High-Res Specimen · 0.4mm Detail"
+                  className="max-h-[72vh] max-w-full object-contain shadow-2xl rounded-none border-0"
                 />
               </motion.div>
             </div>
 
-            {/* Footer Bar */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              transition={{ duration: 0.35, delay: 0.08 }}
-              className="border-t border-white/10 pt-4 max-w-7xl mx-auto w-full flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs text-white/70 z-20"
+            {/* Footer */}
+            <div
+              className="flex flex-col sm:flex-row items-center justify-between text-xs text-white/60 z-20 max-w-7xl mx-auto w-full border-0 pt-4"
               onClick={(e) => e.stopPropagation()}
             >
-              <p className="font-light">
-                Crafted at Kings Marble &amp; Granite · 1848 Industrial Blvd, Harvey LA
-              </p>
-              <button
-                type="button"
-                onClick={() => setSelectedImage(null)}
-                className="btn-primary-luxury !py-2 !px-5 text-xs"
-              >
-                Close View ✕
-              </button>
-            </motion.div>
+              <span>Authentic Commission · King's Marble &amp; Granite Fabrication</span>
+              <span className="mt-2 sm:mt-0 font-mono text-[var(--accent)]">
+                SLIDE {selectedImage.id} OF {total}
+              </span>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -1,82 +1,48 @@
 import React, { useState, useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import { motion, useInView, useScroll, useTransform, animate } from 'framer-motion';
 
 export default function AboutHeritage() {
   const [counts, setCounts] = useState({ surfaces: 0, years: 0, precision: 0 });
   const sectionRef = useRef(null);
-  const harveyRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+  const harveyX = useTransform(scrollYProgress, [0, 1], ['-2%', '3%']);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (!isInView) return;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      setCounts({ surfaces: 2800, years: 15, precision: 0.4 });
+      return;
+    }
 
-    const ctx = gsap.context(() => {
-      // 1. GSAP Animated Metric Counter
-      const countTarget = { surfaces: 0, years: 0, precision: 0 };
+    const controls1 = animate(0, 2800, {
+      duration: 1.8,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate: (latest) => setCounts((c) => ({ ...c, surfaces: Math.floor(latest) })),
+    });
 
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: 'top 75%',
-        once: true,
-        onEnter: () => {
-          if (prefersReducedMotion) {
-            setCounts({ surfaces: 2800, years: 15, precision: 0.4 });
-            return;
-          }
+    const controls2 = animate(0, 15, {
+      duration: 1.5,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate: (latest) => setCounts((c) => ({ ...c, years: Math.floor(latest) })),
+    });
 
-          gsap.to(countTarget, {
-            surfaces: 2800,
-            years: 15,
-            precision: 0.4,
-            duration: 1.8,
-            ease: 'power2.out',
-            onUpdate: () => {
-              setCounts({
-                surfaces: Math.floor(countTarget.surfaces),
-                years: Math.floor(countTarget.years),
-                precision: +countTarget.precision.toFixed(1),
-              });
-            },
-          });
-        },
-      });
+    const controls3 = animate(0, 0.4, {
+      duration: 1.8,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate: (latest) => setCounts((c) => ({ ...c, precision: +latest.toFixed(1) })),
+    });
 
-      // 2. Parallax scrub on giant "HARVEY" typography watermark
-      if (!prefersReducedMotion && harveyRef.current) {
-        gsap.to(harveyRef.current, {
-          xPercent: 3,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 1.2,
-          },
-        });
-      }
-
-      // 3. Staggered reveal for the three architectural statements
-      if (!prefersReducedMotion) {
-        gsap.from('.about-statement-row', {
-          opacity: 0,
-          y: 35,
-          stagger: 0.15,
-          duration: 0.8,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: '.about-statement-row',
-            start: 'top 85%',
-            once: true,
-          },
-        });
-      }
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+    return () => {
+      controls1.stop();
+      controls2.stop();
+      controls3.stop();
+    };
+  }, [isInView]);
 
   return (
     <section
@@ -87,10 +53,9 @@ export default function AboutHeritage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* EFFECT 5: Giant "HARVEY" Architectural Wordmark with Stone Inside It */}
         <div className="mb-16 sm:mb-24 select-none relative overflow-hidden">
-          <span
-            ref={harveyRef}
-            className="font-display font-bold text-[clamp(4.5rem,15vw,12rem)] tracking-tight block leading-[0.85] text-transparent uppercase opacity-90 will-change-transform"
+          <motion.span
             style={{
+              x: harveyX,
               backgroundImage: 'url("/King’s Social Media/IMG_7694.webp")',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
@@ -98,9 +63,10 @@ export default function AboutHeritage() {
               WebkitBackgroundClip: 'text',
               backgroundClip: 'text',
             }}
+            className="font-display font-bold text-[clamp(4.5rem,15vw,12rem)] tracking-tight block leading-[0.85] text-transparent uppercase opacity-90 will-change-transform"
           >
             HARVEY
-          </span>
+          </motion.span>
           <span className="text-xs uppercase tracking-[0.28em] text-[var(--accent)] font-medium block mt-2">
             1848 Industrial Blvd · Atelier &amp; Covered Crane Yard
           </span>
@@ -108,8 +74,14 @@ export default function AboutHeritage() {
 
         {/* Studio Philosophy & Master Craftsman Portrait */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Text narrative under 120 words */}
-          <div className="lg:col-span-6 space-y-6">
+          {/* Text narrative with Framer Motion Fade-Up */}
+          <motion.div
+            initial={{ opacity: 0, y: 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-6 space-y-6"
+          >
             <span className="text-xs uppercase tracking-[0.24em] text-[var(--accent)] font-medium block">
               04 / Studio &amp; Heritage
             </span>
@@ -155,10 +127,16 @@ export default function AboutHeritage() {
                 </span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Master Craftsman / Atelier Founder Portrait (Moved here from Hero) */}
-          <div className="lg:col-span-6">
+          {/* Master Craftsman / Atelier Founder Portrait with Framer Motion Fade-In */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96, y: 30 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-6"
+          >
             <div className="relative h-[480px] sm:h-[580px] overflow-hidden border border-[var(--line)] bg-[#0B0B0C] shadow-2xl group">
               <img
                 src="/King’s Social Media/IMG_7691.webp"
@@ -180,11 +158,17 @@ export default function AboutHeritage() {
                 </span>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Three Large Numbered Statements (Replacing the 3 small cards) */}
-        <div className="mt-28 pt-20 border-t border-[var(--line)]">
+        {/* Three Large Numbered Statements with Framer Motion Fade-Up */}
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-28 pt-20 border-t border-[var(--line)]"
+        >
           <div className="max-w-3xl mb-16">
             <span className="text-xs uppercase tracking-[0.26em] text-[var(--accent)] font-medium block mb-2">
               The Architectural Standard
@@ -259,7 +243,7 @@ export default function AboutHeritage() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
