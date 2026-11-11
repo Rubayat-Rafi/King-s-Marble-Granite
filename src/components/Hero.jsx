@@ -184,11 +184,11 @@ export default function Hero() {
         <div className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full bg-white/[0.04] blur-[120px]" />
       </div>
 
-      {/* LAYER 3: Foreground Content with Mask Reveal & Fully Responsive Centered Typography */}
+      {/* LAYER 3: Foreground Content with Mask Reveal & Left-Aligned Typography in Centered Canvas */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-10 lg:px-12 py-16 sm:py-24 flex items-center justify-center">
-        <div className="max-w-4xl lg:max-w-5xl text-center mx-auto space-y-5 sm:space-y-7 flex flex-col items-center">
+        <div className="w-full max-w-3xl lg:max-w-4xl text-left mx-auto space-y-5 sm:space-y-7 flex flex-col items-start">
           {/* Tagline Badge */}
-          <div className="overflow-hidden flex justify-center w-full">
+          <div className="overflow-hidden flex justify-start w-full">
             <div
               ref={badgeRef}
               className="inline-flex items-center gap-2 bg-black/60 px-3.5 sm:px-4 py-1.5 sm:py-2 backdrop-blur-md border border-white/10"
@@ -203,13 +203,13 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Fluid Responsive Headline: Grand Architectural Atelier Scale */}
-          <div className="overflow-hidden py-1 w-full flex justify-center">
+          {/* Fluid Responsive Headline: Grand Architectural Atelier Scale (Left-Aligned) */}
+          <div className="overflow-hidden py-1 w-full text-left">
             <h1
               ref={headlineRef}
-              className="font-display text-[clamp(2.75rem,7.5vw,5.75rem)] text-white tracking-[-0.02em] leading-[1.04] sm:leading-[0.98] drop-shadow-lg text-center"
+              className="font-display text-[clamp(2.75rem,7.5vw,5.75rem)] text-white tracking-[-0.02em] leading-[1.04] sm:leading-[0.98] drop-shadow-lg text-left"
             >
-              The surface <br className="hidden sm:inline" />
+              The surface <br />
               <span
                 className="italic font-normal transition-colors duration-700"
                 style={{ color: activeStone.accent }}
@@ -220,22 +220,22 @@ export default function Hero() {
             </h1>
           </div>
 
-          {/* Responsive Paragraph Copy */}
-          <div className="overflow-hidden w-full flex justify-center">
+          {/* Responsive Paragraph Copy (Left-Aligned) */}
+          <div className="overflow-hidden w-full text-left">
             <p
               ref={paragraphRef}
-              className="text-sm sm:text-base md:text-lg text-[#DDD8CF]/90 max-w-lg sm:max-w-2xl mx-auto font-light leading-relaxed drop-shadow-sm text-center"
+              className="text-sm sm:text-base md:text-lg text-[#DDD8CF]/90 max-w-xl font-light leading-relaxed drop-shadow-sm text-left"
             >
               We import rare natural monoliths directly from historic quarries in Carrara and Brazil,
               digitize them with 0.4mm 3D lasers, and finish them with continuous vein continuation.
             </p>
           </div>
 
-          {/* Responsive Action Buttons */}
-          <div className="overflow-hidden pt-3 w-full flex justify-center">
+          {/* Responsive Action Buttons (Left-Aligned) */}
+          <div className="overflow-hidden pt-3 w-full flex justify-start">
             <div
               ref={ctaRef}
-              className="flex flex-col sm:flex-row sm:items-center justify-center gap-4 sm:gap-6"
+              className="flex flex-col sm:flex-row sm:items-center justify-start gap-4 sm:gap-6"
             >
               <Link
                 to="/materials"
