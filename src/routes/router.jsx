@@ -7,6 +7,7 @@ import Portfolio from "../pages/Portfolio.jsx";
 import Materials from "../pages/Materials.jsx";
 import Process from "../pages/Process.jsx";
 import Contact from "../pages/Contact.jsx";
+import BrazilProvenance from "../pages/BrazilProvenance.jsx";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,14 @@ const router = createBrowserRouter([
       {
         path: "contact",
         element: <Contact />,
+      },
+      {
+        path: "brazil",
+        element: <BrazilProvenance />,
+      },
+      {
+        path: "brazil-provenance",
+        element: <BrazilProvenance />,
       },
     ],
   },

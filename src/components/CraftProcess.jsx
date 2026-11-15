@@ -45,7 +45,7 @@ const PROCESS_STEPS = [
     spec: '15-Year Craftsmanship & Stain Warranty',
     bg: '#141212',
     accent: '#FAB502',
-    image: "/King’s Social Media/IMG_7690.webp",
+    image: "/King’s Social Media/IMG_7706.webp",
   },
 ];
 
@@ -328,7 +328,18 @@ export default function CraftProcess() {
       {/* ── BOTTOM STAGE BAR WITH LINK TO SERVICES (Zero Borders) ── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-20 pt-4 sm:pt-6 border-0">
         <div className="pt-3 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 text-[11px] sm:text-xs text-white/60 border-0">
-          <span>Kings Marble &amp; Granite · 1848 Industrial Blvd, Harvey LA</span>
+          <span>
+            Kings Marble &amp; Granite ·{' '}
+            <a
+              href="https://maps.app.goo.gl/dkJQrof9kvrVG4mLA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[var(--accent)] transition-colors underline underline-offset-2"
+              title="Open atelier location in Google Maps"
+            >
+              1848 Industrial Blvd, Harvey LA ↗
+            </a>
+          </span>
           <Link
             to="/services"
             className="text-[var(--accent)] hover:text-white uppercase tracking-wider transition-colors flex items-center gap-1.5 font-medium"

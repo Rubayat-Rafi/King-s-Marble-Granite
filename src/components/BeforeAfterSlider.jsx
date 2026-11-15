@@ -58,28 +58,28 @@ export default function BeforeAfterSlider() {
         onTouchMove={handleTouchMove}
         className="relative h-[380px] sm:h-[520px] overflow-hidden select-none cursor-ew-resize border border-[var(--line)] bg-[#0B0B0C]"
       >
-        {/* AFTER IMAGE: Finished 14-ft Mitered Waterfall Kitchen (Full Width Underlying) */}
+        {/* AFTER IMAGE: Finished Bookmatched Kitchen & Island (Full Width Underlying) */}
         <img
-          src="/King’s Social Media/IMG_7690.webp"
-          alt="Finished Mitered Waterfall Island Installation"
+          src="/King’s Social Media/IMG_7700.webp"
+          alt="Finished Bookmatched Island & Slab Backsplash Installation"
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         />
         <div className="absolute top-5 right-5 z-10 bg-black/70 backdrop-blur-md px-3 py-1.5 text-xs text-white uppercase tracking-widest border border-white/10 pointer-events-none">
-          Finished 6cm Waterfall Apron
+          Finished Architectural Suite
         </div>
 
-        {/* BEFORE IMAGE: Raw Quarry Monolith (Clipped via Modern CSS clip-path - 100% fluid & responsive) */}
+        {/* BEFORE IMAGE: Raw Framing & Slab Installation Phase (Clipped via Modern CSS clip-path) */}
         <div
           className="absolute inset-0 pointer-events-none overflow-hidden"
           style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
         >
           <img
-            src="/King’s Social Media/IMG_7694.webp"
-            alt="Raw Quarry Slab Specimen"
+            src="/King’s Social Media/3a4f499a-a7da-47d7-a4eb-9e015653e63f.webp"
+            alt="In-Progress Stone Cladding & Framing"
             className="w-full h-full object-cover"
           />
           <div className="absolute top-5 left-5 z-10 bg-black/70 backdrop-blur-md px-3 py-1.5 text-xs text-[var(--accent)] uppercase tracking-widest border border-white/10">
-            Raw Carrara Slab Lot
+            In-Progress Slab Cladding
           </div>
         </div>
 

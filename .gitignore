@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Large raw camera source videos (already transcoded into public/brazil/)
+*.MOV
+*.mov
+public/owner - brazil/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -39,7 +39,7 @@ export default function About() {
             </h1>
 
             <p className="text-sm sm:text-base text-[#DDD8CF] max-w-2xl font-light leading-relaxed">
-              Founded in Harvey, Louisiana, King’s Marble &amp; Granite operates on direct quarry provenance, zero subcontracting, and sub-millimeter 3D digital fabrication.
+              Founded in Harvey, Louisiana by master stone fabricators Hussein &amp; Musa, King’s Marble &amp; Granite operates on direct quarry provenance, zero subcontracting, and sub-millimeter 3D digital fabrication.
             </p>
           </motion.div>
         </div>
@@ -63,11 +63,21 @@ export default function About() {
                 We curate architectural permanence from the Earth&apos;s oldest geology.
               </h2>
               <p className="text-sm sm:text-base text-[var(--text-muted)] font-light leading-relaxed">
-                King’s Marble &amp; Granite was established to solve the compromise of modern construction: middleman slab dealers, subcontracted installers, and mismatched veining seams.
+                King’s Marble &amp; Granite was established by co-founders Hussein &amp; Musa to solve the compromise of modern construction: middleman slab dealers, subcontracted installers, and mismatched veining seams.
               </p>
               <p className="text-sm text-[var(--text-muted)] font-light leading-relaxed">
                 We import whole blocks directly from Carrara, Italy, and Minas Gerais, Brazil. Every slab is digitally modeled using Prodim 3D laser digitizers and milled on our 5-axis Intermac CNC waterjets, ensuring seamless 45° waterfalls and continuous vein continuation across every room.
               </p>
+
+              <div className="pt-2">
+                <Link
+                  to="/brazil"
+                  className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-[var(--accent)] hover:text-white font-medium border-b border-[var(--accent)] pb-0.5 transition-colors"
+                >
+                  <span>Explore Direct Brazil Quarry Provenance &amp; Owner Sourcing</span>
+                  <span>→</span>
+                </Link>
+              </div>
 
               <div className="pt-6 border-t border-[var(--line)] grid grid-cols-2 gap-8 text-left">
                 <div>
@@ -102,7 +112,15 @@ export default function About() {
                     Harvey Facility
                   </span>
                   <p className="text-xs font-light text-[#DDD8CF]">
-                    1848 Industrial Blvd · Direct slab reserve and waterjet cutting cell.
+                    <a
+                      href="https://maps.app.goo.gl/dkJQrof9kvrVG4mLA"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-[var(--accent)] underline underline-offset-4 font-medium text-white"
+                    >
+                      1848 Industrial Blvd ↗
+                    </a>{' '}
+                    · Direct slab reserve and waterjet cutting cell.
                   </p>
                 </div>
               </div>

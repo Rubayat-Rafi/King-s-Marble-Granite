@@ -77,10 +77,16 @@ export default function Portfolio() {
                 <span className="text-[var(--accent)] font-semibold">✦</span>
                 <span>0.4mm Digital Laser Precision</span>
               </div>
-              <div className="flex items-center gap-2">
+              <a
+                href="https://www.instagram.com/kingmarble06?vrfl=ZWl4M2NuZTEzOGEw"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:text-[var(--accent)] transition-colors"
+                title="Follow King's Marble & Granite on Instagram"
+              >
                 <span className="text-[var(--accent)] font-semibold">✦</span>
-                <span>In-House Fabricators Only</span>
-              </div>
+                <span className="underline underline-offset-4 font-medium text-[var(--accent)]">Daily Cuts on Instagram @kingmarble06 ↗</span>
+              </a>
             </div>
           </motion.div>
         </div>

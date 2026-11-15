@@ -4,13 +4,13 @@ import { useStoneTheme } from '../context/StoneThemeContext';
 import ImageWithSkeleton from './ImageWithSkeleton';
 
 const SHOWCASE_IMAGES = [
-  { id: 1, src: "/King’s Social Media/IMG_7694.webp", alt: "Mitered Waterfall Island Installation" },
-  { id: 2, src: "/King’s Social Media/IMG_7701.webp", alt: "Obsidian Bar Top Installation" },
-  { id: 3, src: "/King’s Social Media/IMG_7718.webp", alt: "Translucent Quartzite Monolith Installation" },
-  { id: 4, src: "/King’s Social Media/IMG_7692.webp", alt: "Floating Marble Vanity & Spa Cladding" },
-  { id: 5, src: "/King’s Social Media/10778015280_IMG_0146.webp", alt: "Outdoor Culinary Pavilion Countertops" },
-  { id: 6, src: "/King’s Social Media/IMG_7705.webp", alt: "Full-Height Monolithic Slab Hearth" },
-  { id: 7, src: "/King’s Social Media/IMG_7707.webp", alt: "Architectural Kitchen Perimeter & Waterfall" },
+  { id: 1, src: "/King’s Social Media/IMG_7694.webp", alt: "Bespoke Walk-In Dressing Suite Island Credenza" },
+  { id: 2, src: "/King’s Social Media/IMG_7705.webp", alt: "Executive Kitchen Island with Twin Starburst Chandeliers" },
+  { id: 3, src: "/King’s Social Media/IMG_7692.webp", alt: "Modern Chef Island with Fluted Dark Base & Commercial Appliances" },
+  { id: 4, src: "/King’s Social Media/IMG_7695.webp", alt: "Private Wine Lounge & Charcoal Quartzite Wet Bar" },
+  { id: 5, src: "/King’s Social Media/IMG_7697.webp", alt: "Sculpted Integrated-Sink Powder Room Vanity" },
+  { id: 6, src: "/King’s Social Media/IMG_7708.webp", alt: "Illuminated Glass-Front Entertaining Bar & Wine Station" },
+  { id: 7, src: "/King’s Social Media/IMG_7707.webp", alt: "Architectural White Quartzite Perimeter & Island Suite" },
 ];
 
 export default function InteractiveCraftDeck() {

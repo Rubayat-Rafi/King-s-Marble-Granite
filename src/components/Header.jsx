@@ -23,6 +23,7 @@ export default function Header() {
     { label: 'Services', href: '/services', isRoute: true },
     { label: 'Portfolio', href: '/portfolio', isRoute: true },
     { label: 'Process', href: '/process', isRoute: true },
+    { label: 'Brazil Direct', href: '/brazil', isRoute: true },
     { label: 'About', href: '/about', isRoute: true },
     { label: 'Contact', href: '/contact', isRoute: true },
   ];
@@ -45,7 +46,7 @@ export default function Header() {
           {/* Left: Physical Atelier & Slab Yard Location */}
           <div className="flex items-center gap-2 sm:gap-3 min-w-0">
             <a
-              href="https://maps.google.com/?q=1848+Industrial+Blvd,+Harvey,+LA+70058"
+              href="https://maps.app.goo.gl/dkJQrof9kvrVG4mLA"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 hover:text-[var(--accent)] transition-colors group truncate"
@@ -71,8 +72,23 @@ export default function Header() {
             </span>
           </div>
 
-          {/* Right: Phone Line & Direct Yard Tour CTA */}
+          {/* Right: Phone Line, Instagram & Direct Yard Tour CTA */}
           <div className="flex items-center gap-3 sm:gap-4 shrink-0">
+            <a
+              href="https://www.instagram.com/kingmarble06?vrfl=ZWl4M2NuZTEzOGEw"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden lg:inline-flex items-center gap-1.5 text-[11px] font-medium hover:text-[var(--accent)] transition-colors group"
+              title="Follow King's Marble & Granite on Instagram"
+            >
+              <svg className="w-3.5 h-3.5 text-[var(--accent)] transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+              <span>@kingmarble06</span>
+            </a>
+            <span className="hidden lg:inline text-current opacity-30">|</span>
             <a
               href="tel:+15047237898"
               className="inline-flex items-center gap-1.5 font-semibold tracking-wider hover:text-[var(--accent)] transition-colors group"
@@ -227,16 +243,38 @@ export default function Header() {
                   Request estimate
                 </Link>
 
-                <div className="space-y-1 text-xs text-[var(--text-muted)] pt-1">
-                  <p className="font-medium text-[var(--text)]">1848 Industrial Blvd, Harvey, LA 70058</p>
+                <div className="space-y-1.5 text-xs text-[var(--text-muted)] pt-1">
+                  <a
+                    href="https://maps.app.goo.gl/dkJQrof9kvrVG4mLA"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-[var(--text)] hover:text-[var(--accent)] transition-colors block"
+                  >
+                    1848 Industrial Blvd, Harvey, LA 70058 ↗
+                  </a>
                   <p>Mon – Sat: 8:00 AM – 5:00 PM</p>
                 </div>
-                <a
-                  href="tel:+15047237898"
-                  className="text-xs uppercase tracking-wider text-[var(--accent)] font-semibold inline-flex items-center gap-1.5"
-                >
-                  Direct: (504) 723-7898
-                </a>
+                <div className="flex items-center justify-between pt-1">
+                  <a
+                    href="tel:+15047237898"
+                    className="text-xs uppercase tracking-wider text-[var(--accent)] font-semibold inline-flex items-center gap-1.5"
+                  >
+                    Direct: (504) 723-7898
+                  </a>
+                  <a
+                    href="https://www.instagram.com/kingmarble06?vrfl=ZWl4M2NuZTEzOGEw"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-white/80 hover:text-[var(--accent)] font-medium inline-flex items-center gap-1.5"
+                  >
+                    <svg className="w-3.5 h-3.5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                    <span>Instagram</span>
+                  </a>
+                </div>
               </div>
             </nav>
           </motion.div>

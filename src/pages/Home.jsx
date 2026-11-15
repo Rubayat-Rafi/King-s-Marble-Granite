@@ -31,5 +31,5 @@ export default function Home() {
       {/* 7. Calm Contact Section with Direct Form, Phone & Map (05 / Direct Consultation) */}
       <ContactSection />
     </main>
-  );
-}
+  )
+};

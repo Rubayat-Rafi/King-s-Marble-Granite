@@ -17,7 +17,7 @@ export const STONE_THEMES = [
     finishes: ['Honed Matte', 'Polished High-Luster'],
     bestUses: 'Sculptural kitchen islands, full-height backsplashes, master ensuites',
     // Actual raw slab specimen with dramatic veining
-    image: "/King’s Social Media/IMG_7690.webp",
+    image: "/King’s Social Media/IMG_7701.webp",
     detailImage: "/King’s Social Media/3a4f499a-a7da-47d7-a4eb-9e015653e63f.webp",
     veinDescription:
       'Translucent alabaster background traversed by feathery amber ribbons and champagne-gold sub-fissures.',
@@ -38,7 +38,7 @@ export const STONE_THEMES = [
     finishes: ['Leathered Velvet', 'Diamond Polished'],
     bestUses: 'Architectural wet bars, dramatic powder rooms, hearth plinths',
     // Actual raw slab specimen
-    image: "/King’s Social Media/IMG_7701.webp",
+    image: "/King’s Social Media/IMG_7690.webp",
     detailImage: "/King’s Social Media/369e1b63-ec7b-4c34-8678-7a273c6dda41.webp",
     veinDescription:
       'Midnight charcoal field shattered by lightning-like calcite fractures and warm oxidized mineral traces.',

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router';
 import { motion, useInView, useScroll, useTransform, animate } from 'framer-motion';
 
 export default function AboutHeritage() {
@@ -94,10 +95,10 @@ export default function AboutHeritage() {
             </h2>
 
             <p className="text-[17px] sm:text-[18px] text-[var(--text-muted)] font-light leading-relaxed max-w-xl">
-              Kings Marble &amp; Granite is a private stone fabrication facility in Harvey, Louisiana. We work
-              exclusively with homeowners, interior architects, and custom builders who demand hairline
-              tolerances. Every block is imported directly from Carrara and Brazil, robotically waterjet milled in
-              our shop, and hand-finished by master artisans.
+              Kings Marble &amp; Granite was founded in Harvey, Louisiana by master stone craftsmen Hussein &amp; Musa.
+              Working exclusively with homeowners, interior architects, and custom builders who demand hairline
+              tolerances, Hussein &amp; Musa personally oversee every block imported directly from Carrara and Brazil,
+              robotically waterjet milled in our shop, and hand-finished by certified artisans.
             </p>
 
             {/* Real Metrics with Animated Count-Up */}
@@ -147,7 +148,7 @@ export default function AboutHeritage() {
               <div className="absolute bottom-6 left-6 right-6 text-white text-xs flex justify-between items-end z-10">
                 <div>
                   <span className="text-xs uppercase tracking-widest text-[var(--accent)] font-medium block mb-1">
-                    Atelier Principal &amp; Master Stone Mason
+                    Founders Hussein &amp; Musa · Master Stonemasons
                   </span>
                   <p className="text-sm font-light text-white">
                     Direct oversight on every slab cut, mitered, and sealed in our Harvey shop.
@@ -194,10 +195,19 @@ export default function AboutHeritage() {
                   Provenance &amp; Structural Integrity
                 </span>
               </div>
-              <div className="md:col-span-6">
+              <div className="md:col-span-6 space-y-3">
                 <p className="text-sm sm:text-base text-[var(--text-muted)] font-light leading-relaxed">
                   Commercial discounters buy leftover distributor bundles with disguised fracture lines and synthetic resin fillers. We import first-quality whole monolith blocks directly from historic quarries in Carrara, Italy and Brazil, certifying pure mineral authenticity before fabrication begins.
                 </p>
+                <div>
+                  <Link
+                    to="/brazil"
+                    className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-[var(--accent)] hover:text-white font-medium border-b border-[var(--accent)] pb-0.5 transition-colors"
+                  >
+                    <span>Read The Owner&apos;s Brazil Expedition Story</span>
+                    <span>→</span>
+                  </Link>
+                </div>
               </div>
             </div>
 

@@ -76,8 +76,15 @@ export default function Footer() {
             </h4>
             <address className="not-italic text-xs text-[#DED5C5] space-y-2 leading-relaxed">
               <p className="font-semibold text-[#F5F1E8]">
-                1848 Industrial Blvd<br />
-                Harvey, LA 70058, United States
+                <a
+                  href="https://maps.app.goo.gl/dkJQrof9kvrVG4mLA"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#C9A44C] transition-colors underline underline-offset-4"
+                >
+                  1848 Industrial Blvd ↗<br />
+                  Harvey, LA 70058, United States
+                </a>
               </p>
               <div className="pt-1 space-y-0.5 text-[11px] text-[#A6A49E]">
                 <p>Monday – Saturday: 8:00 AM – 5:00 PM</p>
@@ -90,6 +97,16 @@ export default function Footer() {
               </p>
               <p className="text-[#DED5C5]">
                 info@kingsmarbleandgranite.com
+              </p>
+              <p className="pt-1">
+                <a
+                  href="https://www.instagram.com/kingmarble06?vrfl=ZWl4M2NuZTEzOGEw"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#C9A44C] hover:underline font-medium inline-flex items-center gap-1.5"
+                >
+                  <span>Instagram: @kingmarble06 ↗</span>
+                </a>
               </p>
             </address>
           </div>

@@ -135,7 +135,25 @@ export default function Placeholders() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
           <div className="space-y-1">
             <span className="font-display text-xl text-[var(--text)] block">Kings Marble &amp; Granite</span>
-            <p>1848 Industrial Blvd, Harvey, LA 70058 · (504) 723-7898</p>
+            <p>
+              <a
+                href="https://maps.app.goo.gl/dkJQrof9kvrVG4mLA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline"
+              >
+                1848 Industrial Blvd, Harvey, LA 70058 ↗
+              </a>{' '}
+              · (504) 723-7898 ·{' '}
+              <a
+                href="https://www.instagram.com/kingmarble06?vrfl=ZWl4M2NuZTEzOGEw"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline text-[var(--accent)] font-medium"
+              >
+                Instagram @kingmarble06 ↗
+              </a>
+            </p>
           </div>
           <div className="text-right space-y-1">
             <p>Hours: Mon–Sat 8:00 AM – 5:00 PM · Sunday Closed</p>

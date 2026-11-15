@@ -85,7 +85,16 @@ export default function Contact() {
                   <span className="text-label text-xs text-[var(--text)] tracking-wider block mb-1">
                     Facility Address
                   </span>
-                  <p className="text-base font-light text-[var(--text)]">1848 Industrial Blvd</p>
+                  <p className="text-base font-light text-[var(--text)]">
+                    <a
+                      href="https://maps.app.goo.gl/dkJQrof9kvrVG4mLA"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-[var(--accent)] transition-colors underline underline-offset-4"
+                    >
+                      1848 Industrial Blvd ↗
+                    </a>
+                  </p>
                   <p className="text-xs text-[var(--text-muted)] font-light">Harvey, LA 70058, United States</p>
                   <p className="text-xs text-[var(--text-muted)] font-light mt-1">Private client parking &amp; covered slab crane viewing yard</p>
                 </div>
@@ -120,6 +129,21 @@ export default function Contact() {
                     </a>
                   </p>
                   <p className="text-xs text-[var(--text-muted)] font-light">estimating@kingsmarbleandgranite.com</p>
+                  <div className="pt-2">
+                    <a
+                      href="https://www.instagram.com/kingmarble06?vrfl=ZWl4M2NuZTEzOGEw"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs text-[var(--accent)] hover:underline font-medium"
+                    >
+                      <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                      </svg>
+                      <span>Instagram: @kingmarble06 ↗</span>
+                    </a>
+                  </div>
                 </div>
 
                 {/* Quick Map & Directions Card */}
@@ -133,7 +157,7 @@ export default function Contact() {
                       Harvey Slab Yard
                     </span>
                     <a
-                      href="https://www.google.com/maps/dir/?api=1&destination=King%27s+Marble+%26+Granite,+1848+Industrial+Blvd,+Harvey,+LA+70058"
+                      href="https://maps.app.goo.gl/dkJQrof9kvrVG4mLA"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-xs text-[var(--text)] hover:text-[var(--accent)] underline underline-offset-4 transition-colors font-medium"
@@ -316,7 +340,7 @@ export default function Contact() {
               </div>
               <div className="flex flex-wrap items-center gap-3">
                 <a
-                  href="https://www.google.com/maps/dir/?api=1&destination=King%27s+Marble+%26+Granite,+1848+Industrial+Blvd,+Harvey,+LA+70058"
+                  href="https://maps.app.goo.gl/dkJQrof9kvrVG4mLA"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-primary-luxury text-xs !py-2.5 !px-5"
@@ -324,7 +348,7 @@ export default function Contact() {
                   Get Driving Directions →
                 </a>
                 <a
-                  href="https://maps.google.com/?q=King%27s+Marble+%26+Granite,+1848+Industrial+Blvd,+Harvey,+LA+70058"
+                  href="https://maps.app.goo.gl/dkJQrof9kvrVG4mLA"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-outline-luxury text-xs !py-2.5 !px-5"

@@ -48,12 +48,31 @@ export default function ContactSection() {
 
             <div className="pt-6 border-t border-[var(--line)] space-y-3 text-xs text-[var(--text-muted)]">
               <p>
-                <strong className="text-[var(--text)] font-medium">Studio &amp; Slab Yard:</strong> 1848 Industrial Blvd, Harvey, LA 70058
+                <strong className="text-[var(--text)] font-medium">Studio &amp; Slab Yard:</strong>{' '}
+                <a
+                  href="https://maps.app.goo.gl/dkJQrof9kvrVG4mLA"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[var(--accent)] transition-colors underline underline-offset-4"
+                >
+                  1848 Industrial Blvd, Harvey, LA 70058 ↗
+                </a>
               </p>
               <p>
                 <strong className="text-[var(--text)] font-medium">Direct Line:</strong>{' '}
                 <a href="tel:+15047237898" className="hover:text-[var(--accent)] transition-colors font-medium">
                   (504) 723-7898
+                </a>
+              </p>
+              <p>
+                <strong className="text-[var(--text)] font-medium">Instagram:</strong>{' '}
+                <a
+                  href="https://www.instagram.com/kingmarble06?vrfl=ZWl4M2NuZTEzOGEw"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[var(--accent)] hover:underline font-medium"
+                >
+                  @kingmarble06 ↗
                 </a>
               </p>
               <p>
@@ -184,12 +203,20 @@ export default function ContactSection() {
                 1848 Industrial Blvd, Harvey, Louisiana 70058
               </h3>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               <a
-                href="https://www.google.com/maps/dir/?api=1&destination=King%27s+Marble+%26+Granite,+1848+Industrial+Blvd,+Harvey,+LA+70058"
+                href="https://maps.app.goo.gl/dkJQrof9kvrVG4mLA"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary-luxury text-xs !py-2.5 !px-5"
+              >
+                Open in Google Maps ↗
+              </a>
+              <a
+                href="https://maps.app.goo.gl/dkJQrof9kvrVG4mLA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline-luxury text-xs !py-2.5 !px-5"
               >
                 Get Driving Directions →
               </a>
