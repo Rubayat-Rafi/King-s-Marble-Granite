@@ -1,38 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GALLERY_IMAGES } from '../data/content';
+import { GALLERY_CATEGORIES, GALLERY_IMAGES } from '../data/content';
 import { useStoneTheme } from '../context/StoneThemeContext';
 import ImageWithSkeleton from '../components/ImageWithSkeleton';
 
-const applicationGroups = [
-  {
-    id: 'kitchen',
-    label: 'Kitchen',
-    items: GALLERY_IMAGES.filter((item) =>
-      ['Kitchens', 'Waterfall Islands'].includes(item.category)
-    ),
-  },
-  {
-    id: 'bath',
-    label: 'Bath',
-    items: GALLERY_IMAGES.filter((item) => item.category === 'Bathrooms & Vanities'),
-  },
-  {
-    id: 'stairs',
-    label: 'Stairs',
-    items: GALLERY_IMAGES.filter((item) => item.category === 'Stone Slabs & Vein Flow').slice(0, 12),
-  },
-  {
-    id: 'feature-walls',
-    label: 'Feature Walls',
-    items: GALLERY_IMAGES.filter((item) => item.category === 'Stone Slabs & Vein Flow').slice(12),
-  },
-  {
-    id: 'outdoor',
-    label: 'Outdoor',
-    items: GALLERY_IMAGES.filter((item) => item.category === 'Outdoor & Commercial'),
-  },
-];
+const applicationGroups = Object.keys(GALLERY_CATEGORIES).map((category) => ({
+  id: category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
+  label: category,
+  items: GALLERY_IMAGES.filter((item) => item.category === category),
+}));
 
 export default function Materials() {
   const { activeStone } = useStoneTheme();
@@ -66,7 +42,7 @@ export default function Materials() {
             </h1>
 
             <p className="text-sm sm:text-base text-[#DDD8CF] max-w-2xl font-light leading-relaxed">
-              Curated project imagery grouped by where the stone lives most beautifully — kitchen, bath, stair, feature wall, and outdoor spaces.
+              Explore the complete gallery organized by what each image shows — from kitchens, baths, and staircases to feature walls, outdoor work, stone details, and our shop.
             </p>
           </motion.div>
         </div>
