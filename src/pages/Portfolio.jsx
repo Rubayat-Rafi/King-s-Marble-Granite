@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GALLERY_IMAGES } from '../data/content';
+import { GALLERY_CATEGORIES, GALLERY_IMAGES } from '../data/content';
 import { useStoneTheme } from '../context/StoneThemeContext';
 import ImageWithSkeleton from '../components/ImageWithSkeleton';
 
@@ -11,14 +11,7 @@ export default function Portfolio() {
   const [visibleCount, setVisibleCount] = useState(18);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const categories = [
-    'All',
-    'Waterfall Islands',
-    'Kitchens',
-    'Bathrooms & Vanities',
-    'Stone Slabs & Vein Flow',
-    'Outdoor & Commercial',
-  ];
+  const categories = ['All', ...Object.keys(GALLERY_CATEGORIES)];
 
   const filteredItems =
     activeCategory === 'All'
@@ -65,13 +58,13 @@ export default function Portfolio() {
             </h1>
 
             <p className="text-sm sm:text-base text-[#DDD8CF] max-w-2xl font-light leading-relaxed">
-              Every photograph in this archive documents real, bespoke fabrication and installation commissions executed by King’s Marble &amp; Granite. Explore 45° mitered waterfalls, full-height slab backsplashes, and monolithic fireplaces with unbroken vein continuation.
+              Explore King’s Marble &amp; Granite’s stone projects and behind-the-scenes work, organized by what each image shows.
             </p>
 
             <div className="pt-2 flex flex-wrap gap-6 text-xs text-[#DDD8CF]/80">
               <div className="flex items-center gap-2">
                 <span className="text-[var(--accent)] font-semibold">✦</span>
-                <span>{GALLERY_IMAGES.length} Authentic Jobsite Photos</span>
+                <span>{GALLERY_IMAGES.length} Gallery Images</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-[var(--accent)] font-semibold">✦</span>
