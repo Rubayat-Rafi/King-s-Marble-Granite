@@ -1,13 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { motion } from 'framer-motion';
-import { MEDIA_ASSETS, GALLERY_IMAGES } from '../data/content';
+import { MEDIA_ASSETS, formatImagePath } from '../data/content';
 import { useStoneTheme } from '../context/StoneThemeContext';
 import ImageWithSkeleton from '../components/ImageWithSkeleton';
 
 export default function About() {
   const { activeStone } = useStoneTheme();
-  const workshopGallery = GALLERY_IMAGES.slice(10, 16);
+  const workshopGallery = [
+    { src: formatImagePath('slab-kings-carved-marble-crown-sculpture-01.webp'), alt: 'Hand-carved solid marble Kings crown sculpture' },
+    { src: formatImagePath('slab-black-forest-4way-diamond-bookmatch-01.webp'), alt: '4-way diamond bookmatched granite slab' },
+    { src: formatImagePath('slab-cristallo-backlit-amber-veins-01.webp'), alt: 'Backlit translucent Cristallo quartzite slab' },
+    { src: formatImagePath('slab-patagonia-bookmatched-quartzite-01.webp'), alt: 'Bookmatched Patagonia quartzite slab reserve' },
+    { src: formatImagePath('atelier-kings-harvey-monument-sign-01.webp'), alt: 'King\'s Marble & Granite Harvey showroom' },
+    { src: formatImagePath('atelier-kings-marble-fleet-truck-01.webp'), alt: 'King\'s Marble & Granite installation fleet' },
+  ];
 
   return (
     <div className="bg-[var(--bg)] text-[var(--text)] transition-colors duration-700 min-h-screen">
@@ -39,7 +46,7 @@ export default function About() {
             </h1>
 
             <p className="text-sm sm:text-base text-[#DDD8CF] max-w-2xl font-light leading-relaxed">
-              Founded in Harvey, Louisiana by master stone fabricators Hussein &amp; Musa, King’s Marble &amp; Granite operates on direct quarry provenance, zero subcontracting, and sub-millimeter 3D digital fabrication.
+              King&apos;s Marble &amp; Granite has been in business for 18 years. Founded in Harvey, Louisiana by Hussein &amp; Musa, we specialize in Marble, Granite, Quartz &amp; Quartzite — our work stands out above the rest.
             </p>
           </motion.div>
         </div>
@@ -63,10 +70,10 @@ export default function About() {
                 We curate architectural permanence from the Earth&apos;s oldest geology.
               </h2>
               <p className="text-sm sm:text-base text-[var(--text-muted)] font-light leading-relaxed">
-                King’s Marble &amp; Granite was established by co-founders Hussein &amp; Musa to solve the compromise of modern construction: middleman slab dealers, subcontracted installers, and mismatched veining seams.
+                With 18 years in business, King’s Marble &amp; Granite was established by co-founders Hussein &amp; Musa to deliver precision craftsmanship across Marble, Granite, Quartz, and Quartzite without third-party subcontracting.
               </p>
               <p className="text-sm text-[var(--text-muted)] font-light leading-relaxed">
-                We import whole blocks directly from Carrara, Italy, and Minas Gerais, Brazil. Every slab is digitally modeled using Prodim 3D laser digitizers and milled on our 5-axis Intermac CNC waterjets, ensuring seamless 45° waterfalls and continuous vein continuation across every room.
+                From kitchen islands and waterfall counters to bathroom vanities and fireplace surrounds, we carefully measure, cut, polish, and install every piece in-house so our work stands out above the rest.
               </p>
 
               <div className="pt-2">
@@ -81,12 +88,12 @@ export default function About() {
 
               <div className="pt-6 border-t border-[var(--line)] grid grid-cols-2 gap-8 text-left">
                 <div>
-                  <h4 className="font-display text-2xl text-[var(--text)]">0.4 mm</h4>
-                  <p className="text-xs text-[var(--text-muted)] mt-1 font-light">Laser templating tolerance across walls and cabinetry.</p>
+                  <h4 className="font-display text-2xl text-[var(--text)]">18 Years</h4>
+                  <p className="text-xs text-[var(--text-muted)] mt-1 font-light">Established stone fabricators serving Harvey &amp; New Orleans.</p>
                 </div>
                 <div>
-                  <h4 className="font-display text-2xl text-[var(--text)]">15-Year</h4>
-                  <p className="text-xs text-[var(--text-muted)] mt-1 font-light">Fluoropolymer stain and structural craftsmanship guarantee.</p>
+                  <h4 className="font-display text-2xl text-[var(--text)]">4 Specialties</h4>
+                  <p className="text-xs text-[var(--text-muted)] mt-1 font-light">Marble, Granite, Quartz &amp; Quartzite crafted in-house.</p>
                 </div>
               </div>
             </motion.div>
@@ -104,25 +111,8 @@ export default function About() {
                   alt="Kings Marble and Granite Workshop"
                   className="w-full h-full"
                   imgClassName="w-full h-full object-cover"
-                  loadingText="Loading Harvey Workshop..."
+                  loadingText=""
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none z-10" />
-                <div className="absolute bottom-6 left-6 right-6 text-white z-20 text-left">
-                  <span className="text-label text-xs text-[var(--accent)] block tracking-widest mb-1">
-                    Harvey Facility
-                  </span>
-                  <p className="text-xs font-light text-[#DDD8CF]">
-                    <a
-                      href="https://maps.app.goo.gl/dkJQrof9kvrVG4mLA"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-[var(--accent)] underline underline-offset-4 font-medium text-white"
-                    >
-                      1848 Industrial Blvd ↗
-                    </a>{' '}
-                    · Direct slab reserve and waterjet cutting cell.
-                  </p>
-                </div>
               </div>
             </motion.div>
           </div>
@@ -170,55 +160,6 @@ export default function About() {
                 />
               </motion.div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Core Standards */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="border border-[var(--line)] p-8 space-y-4 bg-[var(--bg)]"
-            >
-              <span className="text-label text-xs text-[var(--accent)] block">01 / Provenance</span>
-              <h3 className="font-display text-2xl text-[var(--text)]">Direct Block Quarrying</h3>
-              <p className="text-xs text-[var(--text-muted)] font-light leading-relaxed">
-                We inspect every stone lot at the quarry source in Italy and Brazil to ensure zero resin fillers, hidden fracture faults, or counterfeit synthetic quartz blends.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="border border-[var(--line)] p-8 space-y-4 bg-[var(--bg)]"
-            >
-              <span className="text-label text-xs text-[var(--accent)] block">02 / Orchestration</span>
-              <h3 className="font-display text-2xl text-[var(--text)]">Vein-Flow Pre-Visualization</h3>
-              <p className="text-xs text-[var(--text-muted)] font-light leading-relaxed">
-                Before a single diamond cut is made, clients inspect a high-resolution 3D digital model showing exactly how geological veins transition across waterfalls and walls.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="border border-[var(--line)] p-8 space-y-4 bg-[var(--bg)]"
-            >
-              <span className="text-label text-xs text-[var(--accent)] block">03 / Accountability</span>
-              <h3 className="font-display text-2xl text-[var(--text)]">In-House Master Crews</h3>
-              <p className="text-xs text-[var(--text-muted)] font-light leading-relaxed">
-                Zero third-party subcontractors. The same certified craftsmen who laser-digitize your home and cut your stone oversee the white-glove delivery and installation.
-              </p>
-            </motion.div>
           </div>
         </div>
       </section>

@@ -119,7 +119,7 @@ export default function Hero() {
                 style={{ backgroundColor: activeStone.accent }}
               />
               <span className="text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white/90 font-medium">
-                Fabrication Atelier · Harvey, Louisiana
+                18 Years in Business · Harvey, Louisiana
               </span>
             </div>
           </motion.div>
@@ -151,8 +151,7 @@ export default function Hero() {
             className="overflow-hidden w-full text-left"
           >
             <p className="text-sm sm:text-base md:text-lg text-[#DDD8CF]/90 max-w-xl font-light leading-relaxed drop-shadow-sm text-left">
-              We import rare natural monoliths directly from historic quarries in Carrara and Brazil,
-              digitize them with 0.4mm 3D lasers, and finish them with continuous vein continuation.
+              King&apos;s Marble &amp; Granite has been in business for 18 years. We specialize in Marble, Granite, Quartz &amp; Quartzite — our work stands out above the rest.
             </p>
           </motion.div>
 

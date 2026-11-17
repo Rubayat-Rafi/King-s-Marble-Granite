@@ -6,46 +6,46 @@ const PROCESS_STEPS = [
   {
     num: '01',
     step: 'Phase One',
-    title: 'Private Consultation & Quarry Sourcing',
-    subtitle: 'Direct Material Discovery',
-    desc: 'You walk our Harvey indoor slab reserve or collaborate with our curators to tag exact whole blocks quarried in Carrara and Brazil. Every lot is cataloged by mineral composition, crystallization, and natural veining pattern.',
-    spec: 'Direct Quarry Imports · No Distributor Markups',
+    title: 'Consultation & Stone Selection',
+    subtitle: 'Harvey Showroom & Slab Yard',
+    desc: 'Visit our Harvey showroom to browse our curated selection of Marble, Granite, Quartz, and Quartzite and select the exact slabs for your home.',
+    spec: 'Marble · Granite · Quartz · Quartzite',
     bg: '#0F0F11',
     accent: '#FAB502',
-    image: "/King’s Social Media/15d5ac9c-3e7e-4067-ac7d-9f5379ac1173.webp",
+    image: "/King’s Social Media/slab-patagonia-bookmatched-quartzite-01.webp",
   },
   {
     num: '02',
     step: 'Phase Two',
-    title: 'Sub-Millimeter Prodim 3D Laser Templating',
-    subtitle: 'Digital Blueprints with 0.4mm Tolerance',
-    desc: 'Our engineers deploy optical 3D Prodim digital laser digitizers across your cabinetry and walls. We record electrical cutouts, uneven wall bowings, and radius corners with sub-millimeter precision before any stone is cut.',
-    spec: '0.4 mm Accuracy · Eliminates Human Measuring Errors',
+    title: 'Precision On-Site Templating',
+    subtitle: 'Exact Project Measurements',
+    desc: 'Our measurement team visits your property to capture exact cabinetry dimensions, sink cutouts, and appliance specifications before cutting begins.',
+    spec: 'Custom Layout & Vein Alignment',
     bg: '#131110',
     accent: '#FAB502',
-    image: "/King’s Social Media/18002a95-8d46-4866-bf82-42a028c2fc7a.webp",
+    image: "/King’s Social Media/kitchen-install-panda-marble-island-01.webp",
   },
   {
     num: '03',
     step: 'Phase Three',
-    title: '5-Axis CNC Waterjet & Mitered Vein Flow',
-    subtitle: 'Robotic Diamond Milling',
-    desc: 'Before cutting, clients review a digital vein-flow layout showing exactly where striations travel across islands, backsplashes, and mitered waterfall drops. Diamond waterjets mill 45° joints with hairline seams.',
-    spec: '5-Axis Intermac CNC · 60,000 PSI Waterjet Precision',
+    title: 'In-House Cutting & Edge Finishing',
+    subtitle: 'Crafted in Harvey, LA',
+    desc: 'Every slab is carefully cut, mitered, and hand-finished in our Harvey facility for clean seams, smooth edges, and continuous vein flow.',
+    spec: 'Custom Edge Profiles & Miters',
     bg: '#0C0C0E',
     accent: '#FAB502',
-    image: "/King’s Social Media/IMG_7693.webp",
+    image: "/King’s Social Media/kitchen-panda-marble-island-finished-01.webp",
   },
   {
     num: '04',
     step: 'Phase Four',
-    title: 'White-Glove Installation & 15-Yr Fluoropolymer Seal',
-    subtitle: 'Permanent Architectural Perfection',
-    desc: 'Our certified master craftsmen anchor, level, and chemically fuse joints with UV-stable custom-pigmented epoxy. Every commission concludes with deep fluoropolymer penetrating sealer protection.',
-    spec: '15-Year Craftsmanship & Stain Warranty',
+    title: 'White-Glove Installation',
+    subtitle: 'Built to Stand Out',
+    desc: 'Our experienced installation crew levels, sets, and finishes your stone surfaces with care so your project stands out above the rest.',
+    spec: '18 Years in Business',
     bg: '#141212',
     accent: '#FAB502',
-    image: "/King’s Social Media/IMG_7706.webp",
+    image: "/King’s Social Media/kitchen-dual-faucet-island-subzero-01.webp",
   },
 ];
 
@@ -294,7 +294,7 @@ export default function CraftProcess() {
                           alt={`${step.step} - ${step.title}`}
                           className="w-full h-full rounded-none border-0"
                           imgClassName="w-full h-full object-cover rounded-none border-0 transition-transform duration-700 group-hover:scale-105"
-                          loadingText={`${step.step} Monolith Visual · 0.4mm Laser`}
+                          loadingText={`Loading ${step.step}...`}
                         />
 
                         {/* Ambient Vignette Overlay */}

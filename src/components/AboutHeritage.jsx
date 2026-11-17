@@ -1,49 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router';
-import { motion, useInView, useScroll, useTransform, animate } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function AboutHeritage() {
-  const [counts, setCounts] = useState({ surfaces: 0, years: 0, precision: 0 });
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start end', 'end start'],
   });
   const harveyX = useTransform(scrollYProgress, [0, 1], ['-2%', '3%']);
-
-  useEffect(() => {
-    if (!isInView) return;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      setCounts({ surfaces: 2800, years: 15, precision: 0.4 });
-      return;
-    }
-
-    const controls1 = animate(0, 2800, {
-      duration: 1.8,
-      ease: [0.16, 1, 0.3, 1],
-      onUpdate: (latest) => setCounts((c) => ({ ...c, surfaces: Math.floor(latest) })),
-    });
-
-    const controls2 = animate(0, 15, {
-      duration: 1.5,
-      ease: [0.16, 1, 0.3, 1],
-      onUpdate: (latest) => setCounts((c) => ({ ...c, years: Math.floor(latest) })),
-    });
-
-    const controls3 = animate(0, 0.4, {
-      duration: 1.8,
-      ease: [0.16, 1, 0.3, 1],
-      onUpdate: (latest) => setCounts((c) => ({ ...c, precision: +latest.toFixed(1) })),
-    });
-
-    return () => {
-      controls1.stop();
-      controls2.stop();
-      controls3.stop();
-    };
-  }, [isInView]);
 
   return (
     <section
@@ -57,7 +22,7 @@ export default function AboutHeritage() {
           <motion.span
             style={{
               x: harveyX,
-              backgroundImage: 'url("/King’s Social Media/IMG_7694.webp")',
+              backgroundImage: 'url("/King’s Social Media/bathroom-dressing-suite-white-island-01.webp")',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundAttachment: 'fixed',
@@ -95,39 +60,8 @@ export default function AboutHeritage() {
             </h2>
 
             <p className="text-[17px] sm:text-[18px] text-[var(--text-muted)] font-light leading-relaxed max-w-xl">
-              Kings Marble &amp; Granite was founded in Harvey, Louisiana by master stone craftsmen Hussein &amp; Musa.
-              Working exclusively with homeowners, interior architects, and custom builders who demand hairline
-              tolerances, Hussein &amp; Musa personally oversee every block imported directly from Carrara and Brazil,
-              robotically waterjet milled in our shop, and hand-finished by certified artisans.
+              King&apos;s Marble &amp; Granite has been in business for 18 years, founded in Harvey, Louisiana by Hussein &amp; Musa. We specialize in Marble, Granite, Quartz &amp; Quartzite — our work stands out above the rest.
             </p>
-
-            {/* Real Metrics with Animated Count-Up */}
-            <div className="pt-8 border-t border-[var(--line)] grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6">
-              <div>
-                <strong className="block font-display text-3xl sm:text-4xl text-[var(--text)] font-light">
-                  {counts.surfaces > 0 ? `${counts.surfaces.toLocaleString()}+` : '2,800+'}
-                </strong>
-                <span className="text-xs uppercase tracking-wider text-[var(--text-muted)] block mt-1 font-medium">
-                  Surfaces Installed
-                </span>
-              </div>
-              <div>
-                <strong className="block font-display text-3xl sm:text-4xl text-[var(--text)] font-light">
-                  {counts.years > 0 ? `${counts.years}-Year` : '15-Year'}
-                </strong>
-                <span className="text-xs uppercase tracking-wider text-[var(--text-muted)] block mt-1 font-medium">
-                  Stain Warranty
-                </span>
-              </div>
-              <div>
-                <strong className="block font-display text-3xl sm:text-4xl text-[var(--text)] font-light">
-                  {counts.precision > 0 ? `${counts.precision} mm` : '0.4 mm'}
-                </strong>
-                <span className="text-xs uppercase tracking-wider text-[var(--text-muted)] block mt-1 font-medium">
-                  Laser Precision
-                </span>
-              </div>
-            </div>
           </motion.div>
 
           {/* Master Craftsman / Atelier Founder Portrait with Framer Motion Fade-In */}
@@ -140,24 +74,10 @@ export default function AboutHeritage() {
           >
             <div className="relative h-[480px] sm:h-[580px] overflow-hidden border border-[var(--line)] bg-[#0B0B0C] shadow-2xl group">
               <img
-                src="/King’s Social Media/IMG_7691.webp"
-                alt="Master Craftsman and Founder of Kings Marble and Granite"
+                src="/brazil/superdome-founders-column.webp"
+                alt="Co-Founders Hussein & Musa of King's Marble & Granite"
                 className="w-full h-full object-cover transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent pointer-events-none" />
-              <div className="absolute bottom-6 left-6 right-6 text-white text-xs flex justify-between items-end z-10">
-                <div>
-                  <span className="text-xs uppercase tracking-widest text-[var(--accent)] font-medium block mb-1">
-                    Founders Hussein &amp; Musa · Master Stonemasons
-                  </span>
-                  <p className="text-sm font-light text-white">
-                    Direct oversight on every slab cut, mitered, and sealed in our Harvey shop.
-                  </p>
-                </div>
-                <span className="text-xs bg-black/70 px-2.5 py-1 border border-white/10 hidden sm:inline-block">
-                  Zero Subcontracting
-                </span>
-              </div>
             </div>
           </motion.div>
         </div>
@@ -240,15 +160,15 @@ export default function AboutHeritage() {
               </div>
               <div className="md:col-span-4">
                 <h4 className="font-display text-2xl sm:text-3xl text-[var(--text)] font-light">
-                  0.4mm Laser Precision &amp; In-House Artisans
+                  In-House Master Artisans
                 </h4>
                 <span className="text-xs uppercase tracking-widest text-[var(--accent)] block mt-1 font-medium">
-                  Zero Subcontracting &amp; 15-Yr Warranty
+                  18 Years of Craftsmanship
                 </span>
               </div>
               <div className="md:col-span-6">
                 <p className="text-sm sm:text-base text-[var(--text-muted)] font-light leading-relaxed">
-                  Sub-millimeter Prodim 3D digital laser digitizers capture wall out-of-square irregularities down to 0.4 mm. We mill every piece on 5-axis Intermac CNC waterjets, then our certified in-house master craftsmen install, seam, and seal your surfaces with our 15-year fluoropolymer warranty.
+                  Our in-house fabrication team measures, cuts, polishes, and installs every Marble, Granite, Quartz, and Quartzite commission with zero third-party subcontracting.
                 </p>
               </div>
             </div>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import BeforeAfterSlider from './BeforeAfterSlider';
 import ImageWithSkeleton from './ImageWithSkeleton';
 
 // Curated 8 asymmetric case studies accurately matching verified authentic photography
@@ -13,7 +12,7 @@ const ASYMMETRIC_CASES = [
     stone: 'Mont Blanc Quartzite',
     layout: 'col-span-12 lg:col-span-8',
     height: 'h-[440px] sm:h-[580px]',
-    image: "/King’s Social Media/IMG_7699.webp",
+    image: "/King’s Social Media/kitchen-open-concept-fireplace-view-01.webp",
     desc: 'Open-concept culinary island flowing directly into a soaring bookmatched Mont Blanc Quartzite linear fireplace wall.',
     parallaxFactor: 18,
   },
@@ -24,7 +23,7 @@ const ASYMMETRIC_CASES = [
     stone: 'Copacabana Exotic Granite',
     layout: 'col-span-12 lg:col-span-4 lg:translate-y-12',
     height: 'h-[400px] sm:h-[520px]',
-    image: "/King’s Social Media/IMG_7702.webp",
+    image: "/King’s Social Media/commercial-panda-marble-scullery-bar-01.webp",
     desc: 'Butler’s scullery wet bar featuring dramatic black-and-white stone veining with matching 6-inch mitered backsplash and matte black fixtures.',
     parallaxFactor: -16,
   },
@@ -35,7 +34,7 @@ const ASYMMETRIC_CASES = [
     stone: 'Thassos Pure White Marble',
     layout: 'col-span-12 lg:col-span-5',
     height: 'h-[380px] sm:h-[480px]',
-    image: "/King’s Social Media/IMG_7703.webp",
+    image: "/King’s Social Media/bathroom-dual-sink-hex-floor-vanity-01.webp",
     desc: 'Expansive double vanity topped with crisp pure white stone, matte black widespread faucets, and hexagonal marble floor tile.',
     parallaxFactor: 20,
   },
@@ -46,7 +45,7 @@ const ASYMMETRIC_CASES = [
     stone: 'Calacatta Vintage Marble',
     layout: 'col-span-12 lg:col-span-7 lg:-translate-y-8',
     height: 'h-[420px] sm:h-[540px]',
-    image: "/King’s Social Media/IMG_7715.webp",
+    image: "/King’s Social Media/commercial-oyster-bar-marble-corner-01.webp",
     desc: 'Monumental 4-inch mitered wrap-around bar top with commercial radius return corners, custom blue millwork, and brass foot rail.',
     parallaxFactor: -18,
   },
@@ -57,7 +56,7 @@ const ASYMMETRIC_CASES = [
     stone: 'Taj Mahal Quartzite',
     layout: 'col-span-12 lg:col-span-7',
     height: 'h-[440px] sm:h-[560px]',
-    image: "/King’s Social Media/IMG_7719.webp",
+    image: "/King’s Social Media/kitchen-fluted-oak-island-wolf-range-01.webp",
     desc: 'Warm fluted vertical white oak island paired with diamond-hard Brazilian quartzite and full-height slab backsplash behind a Wolf range.',
     parallaxFactor: 16,
   },
@@ -68,7 +67,7 @@ const ASYMMETRIC_CASES = [
     stone: 'Black Forest Exotic Granite',
     layout: 'col-span-12 lg:col-span-5 lg:translate-y-6',
     height: 'h-[380px] sm:h-[480px]',
-    image: "/King’s Social Media/10778015280_IMG_0146.webp",
+    image: "/King’s Social Media/slab-black-forest-4way-diamond-bookmatch-01.webp",
     desc: 'Masterpiece 4-way diamond bookmatch slab composition creating a hypnotic concentric geometric focal feature.',
     parallaxFactor: -14,
   },
@@ -79,7 +78,7 @@ const ASYMMETRIC_CASES = [
     stone: 'Calacatta Gold Marble',
     layout: 'col-span-12 lg:col-span-6',
     height: 'h-[400px] sm:h-[520px]',
-    image: "/King’s Social Media/IMG_7696.webp",
+    image: "/King’s Social Media/bathroom-fluted-shower-calacatta-floor-01.webp",
     desc: 'Guest bath vanity in crisp white stone paired with vertical fluted shower tile and polished Calacatta marble flooring.',
     parallaxFactor: 18,
   },
@@ -90,7 +89,7 @@ const ASYMMETRIC_CASES = [
     stone: 'Bianco Superiore Quartzite',
     layout: 'col-span-12 lg:col-span-6 lg:-translate-y-6',
     height: 'h-[400px] sm:h-[520px]',
-    image: "/King’s Social Media/IMG_7710.webp",
+    image: "/King’s Social Media/bathroom-led-mirrors-steam-shower-01.webp",
     desc: 'Double-vanity primary bath featuring thick mitered quartzite countertops, backlit LED mirrors, and a frameless glass steam shower.',
     parallaxFactor: -16,
   },
@@ -128,36 +127,6 @@ function CaseStudyCard({ project, onSelect, onHoverStart, onHoverEnd }) {
           loading="lazy"
           className="absolute inset-0 w-full h-[116%] -top-[8%] object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
-
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-60 group-hover:opacity-85 transition-opacity duration-500 pointer-events-none" />
-
-        {/* Badges on Image (Minimum 12px) */}
-        <div className="absolute top-4 left-4 z-10 pointer-events-none">
-          <span className="text-xs uppercase tracking-widest bg-black/75 backdrop-blur-md px-3 py-1.5 text-white border border-white/10 font-medium">
-            {project.stone}
-          </span>
-        </div>
-
-        <div className="absolute bottom-4 left-4 right-4 z-10 flex justify-between items-end text-white pointer-events-none">
-          <div>
-            <span className="text-xs uppercase tracking-wider text-[var(--accent)] block font-medium">
-              {project.location}
-            </span>
-            <h3 className="font-display text-2xl sm:text-3xl text-white font-light">
-              {project.title}
-            </h3>
-          </div>
-          <span className="text-xs uppercase tracking-wider bg-white/20 backdrop-blur-md px-2.5 py-1 border border-white/20 hidden sm:inline-block font-medium">
-            Inspect ↗
-          </span>
-        </div>
-      </div>
-
-      <div className="pt-3.5 flex justify-between items-start text-xs text-[var(--text-muted)]">
-        <p className="max-w-md font-light leading-relaxed">
-          {project.desc}
-        </p>
       </div>
     </motion.div>
   );
@@ -232,10 +201,7 @@ export default function AsymmetricProjects() {
           ))}
         </div>
 
-        {/* Interactive Metamorphosis Before/After Slider (Effect 11) */}
-        <BeforeAfterSlider />
-
-        {/* Quiet Link to Full 125+ Image Archive with Framer Motion Fade-Up */}
+        {/* Quiet Link to Full Curated Image Archive with Framer Motion Fade-Up */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -248,7 +214,7 @@ export default function AsymmetricProjects() {
               Complete Visual Catalog
             </span>
             <h3 className="font-display text-3xl sm:text-4xl text-[var(--text)] font-light">
-              Browse the complete 125+ jobsite photography archive.
+              Browse the complete curated jobsite photography archive.
             </h3>
             <p className="text-xs text-[var(--text-muted)] max-w-xl font-light">
               Filter unedited client installations by stone classification, kitchen perimeter, floating vanities, and raw quarry blocks.

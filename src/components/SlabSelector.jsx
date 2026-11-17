@@ -5,7 +5,6 @@ import ImageWithSkeleton from './ImageWithSkeleton';
 
 export default function SlabSelector() {
   const { activeStone, setStoneById } = useStoneTheme();
-  const [photoType, setPhotoType] = useState('slab'); // 'slab' | 'room'
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1);
   const [tilt, setTilt] = useState({ rx: 0, ry: 0 });
@@ -50,7 +49,7 @@ export default function SlabSelector() {
   };
 
   const isBacklitOnyx = activeStone.id === 'backlit-onyx';
-  const displayedPhoto = photoType === 'slab' ? (activeStone.detailImage || activeStone.image) : activeStone.image;
+  const displayedPhoto = activeStone.image;
 
   return (
     <section
@@ -81,14 +80,14 @@ export default function SlabSelector() {
         >
           <div className="space-y-3 text-left">
             <span className="text-xs uppercase tracking-[0.24em] text-[var(--accent)] font-medium block">
-              01 / Signature Slab Selection
+              01 / Featured Installations
             </span>
             <h2 className="font-display text-4xl sm:text-6xl text-[var(--text)] font-light leading-tight">
-              The site takes the color of the stone.
+              Crafted for every space.
             </h2>
           </div>
           <p className="text-xs sm:text-sm text-[var(--text-muted)] max-w-sm font-light leading-relaxed text-left md:text-right">
-            Select a raw monolith lot below to re-tune the entire website atmosphere and lighting.
+            Select any completed project below to inspect the stone work in full detail.
           </p>
         </motion.div>
 
@@ -136,50 +135,7 @@ export default function SlabSelector() {
                   }}
                 />
 
-                {/* Top Switcher: Raw Slab Specimen vs Finished Installation */}
-                <div
-                  className="absolute top-4 right-4 z-20 flex bg-black/75 backdrop-blur-md p-1 border border-white/15"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <button
-                    type="button"
-                    onClick={() => setPhotoType('slab')}
-                    className={`text-[11px] uppercase tracking-wider px-2.5 py-1 transition-all ${
-                      photoType === 'slab'
-                        ? 'bg-white text-black font-semibold'
-                        : 'text-white/70 hover:text-white'
-                    }`}
-                  >
-                    Raw Slab Lot
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setPhotoType('room')}
-                    className={`text-[11px] uppercase tracking-wider px-2.5 py-1 transition-all ${
-                      photoType === 'room'
-                        ? 'bg-white text-black font-semibold'
-                        : 'text-white/70 hover:text-white'
-                    }`}
-                  >
-                    Finished Room
-                  </button>
-                </div>
-
-                {/* Info Badges (Minimum 12px text) */}
-                <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between text-xs z-10 pointer-events-none">
-                  <span className="text-xs uppercase tracking-wider bg-black/85 text-[#F4F2EE] px-3.5 py-1.5 backdrop-blur-md border border-white/10">
-                    {activeStone.type} · Lot #KM-{activeStone.id.slice(0, 3).toUpperCase()}
-                  </span>
-                  <span className="text-xs uppercase tracking-wider text-[var(--accent)] bg-black/85 px-3.5 py-1.5 backdrop-blur-md border border-white/10 hidden sm:inline-block">
-                    Click to inspect veining (Zoom) ↗
-                  </span>
-                </div>
               </div>
-            </div>
-
-            <div className="pt-3.5 flex items-center justify-between text-xs text-[var(--text-muted)] text-left">
-              <span>Provenance: <strong className="text-[var(--text)] font-medium">{activeStone.origin}</strong></span>
-              <span className="italic">Prodim 3D Laser Digitized · 0.4mm Tolerance</span>
             </div>
           </motion.div>
 
@@ -191,16 +147,16 @@ export default function SlabSelector() {
             transition={{ duration: 0.85, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-5 space-y-6 text-left"
           >
-            {/* Slabs List (6 Specimens with Stone Swatches) - AT THE TOP FOR IMMEDIATE VISIBILITY */}
+            {/* Project Selection Grid */}
             <div className="p-5 sm:p-6 border border-[var(--line)] bg-[var(--bg)]/90 backdrop-blur-sm space-y-4 shadow-sm">
               <div className="flex items-center justify-between">
                 <span className="text-xs uppercase tracking-[0.2em] text-[var(--accent)] font-semibold block">
-                  Natural Reserve Slabs · Select to Shift Theme:
+                  Featured Applications
                 </span>
-                <span className="text-[11px] text-[var(--text-muted)] font-mono">6 Lots</span>
+                <span className="text-[11px] text-[var(--text-muted)] font-mono">6 Projects</span>
               </div>
 
-              {/* 2-Column Responsive Grid: perfectly fits alongside the image in viewport */}
+              {/* 2-Column Responsive Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {STONE_THEMES.map((stone) => {
                   const isCurrent = stone.id === activeStone.id;
@@ -217,7 +173,6 @@ export default function SlabSelector() {
                           : 'border-[var(--line)] hover:border-[var(--text-muted)] bg-[var(--bg)]/50'
                       }`}
                     >
-                      {/* Framer Motion Active Gliding Pill */}
                       {isCurrent && (
                         <motion.div
                           layoutId="activeSlabRing"
@@ -227,7 +182,6 @@ export default function SlabSelector() {
                       )}
 
                       <div className="flex items-center gap-2.5 min-w-0 relative z-10">
-                        {/* Mineral swatch dot */}
                         <span
                           className="w-3.5 h-3.5 rounded-full border border-black/20 shrink-0 shadow-sm transition-transform group-hover:scale-110"
                           style={{ backgroundColor: stone.accent }}
@@ -237,7 +191,7 @@ export default function SlabSelector() {
                             {stone.name}
                           </h4>
                           <span className="text-[11px] text-[var(--text-muted)] uppercase tracking-wider block truncate">
-                            {stone.origin.split(',')[0]}
+                            {stone.type}
                           </span>
                         </div>
                       </div>
@@ -253,8 +207,8 @@ export default function SlabSelector() {
               </div>
             </div>
 
-            {/* Active Stone Specification Card (Beneath the selector, fully accessible) */}
-            <div className="p-6 sm:p-8 border border-[var(--line)] bg-[var(--bg)]/80 backdrop-blur-sm min-h-[280px]">
+            {/* Active Project Details Card */}
+            <div className="p-6 sm:p-8 border border-[var(--line)] bg-[var(--bg)]/80 backdrop-blur-sm">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeStone.id}
@@ -262,7 +216,7 @@ export default function SlabSelector() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                  className="space-y-5"
+                  className="space-y-4"
                 >
                   <div className="space-y-1">
                     <div className="inline-flex items-center gap-2">
@@ -271,7 +225,7 @@ export default function SlabSelector() {
                         style={{ backgroundColor: activeStone.accent }}
                       />
                       <span className="text-xs uppercase tracking-[0.22em] text-[var(--accent)] font-medium">
-                        Current Specimen Profile
+                        {activeStone.type}
                       </span>
                     </div>
                     <h3 className="font-display text-2xl sm:text-3xl text-[var(--text)] font-light">
@@ -283,21 +237,6 @@ export default function SlabSelector() {
                     {activeStone.veinDescription}
                   </p>
 
-                  <div className="space-y-2.5 pt-3 border-t border-[var(--line)] text-xs text-[var(--text)]">
-                    <div className="flex justify-between py-1 border-b border-[var(--line)]/50">
-                      <span className="text-[var(--text-muted)] uppercase tracking-wider">Thickness</span>
-                      <span className="font-medium">{activeStone.thickness}</span>
-                    </div>
-                    <div className="flex justify-between py-1 border-b border-[var(--line)]/50">
-                      <span className="text-[var(--text-muted)] uppercase tracking-wider">Available Finishes</span>
-                      <span className="font-medium">{activeStone.finishes.join(', ')}</span>
-                    </div>
-                    <div className="flex justify-between py-1">
-                      <span className="text-[var(--text-muted)] uppercase tracking-wider">Ideal Installations</span>
-                      <span className="max-w-[240px] text-right font-medium">{activeStone.bestUses}</span>
-                    </div>
-                  </div>
-
                   <div className="pt-2">
                     <motion.a
                       whileHover={{ scale: 1.015 }}
@@ -305,7 +244,7 @@ export default function SlabSelector() {
                       href="/contact"
                       className="btn-primary-luxury text-xs w-full text-center"
                     >
-                      Reserve this lot for digital templating →
+                      Request a quote for a similar project →
                     </motion.a>
                   </div>
                 </motion.div>
@@ -338,39 +277,14 @@ export default function SlabSelector() {
             >
               <div className="text-left space-y-1">
                 <span className="text-xs uppercase tracking-[0.24em] text-[var(--accent)] block font-medium">
-                  Vein Inspection Mode
+                  {activeStone.type}
                 </span>
                 <h3 className="font-display text-2xl sm:text-3xl text-white font-light">
-                  {activeStone.name} — {photoType === 'slab' ? 'Raw Slab Specimen' : 'Finished Installation'}
+                  {activeStone.name}
                 </h3>
               </div>
 
               <div className="flex items-center gap-3">
-                {/* Photo Source Switcher inside Lightbox */}
-                <div className="inline-flex bg-white/10 p-1 border border-white/15">
-                  <button
-                    type="button"
-                    onClick={() => setPhotoType('slab')}
-                    className={`text-xs uppercase tracking-wider px-3 py-1.5 transition-all ${
-                      photoType === 'slab'
-                        ? 'bg-white text-black font-semibold'
-                        : 'text-white/70 hover:text-white'
-                    }`}
-                  >
-                    Raw Slab
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setPhotoType('room')}
-                    className={`text-xs uppercase tracking-wider px-3 py-1.5 transition-all ${
-                      photoType === 'room'
-                        ? 'bg-white text-black font-semibold'
-                        : 'text-white/70 hover:text-white'
-                    }`}
-                  >
-                    In Residence
-                  </button>
-                </div>
 
                 <button
                   type="button"
@@ -407,7 +321,7 @@ export default function SlabSelector() {
                   alt={`Ultra high-resolution veining pattern of ${activeStone.name}`}
                   className="max-h-[76vh] max-w-[90vw] shadow-2xl border border-white/10 rounded-sm"
                   imgClassName="max-h-[76vh] max-w-[90vw] object-contain"
-                  loadingText={`Loading High-Res ${activeStone.name} · 0.4mm Detail`}
+                  loadingText={`Loading ${activeStone.name}...`}
                 />
               </motion.div>
             </div>

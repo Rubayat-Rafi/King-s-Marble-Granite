@@ -10,7 +10,7 @@ export default function ImageWithSkeleton({
   alt = 'King\'s Marble & Granite Installation',
   className = '',
   imgClassName = 'w-full h-full object-cover',
-  loadingText = 'Loading High-Res Stone · 0.4mm Detail',
+  loadingText = 'Loading High-Res Image...',
   draggable = false,
   onClick,
 }) {

@@ -38,21 +38,21 @@ export default function Services() {
             </h1>
 
             <p className="text-sm sm:text-base text-[#DDD8CF] max-w-2xl font-light leading-relaxed">
-              We operate an advanced digital fabrication shop equipped with 5-axis CNC diamond waterjets and sub-millimeter 3D laser digitizers. From compound mitered waterfall islands to 18-foot fireplace surrounds, we craft every stone element in-house with zero third-party subcontracting.
+              King&apos;s Marble &amp; Granite has been in business for 18 years. We specialize in Marble, Granite, Quartz &amp; Quartzite — crafting custom countertops, waterfall islands, vanities, fireplaces, and outdoor stations in-house.
             </p>
 
             <div className="pt-2 flex flex-wrap gap-6 text-xs text-[#DDD8CF]/80">
               <div className="flex items-center gap-2">
                 <span className="text-[var(--accent)] font-semibold">✦</span>
-                <span>Prodim 3D Laser Digitizing</span>
+                <span>18 Years in Business</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-[var(--accent)] font-semibold">✦</span>
-                <span>5-Axis Diamond Waterjets</span>
+                <span>Marble · Granite · Quartz · Quartzite</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-[var(--accent)] font-semibold">✦</span>
-                <span>15-Year Fluoropolymer Warranty</span>
+                <span>In-House Fabrication &amp; Installation</span>
               </div>
             </div>
           </motion.div>
@@ -97,32 +97,17 @@ export default function Services() {
                     {service.description}
                   </p>
 
-                  {/* Fabrication Specifications */}
-                  <div className="pt-4 border-t border-[var(--line)] space-y-3">
-                    <span className="text-label text-xs text-[var(--text)] tracking-wider block font-medium">
-                      Engineering Specifications:
-                    </span>
-                    <ul className="space-y-2">
-                      {service.features.map((feature, fIdx) => (
-                        <li key={fIdx} className="flex items-start gap-3 text-xs text-[var(--text-muted)] font-light">
-                          <span className="text-[var(--accent)] mt-0.5">✦</span>
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
                   <div className="pt-2">
                     <Link
                       to="/contact"
                       className="btn-primary-luxury inline-block"
                     >
-                      Commission {service.title}
+                      Inquire Now
                     </Link>
                   </div>
                 </div>
 
-                {/* Monolith Imagery */}
+                {/* Clean Imagery */}
                 <div
                   className={`col-span-12 lg:col-span-6 ${
                     isEven ? 'lg:order-1' : 'lg:order-2'
@@ -135,22 +120,8 @@ export default function Services() {
                         alt={service.title}
                         className="w-full h-full"
                         imgClassName="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        loadingText={`Loading ${service.title}...`}
+                        loadingText=""
                       />
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-                    <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end text-white pointer-events-none">
-                      <div>
-                        <span className="text-label text-xs text-[var(--accent)] block tracking-widest mb-1">
-                          In-House Fabrication
-                        </span>
-                        <p className="text-xs font-light text-[#DDD8CF]">
-                          {service.subtitle}
-                        </p>
-                      </div>
-                      <span className="text-label text-xs bg-black/60 backdrop-blur-md px-3 py-1 border border-white/10">
-                        Harvey, LA
-                      </span>
                     </div>
                   </div>
                 </div>

@@ -36,7 +36,7 @@ export default function LogoPreloader() {
   if (isDone) return null;
 
   const getPhaseText = (p) => {
-    if (p < 34) return '0.4mm Laser Calibrating';
+    if (p < 34) return 'Preparing Stone Gallery';
     if (p < 68) return 'Syncing 5-Axis Waterjet Miters';
     if (p < 99) return 'Aligning Vein Continuation';
     return 'Atelier Ready';

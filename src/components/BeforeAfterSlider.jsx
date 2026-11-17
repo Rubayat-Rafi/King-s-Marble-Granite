@@ -60,7 +60,7 @@ export default function BeforeAfterSlider() {
       >
         {/* AFTER IMAGE: Finished Bookmatched Kitchen & Island (Full Width Underlying) */}
         <img
-          src="/King’s Social Media/IMG_7700.webp"
+          src="/King’s Social Media/kitchen-mont-blanc-island-backsplash-01.webp"
           alt="Finished Bookmatched Island & Slab Backsplash Installation"
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         />
@@ -74,7 +74,7 @@ export default function BeforeAfterSlider() {
           style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
         >
           <img
-            src="/King’s Social Media/3a4f499a-a7da-47d7-a4eb-9e015653e63f.webp"
+            src="/King’s Social Media/fireplace-install-calacatta-wall-01.webp"
             alt="In-Progress Stone Cladding & Framing"
             className="w-full h-full object-cover"
           />

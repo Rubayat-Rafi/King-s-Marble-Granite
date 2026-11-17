@@ -98,45 +98,6 @@ const SUPERDOME_EXHIBITION_MEDIA = [
   }
 ];
 
-const BRAZILIAN_STONE_PROFILES = [
-  {
-    name: 'Taj Mahal Quartzite',
-    origin: 'Ceará & Bahia, Brazil',
-    description: 'The global benchmark for serene luxury. Warm creamy tones woven with champagne and amber filaments. Combines the timeless softness of Calacatta with diamond-hard quartzite strength.',
-    hardness: 'Mohs 7.0',
-    acidResistance: '100% Etch-Proof (Lemons, Wine, Vinegar)',
-    idealFor: 'Full Waterfall Kitchen Islands, High-Traffic Chef Countertops',
-    badge: 'Most Requested'
-  },
-  {
-    name: 'Patagonia Exotic',
-    origin: 'Bahia & Minas Gerais, Brazil',
-    description: 'Nature’s most theatrical geology. Giant crystalline quartz deposits juxtaposed with black tourmaline clusters and creamy feldspar. Dramatically illuminates when backlit.',
-    hardness: 'Mohs 7.5',
-    acidResistance: 'Scratch & Heat Impervious',
-    idealFor: 'Backlit Bar Displays, Monolithic Fireplace Hearth, Statement Powder Room',
-    badge: 'Backlit Luminescence'
-  },
-  {
-    name: 'Cristallo Extra',
-    origin: 'Minas Gerais, Brazil',
-    description: 'Pure translucent quartz crystal. When paired with hidden low-profile LED illumination, the entire slab transforms into a glowing, ethereal jewel of solid ice and golden veins.',
-    hardness: 'Mohs 7.0',
-    acidResistance: 'Zero Porosity with Professional Seal',
-    idealFor: 'Backlit Kitchen Islands, Floating Master Vanities, Spa Wall Paneling',
-    badge: 'Translucent Crystal'
-  },
-  {
-    name: 'Mont Blanc Quartzite',
-    origin: 'Espírito Santo, Brazil',
-    description: 'Crisp alpine whites crossed by quiet charcoal and cool dove-grey striations. The visual poetry of pristine marble with zero etching worries or soft-calcite vulnerability.',
-    hardness: 'Mohs 7.0',
-    acidResistance: 'Stain & Acid Resilient',
-    idealFor: 'Modern Minimalist Kitchens, Full-Height Backsplashes, Outdoor Kitchens',
-    badge: 'Modern Heritage'
-  }
-];
-
 // All 5 authentic video recordings from the owners' Brazil quarry expeditions
 const BRAZIL_QUARRY_VIDEO_REELS = [
   {
@@ -203,39 +164,6 @@ const BRAZIL_QUARRY_VIDEO_REELS = [
     mp4: '/brazil/quarry-reel-5.mp4',
     webm: '/brazil/quarry-reel-5.webm',
     poster: '/brazil/quarry-reel-5-thumb.webp'
-  }
-];
-
-const PROVENANCE_STEPS = [
-  {
-    step: '01',
-    phase: 'Geological Expedition',
-    title: 'The Owner Treks to the Brazil Summit',
-    description: 'We don&apos;t buy from wholesaler catalogs. The owner travels directly to the bedrock mining regions of Espírito Santo and Minas Gerais to stand at the quarry summit and inspect the raw rock face.'
-  },
-  {
-    step: '02',
-    phase: 'Physical Block Tagging',
-    title: 'Stamping Whole Monolith Blocks',
-    description: 'The owner walks the quarry yard in person to audit freshly wire-sawn blocks (e.g. Lot #5957). Blocks with flawless crystal structure are stamped with King’s reserve markings.'
-  },
-  {
-    step: '03',
-    phase: 'Sequential Slicing & Bookmatching',
-    title: 'Consecutive Sister Slabs',
-    description: 'Sequential block cuts ensure that contiguous slab bundles stay together during transit, guaranteeing continuous uninterrupted vein flow across kitchen waterfalls and full-height hearths.'
-  },
-  {
-    step: '04',
-    phase: 'Direct Transatlantic Freight',
-    title: 'Port of Vitória to Harvey Atelier',
-    description: 'Sealed ocean containers ship directly to the Gulf Coast and straight to our indoor yard at 1848 Industrial Blvd in Harvey, LA, completely eliminating secondary broker markups.'
-  },
-  {
-    step: '05',
-    phase: 'Digital Laser Fabrication',
-    title: 'Harvey In-House 3D Precision',
-    description: 'Using 0.4mm Prodim 3D laser digitizing and 5-axis Intermac CNC diamond waterjets, our in-house master artisans mill, seam, and hand-finish your architectural commission.'
   }
 ];
 
@@ -317,28 +245,8 @@ export default function BrazilProvenance() {
             </h1>
 
             <p className="text-base sm:text-lg text-[#DDD8CF] max-w-2xl font-light leading-relaxed">
-              Founded by master stone fabricators Hussein &amp; Musa, King’s Marble &amp; Granite operates on direct origin provenance. We never order stone blindly from digital trade catalogs or third-party brokers. We personally travel to the bedrock mountain quarries of Brazil, inspect freshly cut monolith blocks, and hand-tag exclusive stone lots directly for our Harvey atelier.
+              Founded by Hussein &amp; Musa, King’s Marble &amp; Granite has been in business for 18 years. We personally travel to stone quarries in Brazil to inspect raw blocks and select natural stone directly for our Harvey, Louisiana showroom.
             </p>
-
-            {/* Quick Metrics Bar */}
-            <div className="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-6 border-t border-white/10">
-              <div>
-                <span className="font-display text-2xl sm:text-3xl text-white block">5,100+ mi</span>
-                <span className="text-[11px] uppercase tracking-wider text-white/60 block mt-1">Transatlantic Direct</span>
-              </div>
-              <div>
-                <span className="font-display text-2xl sm:text-3xl text-[var(--accent)] block">0 Middlemen</span>
-                <span className="text-[11px] uppercase tracking-wider text-white/60 block mt-1">Direct Quarry Value</span>
-              </div>
-              <div>
-                <span className="font-display text-2xl sm:text-3xl text-white block">100% Sequential</span>
-                <span className="text-[11px] uppercase tracking-wider text-white/60 block mt-1">Consecutive Bookmatch</span>
-              </div>
-              <div>
-                <span className="font-display text-2xl sm:text-3xl text-[var(--accent)] block">Mohs 7+</span>
-                <span className="text-[11px] uppercase tracking-wider text-white/60 block mt-1">Diamond-Hard Quartzite</span>
-              </div>
-            </div>
 
             <div className="pt-4 flex flex-wrap items-center gap-4">
               <a
@@ -503,10 +411,10 @@ export default function BrazilProvenance() {
               {/* Informational Callout */}
               <div className="p-5 bg-[var(--surface)] border border-[var(--line)] text-left">
                 <span className="text-[10px] uppercase tracking-[0.2em] text-[var(--accent)] font-semibold block mb-1">
-                  Transatlantic Freight Guarantee
+                  Direct Quarry Sourcing
                 </span>
                 <p className="text-xs text-[var(--text-muted)] font-light leading-relaxed">
-                  Every slab shipped from Brazil is tracked from the Port of Vitória directly to our indoor Harvey slab yard. No warehouse stops, no broker auctions, no compromised handling.
+                  Hand-selected directly in Brazil and shipped to our Harvey, Louisiana showroom.
                 </p>
               </div>
             </motion.div>
@@ -544,9 +452,8 @@ export default function BrazilProvenance() {
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 onClick={() => setSelectedImage(item)}
-                className="group relative cursor-pointer bg-[var(--bg)] border border-[var(--line)] hover:border-[var(--accent)] transition-all duration-500 overflow-hidden flex flex-col justify-between"
+                className="group relative cursor-pointer bg-[var(--bg)] border border-[var(--line)] hover:border-[var(--accent)] transition-all duration-500 overflow-hidden"
               >
-                {/* Image Frame */}
                 <div className="aspect-[4/3] sm:aspect-[16/11] relative overflow-hidden bg-black/40">
                   <img
                     src={item.src}
@@ -554,41 +461,6 @@ export default function BrazilProvenance() {
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/20 opacity-60 group-hover:opacity-40 transition-opacity" />
-
-                  {/* Corner Badge */}
-                  <span className="absolute top-3 left-3 bg-black/75 backdrop-blur-md border border-white/10 px-2.5 py-1 text-[10px] uppercase tracking-wider text-white font-medium">
-                    {item.tag}
-                  </span>
-
-                  {/* Zoom Icon indicator */}
-                  <div className="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                    </svg>
-                  </div>
-                </div>
-
-                {/* Content description accurately matching the photo */}
-                <div className="p-5 space-y-2 text-left">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-[11px] text-[var(--accent)] font-medium uppercase tracking-wider">
-                      {item.location}
-                    </span>
-                    <span className="text-[10px] text-[var(--text-muted)] font-mono">
-                      {item.lotCode}
-                    </span>
-                  </div>
-                  <h3 className="font-display text-lg text-[var(--text)] group-hover:text-[var(--accent)] transition-colors leading-snug">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs text-[var(--text-muted)] font-light leading-relaxed line-clamp-2">
-                    {item.caption}
-                  </p>
-                  <div className="pt-3 border-t border-[var(--line)] flex items-center justify-between text-[11px] text-[var(--text-muted)] font-light">
-                    <span>{item.category}</span>
-                    <span className="text-[var(--accent)] font-medium">Inspect Analysis →</span>
-                  </div>
                 </div>
               </motion.div>
             ))}
@@ -626,9 +498,8 @@ export default function BrazilProvenance() {
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                 onClick={() => setSelectedImage(item)}
-                className="group relative cursor-pointer bg-[#111114] border border-white/10 hover:border-[var(--accent)] transition-all duration-500 overflow-hidden flex flex-col justify-between"
+                className="group relative cursor-pointer bg-[#111114] border border-white/10 hover:border-[var(--accent)] transition-all duration-500 overflow-hidden"
               >
-                {/* Superdome Photo Frame */}
                 <div className="aspect-[4/3] sm:aspect-[16/11] relative overflow-hidden bg-black">
                   <img
                     src={item.src}
@@ -636,41 +507,6 @@ export default function BrazilProvenance() {
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 opacity-70 group-hover:opacity-40 transition-opacity" />
-
-                  {/* Corner Badge */}
-                  <span className="absolute top-3 left-3 bg-black/80 backdrop-blur-md border border-white/15 px-3 py-1 text-[10px] uppercase tracking-wider text-[var(--accent)] font-semibold">
-                    {item.tag}
-                  </span>
-
-                  {/* Zoom Icon indicator */}
-                  <div className="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-black/80 backdrop-blur-md border border-white/20 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                    </svg>
-                  </div>
-                </div>
-
-                {/* Content description accurately explaining the Superdome image */}
-                <div className="p-6 space-y-3 text-left">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-[11px] text-[var(--accent)] font-medium uppercase tracking-wider">
-                      {item.location}
-                    </span>
-                    <span className="text-[10px] text-white/50 font-mono">
-                      HBA PROUD MEMBER
-                    </span>
-                  </div>
-                  <h3 className="font-display text-xl text-white group-hover:text-[var(--accent)] transition-colors leading-snug">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#DDD8CF] font-light leading-relaxed">
-                    {item.caption}
-                  </p>
-                  <div className="pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-white/60">
-                    <span>{item.details}</span>
-                    <span className="text-[var(--accent)] font-medium">Inspect Exhibition →</span>
-                  </div>
                 </div>
               </motion.div>
             ))}
@@ -922,117 +758,6 @@ export default function BrazilProvenance() {
                 </a>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 7. CURATED BRAZILIAN STONE SPECIMENS ── */}
-      <section className="py-24 sm:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
-          <div className="max-w-3xl mb-16 space-y-4">
-            <span className="text-xs uppercase tracking-[0.24em] text-[var(--accent)] font-medium block">
-              Brazilian Geological Treasures
-            </span>
-            <h2 className="font-display text-3xl sm:text-5xl font-light text-[var(--text)] leading-tight">
-              The crown jewels of South American stone.
-            </h2>
-            <p className="text-sm sm:text-base text-[var(--text-muted)] font-light leading-relaxed">
-              Brazil produces the world&apos;s most structurally resilient and visually stunning quartzites. Below are the signature Brazilian stones we import directly to our Harvey yard.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {BRAZILIAN_STONE_PROFILES.map((stone, index) => (
-              <motion.div
-                key={stone.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-[var(--surface)] border border-[var(--line)] p-8 space-y-6 flex flex-col justify-between hover:border-[var(--accent)]/50 transition-colors"
-              >
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between gap-3">
-                    <span className="text-[10px] uppercase tracking-[0.2em] bg-[var(--accent)]/10 text-[var(--accent)] px-2.5 py-1 font-semibold">
-                      {stone.badge}
-                    </span>
-                    <span className="text-xs text-[var(--text-muted)] font-mono">
-                      {stone.origin}
-                    </span>
-                  </div>
-
-                  <h3 className="font-display text-2xl sm:text-3xl text-[var(--text)] font-light">
-                    {stone.name}
-                  </h3>
-
-                  <p className="text-sm text-[var(--text-muted)] font-light leading-relaxed">
-                    {stone.description}
-                  </p>
-                </div>
-
-                <div className="pt-6 border-t border-[var(--line)] space-y-3 text-xs">
-                  <div className="flex justify-between items-center py-1">
-                    <span className="text-[var(--text-muted)]">Mineral Hardness:</span>
-                    <span className="text-[var(--text)] font-medium">{stone.hardness}</span>
-                  </div>
-                  <div className="flex justify-between items-center py-1">
-                    <span className="text-[var(--text-muted)]">Acid &amp; Stain Resistance:</span>
-                    <span className="text-[var(--accent)] font-medium">{stone.acidResistance}</span>
-                  </div>
-                  <div className="flex justify-between items-center py-1 border-t border-[var(--line)] pt-2">
-                    <span className="text-[var(--text-muted)]">Ideal Architecture:</span>
-                    <span className="text-[var(--text)] font-medium text-right max-w-[60%]">{stone.idealFor}</span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 8. PROVENANCE TIMELINE: 5 PHASES FROM MOUNTAIN TO HOME ── */}
-      <section className="py-24 sm:py-32 bg-[var(--surface)] border-y border-[var(--line)]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
-          <div className="max-w-3xl mb-16 space-y-4">
-            <span className="text-xs uppercase tracking-[0.24em] text-[var(--accent)] font-medium block">
-              The Journey of Authenticity
-            </span>
-            <h2 className="font-display text-3xl sm:text-5xl font-light text-[var(--text)] leading-tight">
-              From the bedrock of Brazil to your Louisiana home.
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-            {PROVENANCE_STEPS.map((step, idx) => (
-              <motion.div
-                key={step.step}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.7, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="p-6 bg-[var(--bg)] border border-[var(--line)] space-y-4 flex flex-col justify-between"
-              >
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="font-display text-3xl text-[var(--accent)] font-light">
-                      {step.step}
-                    </span>
-                    <span className="text-[9px] uppercase tracking-widest text-[var(--text-muted)]">
-                      Phase {idx + 1}
-                    </span>
-                  </div>
-                  <span className="text-[10px] uppercase tracking-wider text-[var(--accent)] font-semibold block">
-                    {step.phase}
-                  </span>
-                  <h4 className="font-display text-lg text-[var(--text)] font-normal leading-snug">
-                    {step.title}
-                  </h4>
-                  <p className="text-xs text-[var(--text-muted)] font-light leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>

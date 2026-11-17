@@ -37,21 +37,21 @@ export default function Process() {
             </h1>
 
             <p className="text-sm sm:text-base text-[#DDD8CF] max-w-2xl font-light leading-relaxed">
-              From direct quarry block selection in Carrara and Brazil to 0.4mm 3D laser digitizing and robotic 5-axis CNC waterjet mitering. Discover our four-phase architectural process.
+              From stone selection at our Harvey showroom to on-site templating, custom cutting, and installation — discover our four-step process.
             </p>
 
             <div className="pt-2 flex flex-wrap gap-6 text-xs text-[#DDD8CF]/80">
               <div className="flex items-center gap-2">
                 <span className="text-[var(--accent)] font-semibold">✦</span>
-                <span>Direct Quarry Provenance</span>
+                <span>18 Years in Business</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-[var(--accent)] font-semibold">✦</span>
-                <span>0.4mm Optical Laser Digitizers</span>
+                <span>Marble · Granite · Quartz · Quartzite</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-[var(--accent)] font-semibold">✦</span>
-                <span>Zero Subcontracting Guarantee</span>
+                <span>In-House Fabrication &amp; Installation</span>
               </div>
             </div>
           </motion.div>
@@ -60,70 +60,6 @@ export default function Process() {
 
       {/* Pinned Monolith Process Story (CraftProcess) */}
       <CraftProcess />
-
-      {/* Technical Precision Standards */}
-      <section className="py-24 sm:py-32 border-t border-[var(--line)]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-3xl mb-16"
-          >
-            <span className="text-xs uppercase tracking-[0.24em] text-[var(--accent)] font-medium block mb-2">
-              Tolerance &amp; Engineering
-            </span>
-            <h2 className="font-display text-3xl sm:text-5xl font-light leading-tight">
-              Why our joints disappear where commercial saws fail.
-            </h2>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="p-8 border border-[var(--line)] bg-[var(--bg)] space-y-4"
-            >
-              <span className="font-display text-3xl text-[var(--accent)] font-light block">01 / Laser</span>
-              <h3 className="font-display text-xl sm:text-2xl font-medium">Prodim 3D Digitizing</h3>
-              <p className="text-xs sm:text-sm text-[var(--text-muted)] font-light leading-relaxed">
-                We capture wall bowings, out-of-square cabinet faces, and electrical cutouts optically down to 0.4mm tolerance before any blade touches natural stone.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="p-8 border border-[var(--line)] bg-[var(--bg)] space-y-4"
-            >
-              <span className="font-display text-3xl text-[var(--accent)] font-light block">02 / Waterjet</span>
-              <h3 className="font-display text-xl sm:text-2xl font-medium">5-Axis Compound Miters</h3>
-              <p className="text-xs sm:text-sm text-[var(--text-muted)] font-light leading-relaxed">
-                60,000 PSI diamond abrasive waterjets cut true 45-degree compound edges, allowing vein continuation to wrap seamlessly from islands to floor plinths.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="p-8 border border-[var(--line)] bg-[var(--bg)] space-y-4"
-            >
-              <span className="font-display text-3xl text-[var(--accent)] font-light block">03 / In-House</span>
-              <h3 className="font-display text-xl sm:text-2xl font-medium">Master Artisans Only</h3>
-              <p className="text-xs sm:text-sm text-[var(--text-muted)] font-light leading-relaxed">
-                Every phase of cutting, profiling, edge-polishing, and chemical fusing is performed exclusively by our factory-trained Harvey fabrication artisans.
-              </p>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
       {/* Editorial Bottom Consultation */}
       <section className="py-24 border-t border-[var(--line)] bg-[var(--bg)] transition-colors duration-700">

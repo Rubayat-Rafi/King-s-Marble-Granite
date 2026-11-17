@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GALLERY_CATEGORIES, GALLERY_IMAGES } from '../data/content';
+import { GALLERY_IMAGES } from '../data/content';
 import { useStoneTheme } from '../context/StoneThemeContext';
 import ImageWithSkeleton from '../components/ImageWithSkeleton';
 
@@ -11,7 +11,17 @@ export default function Portfolio() {
   const [visibleCount, setVisibleCount] = useState(18);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const categories = ['All', ...Object.keys(GALLERY_CATEGORIES)];
+  const categories = [
+    'All',
+    'Kitchens',
+    'Waterfall Islands',
+    'Bathrooms & Vanities',
+    'Fireplaces & Staircases',
+    'Outdoor Kitchens & Bars',
+    'Commercial & Wine Lounges',
+    'Stone Slabs & Quarry',
+    'Showroom & Sculpture',
+  ];
 
   const filteredItems =
     activeCategory === 'All'
@@ -68,7 +78,7 @@ export default function Portfolio() {
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-[var(--accent)] font-semibold">✦</span>
-                <span>0.4mm Digital Laser Precision</span>
+                <span>Marble · Granite · Quartz · Quartzite</span>
               </div>
               <a
                 href="https://www.instagram.com/kingmarble06?vrfl=ZWl4M2NuZTEzOGEw"
@@ -154,35 +164,11 @@ export default function Portfolio() {
               >
                 <ImageWithSkeleton
                   src={item.src}
-                  alt={item.title}
+                  alt={item.category}
                   className="w-full h-full"
-                  imgClassName="w-full h-full object-cover transition-transform duration-1000 ease-luxury group-hover:scale-105 opacity-90 group-hover:opacity-100"
+                  imgClassName="w-full h-full object-cover transition-transform duration-1000 ease-luxury group-hover:scale-105"
                   loadingText=""
                 />
-
-                {/* Subtle dark gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-400" />
-
-                {/* Stone details revealed on hover */}
-                <div className="absolute inset-0 p-6 flex flex-col justify-between z-10">
-                  <div className="flex justify-between items-start">
-                    <span className="text-xs uppercase tracking-[0.2em] bg-black/60 backdrop-blur-md px-2.5 py-1 text-white/90 border border-white/10">
-                      {item.category}
-                    </span>
-                    <span className="w-8 h-8 rounded-none border border-white/20 bg-black/40 text-white flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      ↗
-                    </span>
-                  </div>
-
-                  <div className="space-y-1 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-400">
-                    <h3 className="font-display text-xl sm:text-2xl text-white">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-[#DDD8CF]/80 font-light">
-                      Natural Stone Monolith · Click to inspect veining details
-                    </p>
-                  </div>
-                </div>
               </motion.div>
             ))}
           </div>
@@ -232,13 +218,10 @@ export default function Portfolio() {
               className="flex items-center justify-between text-white z-20 max-w-7xl mx-auto w-full"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="space-y-1 text-left">
+              <div className="text-left">
                 <span className="text-xs uppercase tracking-[0.24em] text-[var(--accent)] block font-medium">
                   {selectedImage.category}
                 </span>
-                <h3 className="font-display text-2xl sm:text-3xl text-white font-light">
-                  {selectedImage.title}
-                </h3>
               </div>
               <button
                 type="button"
@@ -268,7 +251,7 @@ export default function Portfolio() {
                   alt={selectedImage.title}
                   className="max-h-[76vh] max-w-[92vw] shadow-2xl border border-white/10 rounded-sm"
                   imgClassName="max-h-[76vh] max-w-[92vw] object-contain"
-                  loadingText="Loading High-Res Specimen · 0.4mm Detail"
+                  loadingText="Loading High-Res Image..."
                 />
               </motion.div>
             </div>

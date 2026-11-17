@@ -29,7 +29,7 @@ export default function MinimalFooter() {
               Crafting bookmatched waterfall islands, full-height slab walls, and stone sanctuaries.
             </p>
             <span className="text-xs text-[var(--accent)] tracking-widest block font-medium">
-              15-Year Craftsmanship &amp; Stain Warranty Certified
+              18 Years in Business · Marble, Granite, Quartz &amp; Quartzite
             </span>
           </div>
 
@@ -146,7 +146,7 @@ export default function MinimalFooter() {
           <span
             className="font-display font-light text-[clamp(2.5rem,8.5vw,7.5rem)] tracking-[0.08em] block leading-none text-transparent uppercase opacity-85 transition-opacity"
             style={{
-              backgroundImage: 'url("/King’s Social Media/IMG_7694.webp")',
+              backgroundImage: 'url("/King’s Social Media/bathroom-dressing-suite-white-island-01.webp")',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               WebkitBackgroundClip: 'text',

@@ -23,7 +23,7 @@ export default function Footer() {
               and granite. Specializing in vein-matched waterfall islands, monolithic backsplashes, and custom stone installations.
             </p>
             <div className="pt-2 text-xs text-[#C9A44C] font-semibold tracking-wider">
-              ✦ 15-Year Craftsmanship &amp; Stain Warranty
+              ✦ 18 Years in Business · Marble, Granite, Quartz &amp; Quartzite
             </div>
           </div>
 
@@ -117,7 +117,7 @@ export default function Footer() {
           <p>© {currentYear} King&apos;s Marble &amp; Granite. All rights reserved.</p>
           <div className="flex gap-6 uppercase tracking-wider text-[11px]">
             <span>1848 Industrial Blvd, Harvey, LA</span>
-            <span>Sub-Millimeter Laser Precision</span>
+            <span>18 Years in Business · Harvey, LA</span>
           </div>
         </div>
       </div>

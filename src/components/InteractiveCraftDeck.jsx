@@ -4,13 +4,13 @@ import { useStoneTheme } from '../context/StoneThemeContext';
 import ImageWithSkeleton from './ImageWithSkeleton';
 
 const SHOWCASE_IMAGES = [
-  { id: 1, src: "/King’s Social Media/IMG_7694.webp", alt: "Bespoke Walk-In Dressing Suite Island Credenza" },
-  { id: 2, src: "/King’s Social Media/IMG_7705.webp", alt: "Executive Kitchen Island with Twin Starburst Chandeliers" },
-  { id: 3, src: "/King’s Social Media/IMG_7692.webp", alt: "Modern Chef Island with Fluted Dark Base & Commercial Appliances" },
-  { id: 4, src: "/King’s Social Media/IMG_7695.webp", alt: "Private Wine Lounge & Charcoal Quartzite Wet Bar" },
-  { id: 5, src: "/King’s Social Media/IMG_7697.webp", alt: "Sculpted Integrated-Sink Powder Room Vanity" },
-  { id: 6, src: "/King’s Social Media/IMG_7708.webp", alt: "Illuminated Glass-Front Entertaining Bar & Wine Station" },
-  { id: 7, src: "/King’s Social Media/IMG_7707.webp", alt: "Architectural White Quartzite Perimeter & Island Suite" },
+  { id: 1, src: "/King’s Social Media/bathroom-dressing-suite-white-island-01.webp", alt: "Bespoke Walk-In Dressing Suite Island Credenza" },
+  { id: 2, src: "/King’s Social Media/kitchen-starburst-chandeliers-barn-door-01.webp", alt: "Executive Kitchen Island with Twin Starburst Chandeliers" },
+  { id: 3, src: "/King’s Social Media/kitchen-fluted-dark-island-barstools-01.webp", alt: "Modern Chef Island with Fluted Dark Base & Commercial Appliances" },
+  { id: 4, src: "/King’s Social Media/commercial-wine-lounge-charcoal-bar-01.webp", alt: "Private Wine Lounge & Charcoal Quartzite Wet Bar" },
+  { id: 5, src: "/King’s Social Media/bathroom-gold-leaf-integrated-sink-01.webp", alt: "Sculpted Integrated-Sink Powder Room Vanity" },
+  { id: 6, src: "/King’s Social Media/commercial-illuminated-glass-wine-bar-01.webp", alt: "Illuminated Glass-Front Entertaining Bar & Wine Station" },
+  { id: 7, src: "/King’s Social Media/kitchen-starburst-wolf-range-island-01.webp", alt: "Architectural White Quartzite Perimeter & Island Suite" },
 ];
 
 export default function InteractiveCraftDeck() {
