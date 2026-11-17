@@ -98,69 +98,56 @@ const SUPERDOME_EXHIBITION_MEDIA = [
   }
 ];
 
-// All 5 authentic video recordings from the owners' Brazil quarry expeditions
+// 4 authentic video recordings from the owners' Brazil quarry expeditions
 const BRAZIL_QUARRY_VIDEO_REELS = [
   {
     id: 'reel-1',
     reelNumber: '01',
-    title: 'Diamond Wire Sawing & Bedrock Cleavage',
-    duration: '0:10',
-    location: 'Mountain Quarry Face · Espírito Santo, Brazil',
-    category: 'Active Cleavage Sawing',
-    tag: 'Live Field Recording',
-    description: 'High-tension water-cooled diamond wire saws slice through hundreds of tons of solid bedrock mountain under cooling streams. Notice the sheer, polished natural cut face being cleaved away from the geological formation without explosive micro-fractures.',
-    mp4: '/brazil/quarry-reel-1.mp4',
-    webm: '/brazil/quarry-reel-1.webm',
-    poster: '/brazil/quarry-reel-1-thumb.webp'
-  },
-  {
-    id: 'reel-2',
-    reelNumber: '02',
-    title: 'Quarry Amphitheater & Derrick Crane Rigging',
+    title: 'Quarry Basin & Stone Block Reserve',
     duration: '1:11',
-    location: 'Open-Pit Quarry Basin · Cachoeiro de Itapemirim, Brazil',
-    category: 'Extraction Scale Overview',
-    tag: 'Monumental Pit Survey',
-    description: 'Panoramic walk-through across the stepped benches of the active open-pit quarry basin. Heavy derrick cranes hoist 25-ton squared monolithic blocks along the stepped bedrock amphitheater framed by lush tropical mountain topography.',
+    location: 'Open-Pit Quarry Basin, Brazil',
+    category: 'Quarry Overview',
+    tag: 'Quarry Basin',
+    description: 'Walk-through overlooking the stepped quarry basin and freshly cut stone blocks staged on the quarry floor.',
     mp4: '/brazil/quarry-reel-2.mp4',
     webm: '/brazil/quarry-reel-2.webm',
     poster: '/brazil/quarry-reel-2-thumb.webp'
   },
   {
-    id: 'reel-3',
-    reelNumber: '03',
-    title: 'Monolith Block Staging & Lot Survey',
+    id: 'reel-2',
+    reelNumber: '02',
+    title: 'Mountain Quarry Amphitheater',
     duration: '0:33',
-    location: 'Block Staging Reserve Yard · Brazil',
-    category: 'Block Quality Audit',
-    tag: 'Lot Verification',
-    description: 'Up-close inspection of giant squared stone blocks staged on the quarry floor. Co-founders inspect the crystal integrity, natural veining depth, and structural soundness of each massive block before stamping them for Harvey shipment.',
+    location: 'Mountain Quarry, Brazil',
+    category: 'Extraction Site',
+    tag: 'Mountain Rim',
+    description: 'Panoramic view across the open-pit mountain quarry wall and extraction benches in Brazil.',
     mp4: '/brazil/quarry-reel-3.mp4',
     webm: '/brazil/quarry-reel-3.webm',
     poster: '/brazil/quarry-reel-3-thumb.webp'
   },
   {
-    id: 'reel-4',
-    reelNumber: '04',
-    title: 'Stepped Bedrock Extraction Face',
+    id: 'reel-3',
+    reelNumber: '03',
+    title: 'At the Quarry Summit in Brazil',
     duration: '0:05',
-    location: 'Mountain Quarry Crest · Minas Gerais, Brazil',
-    category: 'Geological Formation',
-    tag: 'Bedrock Profile',
-    description: 'Panoramic sweep across the towering stepped quartzite rock wall under the Brazilian afternoon sun. Pure stone strata carved without explosive blasting, preserving the structural crystal lattice.',
+    location: 'Quarry Summit, Brazil',
+    category: 'On-Site Visit',
+    tag: 'Founder Visit',
+    description: 'Standing at the mountain quarry crest overlooking the stone extraction pit.',
     mp4: '/brazil/quarry-reel-4.mp4',
     webm: '/brazil/quarry-reel-4.webm',
     poster: '/brazil/quarry-reel-4-thumb.webp'
   },
   {
-    id: 'reel-5',
-    reelNumber: '05',
-    title: 'Full Sourcing Expedition & Master Block Audit',
+    id: 'reel-4',
+    reelNumber: '04',
+    title: 'Walking the Brazil Quarry Floor',
     duration: '2:35',
-    location: 'Deep Quarry Expedition · Brazil',
-    category: 'Founder Field Inspection',
-    tag: 'Extended Documentary Reel',
-    description: 'Extended full-length field documentary recording showing the co-founders on foot across the active quarry basin floor, evaluating consecutive sister cuts, auditing block dimensions, and tagging exclusive stone lots destined for New Orleans.',
+    location: 'Active Quarry Floor, Brazil',
+    category: 'Quarry Inspection',
+    tag: 'Full Walkthrough',
+    description: 'Walking across the active quarry floor during our sourcing visit in Brazil to inspect stone blocks.',
     mp4: '/brazil/quarry-reel-5.mp4',
     webm: '/brazil/quarry-reel-5.webm',
     poster: '/brazil/quarry-reel-5-thumb.webp'
@@ -338,7 +325,7 @@ export default function BrazilProvenance() {
                 <div className="aspect-[4/5] relative overflow-hidden bg-black">
                   <video
                     ref={videoRef}
-                    poster="/brazil/quarry-reel-1-thumb.webp"
+                    poster="/brazil/quarry-reel-4-thumb.webp"
                     loop
                     muted={isMuted}
                     playsInline
@@ -347,13 +334,13 @@ export default function BrazilProvenance() {
                     onPause={() => setVideoPlaying(false)}
                     className="w-full h-full object-cover brightness-95 contrast-105"
                   >
-                    <source src="/brazil/quarry-reel-1.webm" type="video/webm" />
-                    <source src="/brazil/quarry-reel-1.mp4" type="video/mp4" />
+                    <source src="/brazil/quarry-reel-4.webm" type="video/webm" />
+                    <source src="/brazil/quarry-reel-4.mp4" type="video/mp4" />
                     Your browser does not support HTML5 video.
                   </video>
 
                   {/* Dark gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/15 pointer-events-none" />
 
                   {/* Play / Pause Interactive Button */}
                   <div
@@ -369,12 +356,6 @@ export default function BrazilProvenance() {
                         <path d="M8 5v14l11-7z" />
                       </svg>
                     )}
-                  </div>
-
-                  {/* Floating live tag */}
-                  <div className="absolute top-4 left-4 z-10 flex items-center gap-2 bg-black/70 backdrop-blur-md px-3 py-1.5 border border-white/10 text-[11px] uppercase tracking-wider text-white">
-                    <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
-                    <span>Live Quarry Footage · Brazil Extraction</span>
                   </div>
 
                   {/* Audio Mute / Unmute Toggle Button */}
@@ -395,16 +376,6 @@ export default function BrazilProvenance() {
                       </svg>
                     )}
                   </button>
-
-                  {/* Bottom Video Caption */}
-                  <div className="absolute bottom-4 left-4 right-4 z-10 text-left pointer-events-none">
-                    <p className="text-xs uppercase tracking-widest text-[var(--accent)] font-medium">
-                      Authentic Field Recording
-                    </p>
-                    <h3 className="font-display text-lg text-white font-light mt-0.5">
-                      Diamond Wire Extraction &amp; Block Handling
-                    </h3>
-                  </div>
                 </div>
               </div>
 
@@ -604,20 +575,20 @@ export default function BrazilProvenance() {
         )}
       </AnimatePresence>
 
-      {/* ── 6. LIVE VIDEO CINEMA ARCHIVE: 5 VERIFIED QUARRY REELS ── */}
+      {/* ── 6. QUARRY VIDEO ARCHIVE: 4 VERIFIED BRAZIL REELS ── */}
       <section className="py-20 sm:py-28 border-b border-[var(--line)] bg-[#0A0A0C] text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="max-w-3xl mb-12 space-y-4 text-left">
             <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[var(--accent)] font-medium">
-              <span>Authentic Video Archive · 5 Quarry Field Recordings</span>
+              <span>Brazil Quarry Video Archive · 4 Videos</span>
               <span className="w-8 h-px bg-[var(--accent)]" />
             </div>
             <h2 className="font-display text-3xl sm:text-5xl font-light text-white leading-tight">
-              Watch the raw power of the Brazilian quarry floor.
+              Inside our Brazil quarry visits.
             </h2>
             <p className="text-sm sm:text-base text-[#DDD8CF] font-light leading-relaxed">
-              High-tension water-cooled diamond wire saws slice through hundreds of tons of solid bedrock mountain under cooling streams. Our recorded video archives capture the monumental scale of the blocks selected by Hussein &amp; Musa for our Harvey fabrication center. Explore all 5 verified field recordings below.
+              Video recordings from Hussein &amp; Musa&apos;s sourcing visits to stone quarries in Brazil. Select any video below to watch.
             </p>
           </div>
 
@@ -642,8 +613,7 @@ export default function BrazilProvenance() {
 
                 {/* Badges on video screen */}
                 <div className="absolute top-4 left-4 z-10 pointer-events-none flex items-center gap-2 bg-black/80 backdrop-blur-md px-3 py-1.5 border border-white/15 text-[11px] uppercase tracking-wider text-white">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>Reel {BRAZIL_QUARRY_VIDEO_REELS[activeReelIndex].reelNumber} of 05 · {BRAZIL_QUARRY_VIDEO_REELS[activeReelIndex].duration}</span>
+                  <span>Video {BRAZIL_QUARRY_VIDEO_REELS[activeReelIndex].reelNumber} of 04 · {BRAZIL_QUARRY_VIDEO_REELS[activeReelIndex].duration}</span>
                 </div>
 
                 <div className="absolute top-4 right-4 z-10 pointer-events-none bg-black/80 backdrop-blur-md px-3 py-1.5 border border-white/15 text-[11px] uppercase tracking-wider text-[var(--accent)] font-mono">
@@ -677,7 +647,7 @@ export default function BrazilProvenance() {
                   Quarry Video Archive
                 </span>
                 <span className="text-[11px] font-mono text-[var(--accent)]">
-                  5 Field Reels Available
+                  4 Quarry Videos
                 </span>
               </div>
 
