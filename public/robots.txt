@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kingsmarbleandgranite.com/sitemap.xml
-
+Sitemap: https://kingmarbleandgranite.com/sitemap.xml
